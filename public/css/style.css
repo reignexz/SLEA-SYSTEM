@@ -1,0 +1,339 @@
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Quicksand',sans-serif; }
+    body { 
+        background:#f8f9fa; 
+        color:#212529; 
+        transition: background 0.3s, color 0.3s; }
+    
+    body.dark-mode {
+      background: #2a2a2a;
+    color: #f0f0f0; 
+    }
+
+    /* COLLAPSE STATE */
+    body.collapsed .sidebar { width:60px; }
+    body.collapsed .sidebar ul li span,
+    body.collapsed .sidebar .dark-toggle span { display:none; }
+    body.collapsed .sidebar ul li { justify-content:center; }
+    body.collapsed .main-content { margin-left:60px; }
+
+    /* collapsed menu-profile stacking */
+    body.collapsed .sidebar .menu-profile {
+      flex-direction: column;
+      align-items: center;
+    }
+    body.collapsed .sidebar .menu-profile .profile-icon {
+      margin-top:15px;
+    }
+
+    body.collapsed .sidebar .menu-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px; /* match sidebar width for symmetry */
+  margin: 0 auto; /* center horizontally */
+}
+
+
+    /* HEADER */
+    .header {
+      position:fixed; 
+      top:0; 
+      left:0; 
+      right:0; 
+      z-index:1000;
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between;
+      padding:20px; 
+      background:#fff; 
+      border-bottom:1px solid #ddd;
+      transition: 0.3s, border-color 0.3s;
+    }
+   
+    body.dark-mode .header {
+      background: #2a2a2a;
+      border-color: #444;
+    }
+    .header-left { 
+        display:flex; 
+        align-items:center; }
+    .header-left .logo { 
+        width:45px; 
+        height:auto; }
+    .header-left h2 {
+      font-size:18px;
+      line-height:1.4;
+      margin-left:15px;
+      /* color set per element spans */
+    }
+    
+    .header-left h2 {
+        font-size: 18px;
+        line-height: 1;
+        margin-left: 15px;           /* space from logo */
+        color: #7b0000;
+            }
+    
+    .header-left h2 span {
+        display: inline-block;
+        line-height: 1;
+    }
+    .header-left h2 .bar {
+        margin: 0 8px;
+    }
+    
+/* — Header typography & colors — */
+.header-left h2 .sle, 
+  .header-left h2 .bar {font-size: 25px; }
+  .header-left h2 .empowering,
+  .header-left h2 .leadership,
+  .header-left h2 .recognizing,
+  .header-left h2 .excellence {
+    font-size: 15px;
+  }
+
+  /* Color assignments */
+  .header-left h2 .sle,
+  .header-left h2 .empowering,
+  .header-left h2 .excellence {
+    color: #7b0000;   /* red */
+  }
+  .header-left h2 .leadership,
+  .header-left h2 .recognizing {
+    color: #F9BD3D;   /* gold */
+  }
+
+  /* Bar spacing */
+  .header-left h2 .bar,
+  .header-left h2 .sle {
+    margin: 0 8px;
+    vertical-align: middle;
+  }
+
+  /* Indent second line under “Empowering Leadership.” */
+  .header-left h2 .recognizing {
+    margin-left: 11.5ch;
+    margin-top: 5px; /* slight indent */
+  }
+    .header-right a {
+      font-size:14px;
+      text-decoration:none;
+      transition: color 0.3s;
+    }
+    .header-right a:first-of-type { margin-right:10px; }
+    .header-right a:nth-of-type(1) { color:#007bff; }
+    .header-right a:nth-of-type(2) { color:#007bff; }
+    .header-right a:hover { text-decoration:underline; }
+
+    body.dark .header-right a {
+      color: #aad4ff;
+    }
+
+    /* LAYOUT */
+    .container { display:flex; margin-top:80px; }
+    .sidebar {
+      position:fixed; 
+      top:65px; 
+      left:0;
+      width:260px; 
+      min-height:calc(100vh - 80px);
+      height: 100%;
+      background:#7b0000; 
+      color:#fff;
+      display:flex; 
+      flex-direction:column;
+      padding:20px 10px;
+      transition: none; /* instant */
+      
+    }
+    
+    body.dark-mode .sidebar {
+      background: #5c0000;
+    }
+
+    /* TOP ROW: HAMBURGER + PROFILE ICON */
+    .sidebar .menu-profile {
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:30px;
+    }
+    .sidebar .menu-toggle {
+      font-size:24px; 
+      color:#fff; 
+      cursor:pointer;
+      margin-left: 10px;
+    }
+    .sidebar .profile-icon {
+      width:40px; height:40px; background:#ffffff;
+      border-radius:50%; position:relative; flex-shrink:0;
+    }
+    .sidebar .profile-icon::after {
+      content:''; position:absolute; bottom:2px; right:2px;
+      width:8px; height:8px; 
+    }
+
+    .sidebar ul { list-style:none; padding:0; margin-top:10px; }
+    .sidebar ul li {
+      display:flex; align-items:center; gap:10px;
+      padding:12px; border-radius:6px; cursor:pointer;
+      transition: none;
+    }
+/* Sidebar default state */
+.sidebar ul li {
+    color: #fff; /* default white text */
+    background: none;
+    transition: color 0.3s ease;
+}
+
+/* Active sidebar item */
+.sidebar ul li.active {
+    color: #F9BD3D; /* gold for active link */
+    font-weight: 600;
+}
+
+/* Hover effect */
+.sidebar ul li:hover {
+    background: none; /* no background on hover */
+    color: #F9BD3D;   /* text turns gold */
+    cursor: pointer;
+}
+
+    .sidebar .dark-toggle {
+      margin: top 10px; display:flex; align-items:center;
+      gap:10px; padding:10px; border-radius:5px; cursor:pointer;
+      transition: none; 
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      flex:1; margin-left:260px; padding:40px;
+      transition: none;
+    }
+    body.dark-mode .main-content {
+      background:#2a2a2a;
+    }
+
+    /* Editable Avatar */
+    .avatar-container {
+      position:relative; width:120px; height:120px;
+      margin:0 auto 30px;
+    }
+    .avatar-container .avatar {
+      width:100%; height:100%; border-radius:50%;
+      object-fit:cover; border:3px solid #7b0000;
+    }
+    .avatar-container .edit-icon {
+      position:absolute; bottom:0; right:0;
+      background:#fff; border:none; padding:6px;
+      border-radius:50%; cursor:pointer;
+      box-shadow:0 0 5px rgba(0,0,0,0.2);
+    }
+
+    /* Profile & Change Password Cards */
+    .profile-section { display:flex; flex-wrap:wrap; gap:40px; }
+    .profile-info, .change-password {
+      flex:1; min-width:300px; padding:20px;
+      background:#fff; border:1px solid #dee2e6;
+      border-radius:20px; box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode .profile-info,
+    body.dark-mode .change-password {
+      background:#3a3a3a;
+      color:#f0f0f0;
+      border-color:#555;
+    }
+    .profile-info h3, .change-password h3 {
+      color:#7b0000; margin-bottom:15px;
+    }
+    body.dark-mode .profile-info h3,
+    body.dark-mode .change-password h3 {
+      color:#F9BD3D;
+    }
+    .profile-info p { margin:8px 0; }
+
+    /* Change Password Styles */
+    .change-password input[type="password"],
+    .change-password input[type="text"] {
+      width:100%; padding:10px; margin:8px 0;
+      border:1px solid #ced4da; border-radius:5px;
+      background:inherit; color:inherit;
+    }
+    .change-password input::placeholder {
+      color: #888;
+    }
+    body.dark-mode .change-password input[type="password"],
+    body.dark-mode .change-password input[type="text"] {
+      border:1px solid #666;
+    }
+    .requirements p {
+      font-size:14px; margin-bottom:5px;
+      color:#495057;
+    }
+    body.dark-mode .requirements p { color:#eee7e7; }
+    .requirements ul {
+      margin-left:20px; font-size:13px; color:#ebebeb;
+    }
+    body.dark-mode .requirements ul { color:#aaa; }
+    .requirements li.valid { color:rgb(0, 255, 0); }
+    .requirements li.invalid { color:red; }
+    .change-password label {
+      font-size:14px; color:#495057;
+    }
+    body.dark-mode .change-password label { color:#ccc; }
+    .change-btn {
+      background:#d9534f; color:#fff; border:none; padding:10px;
+      border-radius:20px; width:100%; cursor:pointer; margin-top:10px;
+      transition:none;
+    }
+    .change-btn:hover { background:#c9302c; }
+
+@media (max-width: 768px) {
+  /* Sidebar hidden by default on mobile */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px; /* hide offscreen */
+    width: 260px;
+    height: 100%;
+    background-color: #7b0000; /* your sidebar color */
+    z-index: 2000;
+    transition: left 0.3s ease;
+  }
+
+  /* When sidebar-open class is added */
+  body.sidebar-open .sidebar {
+    left: 0;
+  }
+
+  /* Main content fills screen when sidebar hidden */
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  /* Hamburger menu visible on mobile */
+  .header-container .menu-toggle {
+    display: block;
+    margin-left: auto; /* push to right side */
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  /* Header-right stays in header, aligns nicely */
+  .header-container .header-right {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+    /* Show-Password checkbox accent colour */
+.change-password label input[type="checkbox"] {
+  /* grey when unchecked */
+  accent-color: #ccc;
+}
+.change-password label input[type="checkbox"]:checked {
+  /* blue when checked */
+  accent-color: #007bff;
+}
+
