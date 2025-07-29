@@ -6,7 +6,14 @@
 
     <ul>
         <li class="active"><i class="fas fa-user"></i><span>Profile</span></li>
-        <li><i class="fas fa-users-cog"></i><span>User Account Management</span></li>
+<li class="has-submenu">
+    <i class="fas fa-users-cog"></i><span>User Account Management</span>
+    <ul class="submenu">
+        <li><a href="{{ route('admin.create_assessor') }}">Create Assessor’s Account</a></li>
+        <li><a href="{{ route('admin.approve-reject') }}">Approve/Reject Account</a></li>
+        <li><a href="{{ route('admin.manage') }}">Manage Account</a></li>
+    </ul>
+</li>
         <li><i class="fas fa-tasks"></i><span>Scoring Rubric Configuration</span></li>
         <li><i class="fas fa-file-alt"></i><span>Submission Oversight</span></li>
         <li><i class="fas fa-check-circle"></i><span>Final Review</span></li>
