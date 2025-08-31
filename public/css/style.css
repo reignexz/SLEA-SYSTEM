@@ -592,3 +592,468 @@ body.dark-mode .approval-table {
 body.dark-mode .approval-table thead {
   background-color: #555;
 }
+
+/* ===== Manage Account (scoped) ===== */
+.manage-container { 
+  padding: 18px 16px; 
+  padding-top: 120px; /* Add space to avoid header overlap */
+  min-height: 100vh;
+}
+
+.manage-title {
+  font-size: 24px; 
+  font-weight: 600; 
+  margin-bottom: 20px;
+  color: #7b0000;
+}
+
+body.dark-mode .manage-title {
+  color: #F9BD3D;
+}
+
+/* Controls row */
+.controls {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: end; gap: 12px; margin-bottom: 10px;
+}
+.controls-left { display: flex; gap: 18px; }
+.dropdowns { display: flex; gap: 18px; }
+.dropdowns label { display: flex; flex-direction: column; font-size: 13px; color: #374151; }
+.dropdowns select {
+  min-width: 165px; height: 34px;
+  padding: 6px 10px; border: 1px solid #D1D5DB; border-radius: 6px;
+  background: #fff;
+}
+
+/* Search box (right side) */
+.search-box { position: relative; width: 230px; justify-self: end; }
+.search-box input {
+  width: 100%; height: 34px; padding: 6px 34px 6px 10px;
+  border: 1px solid #D1D5DB; border-radius: 6px; background: #fff;
+}
+.search-btn {
+  position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border: 0; border-radius: 6px; background: #F3F4F6; cursor: pointer;
+}
+
+/* Table wrapper */
+.table-wrap {
+  margin-top: 10px;
+  background: #fff;
+  border: 1px solid #E5E7EB; border-radius: 10px;
+  overflow: hidden; /* keeps rounded corners on the header */
+}
+
+/* Table proper */
+.manage-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+.manage-table thead th {
+  background: #E5E7EB; color: #111827; font-weight: 600;
+  padding: 10px 12px; border-bottom: 1px solid #D1D5DB;
+}
+.manage-table tbody td {
+  height: 64px; /* row height like Figma */
+  padding: 10px 12px; border-bottom: 1px solid #EDEDED;
+}
+.manage-table tr:last-child td { border-bottom: none; }
+
+.col-email{width:22%} .col-name{width:18%} .col-date{width:16%}
+.col-status{width:16%} .col-last{width:16%} .col-action{width:12%}
+.text-center{text-align:center}
+
+/* Status badge */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+}
+.badge--green { background: #ECFDF5; color: #047857; }
+.badge--red   { background: #FEF2F2; color: #B91C1C; }
+
+/* Action buttons (pills on the right) */
+.action-buttons { display: flex; gap: 8px; justify-content: center; align-items: center; }
+.btn {
+  padding: 6px 12px; line-height: 1; border-radius: 999px; font-size: 12px; font-weight: 600;
+  border: 1px solid transparent; cursor: pointer;
+}
+.btn:disabled { opacity: .6; cursor: default; }
+
+.btn-disable { background: #FEF3C7; color: #92400E; border-color: #FDE68A; }
+.btn-disable:hover { background: #FDE68A; }
+.btn-delete  { background: #FEE2E2; color: #991B1B; border-color: #FECACA; }
+.btn-delete:hover { background: #FECACA; }
+
+/* Pagination (if you use Laravel default) */
+.table-pagination { margin-top: 10px; }
+
+/* ===== Rubric Styles ===== */
+.rubric-main-container {
+  padding-top: 100px; /* Add space to avoid header overlap */
+  min-height: 100vh;
+}
+
+.rubric-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Back Button Navigation */
+.rubric-header-nav {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.btn-back {
+  background: #6c757d;
+  color: #fff;
+  border: 1px solid #6c757d;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.btn-back:hover {
+  background: #545b62;
+  border-color: #545b62;
+  color: #fff;
+  text-decoration: none;
+  transform: translateX(-2px);
+}
+
+body.dark-mode .btn-back {
+  background: #495057;
+  border-color: #495057;
+}
+
+body.dark-mode .btn-back:hover {
+  background: #343a40;
+  border-color: #343a40;
+}
+
+.rubric-main-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #7b0000;
+  text-align: center;
+}
+
+body.dark-mode .rubric-main-title {
+  color: #F9BD3D;
+}
+
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+}
+
+body.dark-mode .tab-nav {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+.tab-nav .btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Rubric Section Styles */
+.rubric-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border: 1px solid #dee2e6;
+}
+
+body.dark-mode .rubric-section {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+.rubric-heading {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #7b0000;
+  border-bottom: 2px solid #7b0000;
+  padding-bottom: 10px;
+}
+
+body.dark-mode .rubric-heading {
+  color: #F9BD3D;
+  border-color: #F9BD3D;
+}
+
+/* Subsection Styles */
+.subsection {
+  margin-bottom: 30px;
+}
+
+.subsection-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #495057;
+  background: #f8f9fa;
+  padding: 10px 15px;
+  border-left: 4px solid #7b0000;
+  border-radius: 5px;
+}
+
+body.dark-mode .subsection-title {
+  color: #f0f0f0;
+  background: #2a2a2a;
+  border-color: #F9BD3D;
+}
+
+/* Enhanced Table Styles with Visible Borders */
+.table-wrap {
+  margin-top: 15px;
+  background: #fff;
+  border: 2px solid #dee2e6;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .table-wrap {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+.manage-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+}
+
+.manage-table thead th {
+  background: #7b0000;
+  color: #fff;
+  font-weight: 600;
+  padding: 15px 12px;
+  text-align: center;
+  border-right: 1px solid #fff;
+  border-bottom: 2px solid #fff;
+  font-size: 14px;
+}
+
+.manage-table thead th:last-child {
+  border-right: none;
+}
+
+body.dark-mode .manage-table thead th {
+  background: #5c0000;
+  border-color: #777;
+}
+
+.manage-table tbody td {
+  padding: 12px;
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  text-align: center;
+  vertical-align: middle;
+  background: #fff;
+}
+
+.manage-table tbody td:last-child {
+  border-right: none;
+}
+
+.manage-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+body.dark-mode .manage-table tbody td {
+  background: #3a3a3a;
+  border-color: #555;
+  color: #f0f0f0;
+}
+
+.manage-table tbody tr:nth-child(even) td {
+  background: #f8f9fa;
+}
+
+body.dark-mode .manage-table tbody tr:nth-child(even) td {
+  background: #2a2a2a;
+}
+
+.manage-table tbody tr:hover td {
+  background: #e3f2fd;
+}
+
+body.dark-mode .manage-table tbody tr:hover td {
+  background: #4a4a4a;
+}
+
+/* Form Styles */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: end;
+  margin-top: 20px;
+}
+
+.form-row .form-control {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  background: #fff;
+  color: #495057;
+}
+
+body.dark-mode .form-row .form-control {
+  background: #2a2a2a;
+  border-color: #555;
+  color: #f0f0f0;
+}
+
+.form-row .form-control:focus {
+  outline: none;
+  border-color: #7b0000;
+  box-shadow: 0 0 0 2px rgba(123, 0, 0, 0.2);
+}
+
+body.dark-mode .form-row .form-control:focus {
+  border-color: #F9BD3D;
+  box-shadow: 0 0 0 2px rgba(249, 189, 61, 0.2);
+}
+
+/* Navigation Buttons */
+.rubric-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-top: 30px;
+  border-top: 1px solid #dee2e6;
+}
+
+body.dark-mode .rubric-navigation {
+  border-color: #555;
+}
+
+.rubric-navigation .btn {
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #7b0000;
+  color: #fff;
+  border: 1px solid #7b0000;
+}
+
+.btn-primary:hover {
+  background: #5c0000;
+  border-color: #5c0000;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: #fff;
+  border: 1px solid #6c757d;
+}
+
+.btn-secondary:hover {
+  background: #545b62;
+  border-color: #545b62;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rubric-main-container {
+    padding-top: 120px;
+  }
+  
+  .rubric-content {
+    padding: 10px;
+  }
+  
+  .tab-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .tab-nav .btn {
+    text-align: center;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .form-row .form-control {
+    min-width: 100%;
+  }
+  
+  .manage-table {
+    font-size: 12px;
+  }
+  
+  .manage-table thead th,
+  .manage-table tbody td {
+    padding: 8px 6px;
+  }
+  
+  .rubric-navigation {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .rubric-navigation .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .rubric-main-container {
+    padding-top: 140px;
+  }
+  
+  .manage-table thead th,
+  .manage-table tbody td {
+    padding: 6px 4px;
+    font-size: 11px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .action-buttons .btn {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+}

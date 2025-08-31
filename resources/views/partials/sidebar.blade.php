@@ -14,7 +14,7 @@
         <li><a href="{{ route('admin.manage') }}">Manage Account</a></li>
     </ul>
 </li>
-        <li><i class="fas fa-tasks"></i><span>Scoring Rubric Configuration</span></li>
+        <li><a href="{{ route('admin.rubrics.index') }}" style="display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;"><i class="fas fa-tasks"></i><span>Scoring Rubric Configuration</span></a></li>
         <li><i class="fas fa-file-alt"></i><span>Submission Oversight</span></li>
         <li><i class="fas fa-check-circle"></i><span>Final Review</span></li>
         <li><i class="fas fa-server"></i><span>System Monitoring and Logs</span></li>

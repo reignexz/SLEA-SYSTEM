@@ -6,12 +6,20 @@
     <link rel="icon" href="{{ asset('images/osas-logo-removebg.png') }}?v={{ filemtime(public_path('images/osas-logo-removebg.png')) }}" type="image/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Global CSS -->
+    {{-- ✅ 1. Vite Tailwind comes FIRST (for base styles) --}}
+   {{-- @vite('resources/css/app.css') --}}
+
+    {{-- ✅ 2. Then Bootstrap, custom styles override Tailwind --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/header.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {{-- ✅ 3. Fonts and Icons --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+    {{-- ✅ 4. JS via Vite --}}
+    @vite('resources/js/app.js')
 
     @yield('head')
 </head>
@@ -20,18 +28,18 @@
     {{-- Include Header --}}
     @include('partials.header')
 
-    {{-- Sidebar Overlay (must be inside <body>) --}}
+    {{-- Sidebar Overlay --}}
     <div class="sidebar-overlay"></div>
 
     {{-- Page Content --}}
-    <main class="flex-grow-1">
+    <main class="flex-grow-1 app-content">
         @yield('content')
     </main>
 
     {{-- Include Footer --}}
     @include('partials.footer')
 
-    <!-- JS Scripts -->
+    {{-- Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/admin_profile.js') }}"></script>
