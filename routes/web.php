@@ -13,6 +13,8 @@ Route::prefix('admin')->group(function () {
     // Admin pages
     Route::get('/create_assessor', [AdminController::class, 'createAssessor'])->name('admin.create_assessor');
     Route::get('/approve-reject', [AdminController::class, 'approveReject'])->name('admin.approve-reject');
+    Route::get('/submission-oversight', [AdminController::class, 'submissionOversight'])->name('admin.submission-oversight');
+    Route::get('/final-review', [AdminController::class, 'finalReview'])->name('admin.final-review');
 
     // Manage Account
     Route::get('/manage', [AdminController::class, 'manageAccount'])->name('admin.manage');

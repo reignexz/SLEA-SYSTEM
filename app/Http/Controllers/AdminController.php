@@ -22,6 +22,20 @@ class AdminController extends Controller
         return view('admin.approve-reject');
     }
 
+    public function submissionOversight()
+    {
+        // For now, return the view without data
+        // Later you can add logic to fetch submissions from database
+        return view('admin.submission-oversight');
+    }
+
+    public function finalReview()
+    {
+        // For now, return the view without data
+        // Later you can add logic to fetch students for final review from database
+        return view('admin.final-review');
+    }
+
     /**
      * Manage Account – list, filter, sort, search
      */
