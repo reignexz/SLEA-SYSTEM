@@ -102,7 +102,7 @@
                                     @endif
                                 </td>
                                 <td class="action-buttons">
-                                    <button type="button" class="btn btn-view" onclick="openSubmissionModal('{{ $submission->id ?? '1' }}')">View</button>
+                                    <button type="button" class="btn btn-view" onclick="openSubmissionModal('{{ $submission->id ?? '1'}}')">View</button>
                                 </td>
                             </tr>
                         @endforeach

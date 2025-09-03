@@ -36,6 +36,13 @@ class AdminController extends Controller
         return view('admin.final-review');
     }
 
+    public function awardReport()
+    {
+        // For now, return the view without data
+        // Later you can add logic to fetch award report data from database
+        return view('admin.award-report');
+    }
+
     /**
      * Manage Account – list, filter, sort, search
      */

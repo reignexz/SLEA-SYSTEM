@@ -91,7 +91,6 @@
                                 $toggleLabel    = $isDisabled ? 'Enable' : 'Disable';
                                 $toggleIcon     = $isDisabled ? 'fa-check' : 'fa-ban';
                                 $toggleClass    = $isDisabled ? 'btn-enable' : 'btn-disable';
-                                $toggleAction   = $isDisabled ? 'enable' : 'disable';
                             @endphp
                             <tr>
                                 <td>{{ $user->email }}</td>
@@ -108,8 +107,8 @@
                                     <button type="button" 
                                             class="btn {{ $toggleClass }} btn-icon" 
                                             title="{{ $toggleLabel }}" aria-label="{{ $toggleLabel }}"
-                                            onclick="openToggleModal('{{ $user->id }}', '{{ $user->email }}', '{{ $toggleLabel }}', '{{ $toggleAction }}')">
-                                        <i class="fas {{ $toggleIcon }}"></i>
+                                            onclick="openToggleModal('{{ $user->id }}', '{{ $user->email }}', '{{ $toggleLabel }}', '{{ $isDisabled ? 'enable' : 'disable' }}')"                                        
+                                            <i class="fas {{ $toggleIcon }}"></i>
                                     </button>
 
                                     <button type="button" 

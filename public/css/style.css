@@ -2197,3 +2197,459 @@ body.dark-mode .rubric-navigation {
     font-size: 10px;
   }
 }
+
+.sidebar ul li.has-submenu:hover::after {
+    color: #F9BD3D;
+    transform: translateY(-50%) translateX(2px);
+}
+
+/* ===== AWARD REPORT SPECIFIC STYLES ===== */
+.award-table { 
+  width: 100%; 
+  border-collapse: separate; 
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.award-table thead th {
+  background: #7b0000; 
+  color: #fff; 
+  font-weight: 600;
+  padding: 15px 12px; 
+  text-align: center;
+  border-right: 1px solid #fff;
+  border-bottom: 2px solid #fff;
+  font-size: 14px;
+}
+
+.award-table thead th:last-child {
+  border-right: none;
+}
+
+.award-table tbody td {
+  padding: 12px; 
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  text-align: center;
+  vertical-align: middle;
+  background: #fff;
+}
+
+.award-table tbody td:last-child {
+  border-right: none;
+}
+
+.award-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.award-table tbody tr:nth-child(even) td {
+  background: #f8f9fa;
+}
+
+.award-table tbody tr:hover td {
+  background: #e3f2fd;
+}
+
+/* Award table action cell */
+.award-table tbody td.action-buttons {
+  padding: 8px 12px;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+/* Column widths for award report */
+.col-name { width: 20%; }
+.col-id { width: 15%; }
+.col-program { width: 15%; }
+.col-points { width: 15%; }
+.col-status { width: 20%; }
+.col-action { width: 15%; }
+
+/* Filter Section */
+.filter-section {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+body.dark-mode .filter-section {
+  background: #2a2a2a;
+  border-color: #555;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: end;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.filter-item label {
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+}
+
+body.dark-mode .filter-item label {
+  color: #ccc;
+}
+
+.filter-select {
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  background: #fff;
+  color: #495057;
+  font-size: 14px;
+  min-width: 200px;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #7b0000;
+  box-shadow: 0 0 0 2px rgba(123, 0, 0, 0.2);
+}
+
+body.dark-mode .filter-select {
+  background: #2a2a2a;
+  border-color: #555;
+  color: #f0f0f0;
+}
+
+body.dark-mode .filter-select:focus {
+  border-color: #F9BD3D;
+  box-shadow: 0 0 0 2px rgba(249, 189, 61, 0.2);
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+}
+
+.btn-filter {
+  background: #7b0000;
+  color: #fff;
+  border: 1px solid #7b0000;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-filter:hover {
+  background: #5c0000;
+  border-color: #5c0000;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(123, 0, 0, 0.3);
+}
+
+.btn-clear {
+  background: #6c757d;
+  color: #fff;
+  border: 1px solid #6c757d;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.btn-clear:hover {
+  background: #545b62;
+  border-color: #545b62;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Program Section */
+.program-section {
+  margin-bottom: 40px;
+}
+
+.program-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #7b0000;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #7b0000;
+}
+
+body.dark-mode .program-title {
+  color: #F9BD3D;
+  border-color: #F9BD3D;
+}
+
+/* Action Section */
+.action-section {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #dee2e6;
+}
+
+body.dark-mode .action-section {
+  border-color: #555;
+}
+
+.btn-export-pdf,
+.btn-generate-preview {
+  background: #7b0000;
+  color: #fff;
+  border: 1px solid #7b0000;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-export-pdf:hover,
+.btn-generate-preview:hover {
+  background: #5c0000;
+  border-color: #5c0000;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(123, 0, 0, 0.3);
+}
+
+.btn-export-pdf:active,
+.btn-generate-preview:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(123, 0, 0, 0.2);
+}
+
+/* Document Modal Styles */
+.document-modal {
+  max-width: 700px;
+}
+
+.document-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.points-breakdown {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #dee2e6;
+}
+
+body.dark-mode .points-breakdown {
+  background: #2a2a2a;
+  border-color: #555;
+}
+
+.points-breakdown h4 {
+  margin: 0 0 15px 0;
+  color: #7b0000;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+body.dark-mode .points-breakdown h4 {
+  color: #F9BD3D;
+}
+
+.breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.breakdown-table th,
+.breakdown-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+body.dark-mode .breakdown-table th,
+body.dark-mode .breakdown-table td {
+  border-color: #555;
+}
+
+.breakdown-table th {
+  background: #e9ecef;
+  font-weight: 600;
+  color: #495057;
+}
+
+body.dark-mode .breakdown-table th {
+  background: #3a3a3a;
+  color: #f0f0f0;
+}
+
+.breakdown-table .total-row {
+  background: #f8f9fa;
+  font-weight: 600;
+}
+
+body.dark-mode .breakdown-table .total-row {
+  background: #3a3a3a;
+}
+
+.btn-done {
+  background: #dc3545;
+  color: #fff;
+  border: 1px solid #dc3545;
+  padding: 10px 30px;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-done:hover {
+  background: #c82333;
+  border-color: #bd2130;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-done:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+
+/* Leadership Status badges */
+.badge--blue {
+  background: #E3F2FD;
+  color: #1976D2;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid #BBDEFB;
+}
+
+.badge--yellow {
+  background: #FFF3E0;
+  color: #F57C00;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid #FFE0B2;
+}
+
+.badge--green {
+  background: #E8F5E8;
+  color: #388E3C;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid #C8E6C9;
+}
+
+/* Dark mode support for award table */
+body.dark-mode .award-table thead th {
+  background: #5c0000;
+  border-color: #777;
+}
+
+body.dark-mode .award-table tbody td {
+  background: #3a3a3a;
+  border-color: #555;
+  color: #f0f0f0;
+}
+
+body.dark-mode .award-table tbody tr:nth-child(even) td {
+  background: #2a2a2a;
+}
+
+body.dark-mode .award-table tbody tr:hover td {
+  background: #4a4a4a;
+}
+
+/* Responsive Design for Award Report */
+@media (max-width: 768px) {
+  .filter-row {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+  
+  .filter-item {
+    min-width: auto;
+  }
+  
+  .filter-select {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .filter-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .btn-filter,
+  .btn-clear {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .action-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .btn-export-pdf,
+  .btn-generate-preview {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .breakdown-table {
+    font-size: 12px;
+  }
+  
+  .breakdown-table th,
+  .breakdown-table td {
+    padding: 8px 6px;
+  }
+}
