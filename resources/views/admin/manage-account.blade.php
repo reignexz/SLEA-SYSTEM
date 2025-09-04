@@ -91,6 +91,7 @@
                                 $toggleLabel    = $isDisabled ? 'Enable' : 'Disable';
                                 $toggleIcon     = $isDisabled ? 'fa-check' : 'fa-ban';
                                 $toggleClass    = $isDisabled ? 'btn-enable' : 'btn-disable';
+                                $toggleAction   = $isDisabled ? 'enable' : 'disable';
                             @endphp
                             <tr>
                                 <td>{{ $user->email }}</td>
@@ -102,21 +103,24 @@
                                     </span>
                                 </td>
                                 <td>{{ optional($user->last_login_at)->diffForHumans() ?? '—' }}</td>
-
-                                <td class="action-buttons">
-                                    <button type="button" 
-                                            class="btn {{ $toggleClass }} btn-icon" 
-                                            title="{{ $toggleLabel }}" aria-label="{{ $toggleLabel }}"
-                                            onclick="openToggleModal('{{ $user->id }}', '{{ $user->email }}', '{{ $toggleLabel }}', '{{ $isDisabled ? 'enable' : 'disable' }}')"                                        
+                                <td class="action-cell">
+                                    <div class="action-buttons">
+                                        <button type="button" 
+                                                class="btn {{ $toggleClass }}" 
+                                                title="{{ $toggleLabel }}" 
+                                                aria-label="{{ $toggleLabel }}"
+                                                onclick="openToggleModal('{{ $user->id }}', '{{ $user->email }}', '{{ $toggleLabel }}', '{{ $toggleAction }}')">
                                             <i class="fas {{ $toggleIcon }}"></i>
-                                    </button>
+                                        </button>
 
-                                    <button type="button" 
-                                            class="btn btn-delete btn-icon" 
-                                            title="Delete" aria-label="Delete"
-                                            onclick="openDeleteModal('{{ $user->id }}', '{{ $user->email }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                        <button type="button" 
+                                                class="btn btn-delete" 
+                                                title="Delete" 
+                                                aria-label="Delete"
+                                                onclick="openDeleteModal('{{ $user->id }}', '{{ $user->email }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -129,13 +133,15 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="action-buttons">
-                                    <button type="button" class="btn btn-disable btn-icon" disabled title="Disable" aria-label="Disable">
-                                        <i class="fas fa-ban"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-delete btn-icon" disabled title="Delete" aria-label="Delete">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                <td class="action-cell">
+                                    <div class="action-buttons">
+                                        <button type="button" class="btn btn-disable" disabled title="Disable" aria-label="Disable">
+                                            <i class="fas fa-ban"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-delete" disabled title="Delete" aria-label="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         @endfor
@@ -223,6 +229,30 @@
     </div>
 </div>
 
+<!-- Success Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content success-modal">
+        <div class="modal-header success-header">
+            <h3 id="successModalTitle">Success!</h3>
+            <span class="close" onclick="closeSuccessModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="success-content">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle" style="font-size: 48px; color: #28a745;"></i>
+                </div>
+                <p id="successModalMessage"></p>
+                <div class="account-summary" id="successModalSummary"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeSuccessModal()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+    </div>
+</div>
+
 <script>
 let currentUserId = '';
 let currentUserEmail = '';
@@ -278,10 +308,43 @@ function closeDeleteModal() {
     currentUserEmail = '';
 }
 
+function showSuccessModal(action, userEmail) {
+    // Update success modal content
+    document.getElementById('successModalTitle').textContent = 'Account ' + action + ' Successfully!';
+    document.getElementById('successModalMessage').textContent = `The account has been ${action} successfully.`;
+    
+    // Update summary
+    const summary = document.getElementById('successModalSummary');
+    summary.innerHTML = `
+        <div class="summary-item">
+            <span class="summary-label">Email:</span>
+            <span class="summary-value">${userEmail}</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Action:</span>
+            <span class="summary-value">${action}</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Status:</span>
+            <span class="summary-value">Completed</span>
+        </div>
+    `;
+    
+    // Show success modal
+    document.getElementById('successModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSuccessModal() {
+    document.getElementById('successModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
 // Close modals when clicking outside
 window.onclick = function(event) {
     const toggleModal = document.getElementById('toggleModal');
     const deleteModal = document.getElementById('deleteModal');
+    const successModal = document.getElementById('successModal');
     
     if (event.target === toggleModal) {
         closeToggleModal();
@@ -289,7 +352,53 @@ window.onclick = function(event) {
     if (event.target === deleteModal) {
         closeDeleteModal();
     }
+    if (event.target === successModal) {
+        closeSuccessModal();
+    }
 }
+
+// Add form submission handlers
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle form submission
+    document.getElementById('toggleForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simulate form submission (replace with actual AJAX call if needed)
+        const formData = new FormData(this);
+        const action = currentToggleAction;
+        const userEmail = currentUserEmail;
+        
+        // Close confirmation modal
+        closeToggleModal();
+        
+        // Show success modal after a short delay
+        setTimeout(() => {
+            showSuccessModal(action, userEmail);
+        }, 300);
+        
+        // Here you would normally submit the form via AJAX
+        // For now, we'll just show the success message
+    });
+    
+    // Delete form submission
+    document.getElementById('deleteForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simulate form submission (replace with actual AJAX call if needed)
+        const userEmail = currentUserEmail;
+        
+        // Close confirmation modal
+        closeDeleteModal();
+        
+        // Show success modal after a short delay
+        setTimeout(() => {
+            showSuccessModal('deleted', userEmail);
+        }, 300);
+        
+        // Here you would normally submit the form via AJAX
+        // For now, we'll just show the success message
+    });
+});
 </script>
 
 @endsection

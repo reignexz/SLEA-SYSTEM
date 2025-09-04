@@ -16,6 +16,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/submission-oversight', [AdminController::class, 'submissionOversight'])->name('admin.submission-oversight');
     Route::get('/final-review', [AdminController::class, 'finalReview'])->name('admin.final-review');
     Route::get('/award-report', [AdminController::class, 'awardReport'])->name('admin.award-report');
+    Route::get('/system-monitoring', [AdminController::class, 'systemMonitoring'])->name('admin.system-monitoring');
 
     // Manage Account
     Route::get('/manage', [AdminController::class, 'manageAccount'])->name('admin.manage');

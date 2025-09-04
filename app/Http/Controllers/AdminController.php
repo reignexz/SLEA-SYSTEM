@@ -43,6 +43,12 @@ class AdminController extends Controller
         return view('admin.award-report');
     }
 
+    public function systemMonitoring()
+    {
+        // Placeholder view for system monitoring and logs
+        return view('admin.system-monitoring');
+    }
+
     /**
      * Manage Account – list, filter, sort, search
      */

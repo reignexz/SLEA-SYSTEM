@@ -24,17 +24,13 @@
         
         <li><a href="{{ route('admin.award-report') }}" style="display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;"><i class="fas fa-trophy"></i><span>Award Report</span></a></li>
         
-        <li><a href="#" onclick="showSystemMonitoring()" style="display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;"><i class="fas fa-server"></i><span>System Monitoring and Logs</span></a></li>
+        <li><a href="{{ route('admin.system-monitoring') }}" style="display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;"><i class="fas fa-server"></i><span>System Monitoring and Logs</span></a></li>
         
         <li><a href="#" onclick="logout()" style="display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a></li>
     </ul>
 </aside>
 
 <script>
-function showSystemMonitoring() {
-    alert('System Monitoring and Logs functionality will be implemented here.');
-}
-
 function logout() {
     if (confirm('Are you sure you want to log out?')) {
         // Add logout functionality here

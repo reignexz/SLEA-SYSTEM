@@ -715,7 +715,11 @@ body.dark-mode .search-btn {
 .manage-table tbody td.action-buttons {
   padding: 8px 12px;
   width: 12%;
-  position: relative; /* Ensure proper positioning context */
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  z-index: 5;
+  overflow: visible;
 }
 
 .manage-table tr:last-child td { 
@@ -763,7 +767,14 @@ body.dark-mode .manage-table tbody tr:hover td {
 .badge--green { background: #ECFDF5; color: #047857; }
 .badge--red   { background: #FEF2F2; color: #B91C1C; }
 
-/* Action buttons (pills on the right) - Manage Account specific */
+/* Action buttons - Manage Account specific */
+.manage-table .action-cell {
+  padding: 8px 12px;
+  text-align: center;
+  vertical-align: middle;
+  width: 12%;
+}
+
 .manage-table .action-buttons { 
   display: flex; 
   gap: 8px; 
@@ -773,22 +784,23 @@ body.dark-mode .manage-table tbody tr:hover td {
 }
 
 .manage-table .action-buttons .btn {
-  padding: 8px 12px; 
-  line-height: 1; 
-  border-radius: 20px; 
-  font-size: 12px; 
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 14px;
   font-weight: 600;
   border: 1px solid transparent; 
-  cursor: pointer;
+  cursor: pointer !important;
+  pointer-events: auto !important;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-width: auto;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 36px; /* Fixed height for consistency */
-  flex-shrink: 0; /* Prevent buttons from shrinking */
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
 }
 
 .manage-table .action-buttons .btn:hover {
@@ -802,9 +814,10 @@ body.dark-mode .manage-table tbody tr:hover td {
 
 .manage-table .action-buttons .btn:disabled { 
   opacity: .6; 
-  cursor: default; 
+  cursor: default !important; 
   transform: none;
   box-shadow: none;
+  pointer-events: none;
 }
 
 .manage-table .action-buttons .btn-disable { 
@@ -860,20 +873,39 @@ body.dark-mode .manage-table tbody tr:hover td {
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Compact icon-only button */
-.manage-table .action-buttons .btn-icon {
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border-radius: 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.manage-table .action-buttons .btn-icon i {
+.manage-table .action-buttons .btn i {
   margin: 0;
   font-size: 14px;
+}
+
+/* Force button interactivity */
+.manage-table .action-buttons .btn:not([disabled]) {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure buttons are clickable and visible */
+.manage-table .action-buttons .btn {
+  min-width: 36px;
+  min-height: 36px;
+  overflow: visible;
+  user-select: none;
+}
+
+/* Remove any potential overlapping elements */
+.manage-table .action-cell {
+  overflow: visible;
+  position: relative;
+}
+
+.manage-table .action-buttons {
+  position: relative;
+  z-index: 15;
+}
+
+/* Ensure no other elements block the buttons */
+.manage-table .action-cell * {
+  pointer-events: auto;
 }
 
 /* Pagination (if you use Laravel default) */
@@ -1183,6 +1215,54 @@ body.dark-mode .summary-label {
 }
 
 body.dark-mode .summary-value {
+  color: #f0f0f0;
+}
+
+/* ===== Confirmation Modal Specific Styles ===== */
+.confirmation-modal {
+  max-width: 500px;
+}
+
+.account-details {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+body.dark-mode .account-details {
+  background: #2d3748;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px 0;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #495057;
+  flex: 1;
+}
+
+body.dark-mode .detail-label {
+  color: #ccc;
+}
+
+.detail-value {
+  color: #212529;
+  flex: 1;
+  text-align: right;
+}
+
+body.dark-mode .detail-value {
   color: #f0f0f0;
 }
 
@@ -2138,17 +2218,21 @@ body.dark-mode .rubric-navigation {
     padding: 8px 6px;
   }
   
+  .manage-table .action-cell {
+    padding: 6px 8px;
+  }
+  
   .manage-table .action-buttons {
     gap: 6px;
-    max-height: 50px;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .manage-table .action-buttons .btn {
-    padding: 6px 12px;
-    font-size: 11px;
-    min-width: 70px;
+    width: 32px;
     height: 32px;
+    font-size: 12px;
     flex-shrink: 0;
   }
   
@@ -2174,22 +2258,22 @@ body.dark-mode .rubric-navigation {
     font-size: 11px;
   }
   
+  .manage-table .action-cell {
+    padding: 4px 6px;
+  }
+  
   .manage-table .action-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: stretch;
-    max-height: 60px;
-    overflow: hidden;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
   }
   
   .manage-table .action-buttons .btn {
-    padding: 6px 10px;
-    font-size: 10px;
-    min-width: auto;
-    width: 100%;
-    justify-content: center;
+    width: 28px;
     height: 28px;
+    font-size: 10px;
     flex-shrink: 0;
   }
   
