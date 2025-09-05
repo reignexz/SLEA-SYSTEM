@@ -87,7 +87,7 @@ class AdminController extends Controller
             $q->latest('created_at');
         }
 
-        $users = $q->paginate(12);
+        $users = $q->paginate(10);
 
         // IMPORTANT: this returns the blade below
         return view('admin.manage-account', compact('users'));
@@ -101,7 +101,13 @@ class AdminController extends Controller
         $user->is_disabled = ! (bool) $user->is_disabled;
         $user->save();
 
-        return back()->with('status', 'User status updated.');
+        $message = $user->is_disabled ? 'User disabled successfully.' : 'User enabled successfully.';
+
+        if (request()->ajax()) {
+            return response()->json(['message' => $message, 'status' => $user->is_disabled ? 'disabled' : 'active']);
+        }
+
+        return back()->with('status', $message);
     }
 
     /**
@@ -109,8 +115,15 @@ class AdminController extends Controller
      */
     public function destroyUser(User $user)
     {
+        $userName = $user->name ?? $user->email;
         $user->delete();
 
-        return back()->with('status', 'User deleted.');
+        $message = "User '{$userName}' deleted successfully.";
+
+        if (request()->ajax()) {
+            return response()->json(['message' => $message]);
+        }
+
+        return back()->with('status', $message);
     }
 }

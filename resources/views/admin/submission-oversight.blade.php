@@ -122,21 +122,160 @@
                                 <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-1')">View</button>
                             </td>
                         </tr>
-                        {{-- Empty rows for demonstration --}}
-                        @for ($i = 0; $i < 5; $i++)
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="text-center">
-                                    <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
-                                </td>
-                                <td class="action-buttons">
-                                    <button type="button" class="btn btn-view" disabled>View</button>
-                                </td>
-                            </tr>
-                        @endfor
+                        <tr>
+                            <td>Academic Excellence Award</td>
+                            <td>Maria Santos</td>
+                            <td>II. Academic</td>
+                            <td>
+                                <span class="badge badge--green">Approved</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-2')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Community Service Certificate</td>
+                            <td>John Dela Cruz</td>
+                            <td>IV. Community</td>
+                            <td>
+                                <span class="badge badge--red">Rejected</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #dc3545;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-3')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dean's List Recognition</td>
+                            <td>Sarah Johnson</td>
+                            <td>II. Academic</td>
+                            <td>
+                                <span class="badge badge--yellow">Pending</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-4')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Student Council President</td>
+                            <td>Michael Rodriguez</td>
+                            <td>I. Leadership</td>
+                            <td>
+                                <span class="badge badge--green">Approved</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-5')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Volunteer Work Documentation</td>
+                            <td>Anna Garcia</td>
+                            <td>IV. Community</td>
+                            <td>
+                                <span class="badge badge--yellow">Pending</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #dc3545;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-6')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Research Paper Publication</td>
+                            <td>David Kim</td>
+                            <td>II. Academic</td>
+                            <td>
+                                <span class="badge badge--green">Approved</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-7')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sports Achievement Award</td>
+                            <td>Lisa Chen</td>
+                            <td>III. Awards</td>
+                            <td>
+                                <span class="badge badge--red">Rejected</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #dc3545;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-8')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Disciplinary Clearance</td>
+                            <td>Robert Wilson</td>
+                            <td>V. Good Conduct</td>
+                            <td>
+                                <span class="badge badge--yellow">Pending</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-9')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>International Conference Presentation</td>
+                            <td>Jennifer Lee</td>
+                            <td>II. Academic</td>
+                            <td>
+                                <span class="badge badge--green">Approved</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-10')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Club Organization Certificate</td>
+                            <td>Carlos Martinez</td>
+                            <td>I. Leadership</td>
+                            <td>
+                                <span class="badge badge--yellow">Pending</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #dc3545;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-11')">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Environmental Project Documentation</td>
+                            <td>Emily Davis</td>
+                            <td>IV. Community</td>
+                            <td>
+                                <span class="badge badge--green">Approved</span>
+                            </td>
+                            <td class="text-center">
+                                <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-12')">View</button>
+                            </td>
+                        </tr>
                     @endif
                 </tbody>
             </table>

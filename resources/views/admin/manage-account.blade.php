@@ -34,20 +34,20 @@
                 <div class="dropdowns">
                     <label>
                         <span>Filter</span>
-                        <select name="filter">
+                        <select name="filter" class="filter-select">
                             <option value="" @selected(request('filter')==='')>None</option>
                             <option value="active" @selected(request('filter')==='active')>Active</option>
                             <option value="disabled" @selected(request('filter')==='disabled')>Disabled</option>
-                            <option value="new" @selected(request('filter')==='new')>New (last 7 days)</option>
+                            <option value="new" @selected(request('filter')==='new')>New (Last 7 days)</option>
                         </select>
                     </label>
 
                     <label>
                         <span>Sort by</span>
-                        <select name="sort">
+                        <select name="sort" class="filter-select">
                             <option value="" @selected(request('sort')==='')>None</option>
                             <option value="name" @selected(request('sort')==='name')>Name</option>
-                            <option value="date" @selected(request('sort')==='date')>Date</option>
+                            <option value="date" @selected(request('sort')==='date')>Date Created</option>
                             <option value="status" @selected(request('sort')==='status')>Account Status</option>
                             <option value="last_login" @selected(request('sort')==='last_login')>Last Login</option>
                         </select>
@@ -56,288 +56,179 @@
             </div>
 
             <div class="search-box">
-                <input type="search" name="q" value="{{ request('q') }}" placeholder="Search...">
-                <button class="search-btn" type="submit" aria-label="Search">
+                <input type="text" name="q" placeholder="Search by email or name..." value="{{ request('q') }}" class="search-input">
+                <button type="submit" class="search-btn">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
         </form>
 
-        {{-- Table --}}
-        <div class="table-wrap">
-            <table class="manage-table">
+        {{-- Account Management Table --}}
+        <div class="table-container">
+            <table class="manage-account-table">
                 <thead>
                     <tr>
-                        <th class="col-email">Email Address</th>
-                        <th class="col-name">Name</th>
-                        <th class="col-date">Date</th>
-                        <th class="col-status">Account Status</th>
-                        <th class="col-last">Last Login</th>
-                        <th class="col-action text-center">Action</th>
+                        <th>Email Address</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Account Status</th>
+                        <th>Last Login</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $hasRows = $users instanceof \Illuminate\Contracts\Pagination\Paginator
-                                   ? $users->count() > 0
-                                   : collect($users)->count() > 0;
-                    @endphp
-
-                    @if ($hasRows)
-                        @foreach ($users as $user)
-                            @php
-                                $isDisabled     = (bool) ($user->is_disabled ?? false);
-                                $statusText     = $isDisabled ? 'Disabled' : 'Active';
-                                $toggleLabel    = $isDisabled ? 'Enable' : 'Disable';
-                                $toggleIcon     = $isDisabled ? 'fa-check' : 'fa-ban';
-                                $toggleClass    = $isDisabled ? 'btn-enable' : 'btn-disable';
-                                $toggleAction   = $isDisabled ? 'enable' : 'disable';
-                            @endphp
-                            <tr>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->created_at?->format('Y-m-d') }}</td>
-                                <td>
-                                    <span class="badge {{ $isDisabled ? 'badge--red' : 'badge--green' }}">
-                                        {{ $statusText }}
-                                    </span>
-                                </td>
-                                <td>{{ optional($user->last_login_at)->diffForHumans() ?? '—' }}</td>
-                                <td class="action-cell">
-                                    <div class="action-buttons">
-                                        <button type="button" 
-                                                class="btn {{ $toggleClass }}" 
-                                                title="{{ $toggleLabel }}" 
-                                                aria-label="{{ $toggleLabel }}"
-                                                onclick="openToggleModal('{{ $user->id }}', '{{ $user->email }}', '{{ $toggleLabel }}', '{{ $toggleAction }}')">
-                                            <i class="fas {{ $toggleIcon }}"></i>
-                                        </button>
-
-                                        <button type="button" 
-                                                class="btn btn-delete" 
-                                                title="Delete" 
-                                                aria-label="Delete"
-                                                onclick="openDeleteModal('{{ $user->id }}', '{{ $user->email }}')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @else
-                        {{-- Render the empty grid like the Figma (6 blank rows with actions visible) --}}
-                        @for ($i = 0; $i < 6; $i++)
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="action-cell">
-                                    <div class="action-buttons">
-                                        <button type="button" class="btn btn-disable" disabled title="Disable" aria-label="Disable">
-                                            <i class="fas fa-ban"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-delete" disabled title="Delete" aria-label="Delete">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endfor
-                    @endif
+                    @forelse($users as $user)
+                        <tr>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->name ?? 'N/A' }}</td>
+                            <td>{{ $user->created_at ? $user->created_at->format('M d, Y') : 'N/A' }}</td>
+                            <td>
+                                <span class="status-badge {{ $user->is_disabled ? 'status-disabled' : 'status-active' }}">
+                                    {{ $user->is_disabled ? 'Disabled' : 'Active' }}
+                                </span>
+                            </td>
+                            <td>{{ $user->last_login_at ? $user->last_login_at->format('M d, Y H:i') : 'Never' }}</td>
+                            <td class="action-column">
+                                <div class="action-buttons">
+                                    <button class="action-btn disable-btn" 
+                                            onclick="confirmToggleUser({{ $user->id }}, {{ $user->is_disabled ? 'false' : 'true' }}, '{{ $user->name }}')"
+                                            title="{{ $user->is_disabled ? 'Enable' : 'Disable' }} User">
+                                        <i class="fas {{ $user->is_disabled ? 'fa-user-check' : 'fa-user-slash' }}"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" 
+                                            onclick="confirmDeleteUser({{ $user->id }}, '{{ $user->name }}')"
+                                            title="Delete User">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center">No users found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
-        
+
         {{-- Pagination --}}
-        @if (method_exists($users, 'links'))
-            <div class="table-pagination">
-                {{ $users->withQueryString()->links() }}
+        @if($users->hasPages())
+            <div class="pagination-container">
+                {{ $users->appends(request()->query())->links() }}
             </div>
         @endif
     </div>
 </div>
 
-<!-- Toggle Status Modal -->
-<div id="toggleModal" class="modal">
-    <div class="modal-content confirmation-modal">
+{{-- Confirmation Modal for Toggle User --}}
+<div id="toggleModal" class="modal" style="display: none;">
+    <div class="modal-content">
         <div class="modal-header">
-            <h3 id="toggleModalTitle">Toggle Account Status</h3>
+            <h3 id="toggleModalTitle">Confirm Action</h3>
             <span class="close" onclick="closeToggleModal()">&times;</span>
         </div>
         <div class="modal-body">
-            <p id="toggleModalMessage"></p>
-            <div class="account-details">
-                <div class="detail-row">
-                    <span class="detail-label">Email:</span>
-                    <span class="detail-value" id="toggleModalEmail"></span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Action:</span>
-                    <span class="detail-value" id="toggleModalAction"></span>
-                </div>
-            </div>
+            <p id="toggleModalMessage">Are you sure you want to perform this action?</p>
         </div>
         <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeToggleModal()">Cancel</button>
             <form id="toggleForm" method="POST" style="display: inline;">
                 @csrf
                 @method('PATCH')
-                <button type="submit" class="btn btn-success">
-                    <i class="fas fa-check"></i> Confirm
-                </button>
+                <button type="submit" class="btn btn-primary" id="toggleConfirmBtn">Confirm</button>
             </form>
-            <button type="button" class="btn btn-secondary" onclick="closeToggleModal()">
-                <i class="fas fa-times"></i> Cancel
-            </button>
         </div>
     </div>
 </div>
 
-<!-- Delete Account Modal -->
-<div id="deleteModal" class="modal">
-    <div class="modal-content confirmation-modal">
+{{-- Confirmation Modal for Delete User --}}
+<div id="deleteModal" class="modal" style="display: none;">
+    <div class="modal-content">
         <div class="modal-header">
-            <h3>Delete Account</h3>
+            <h3>Delete User</h3>
             <span class="close" onclick="closeDeleteModal()">&times;</span>
         </div>
         <div class="modal-body">
-            <p>Are you sure you want to delete this account? This action cannot be undone.</p>
-            <div class="account-details">
-                <div class="detail-row">
-                    <span class="detail-label">Email:</span>
-                    <span class="detail-value" id="deleteModalEmail"></span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Name:</span>
-                    <span class="detail-value" id="deleteModalName"></span>
-                </div>
-            </div>
+            <p id="deleteModalMessage">Are you sure you want to delete this user? This action cannot be undone.</p>
         </div>
         <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
             <form id="deleteForm" method="POST" style="display: inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">
-                    <i class="fas fa-trash"></i> Delete
-                </button>
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-            <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">
-                <i class="fas fa-times"></i> Cancel
-            </button>
         </div>
     </div>
 </div>
 
-<!-- Success Modal -->
-<div id="successModal" class="modal">
+{{-- Success Modal --}}
+<div id="successModal" class="modal" style="display: none;">
     <div class="modal-content success-modal">
-        <div class="modal-header success-header">
-            <h3 id="successModalTitle">Success!</h3>
-            <span class="close" onclick="closeSuccessModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            <div class="success-content">
-                <div class="success-icon">
-                    <i class="fas fa-check-circle" style="font-size: 48px; color: #28a745;"></i>
-                </div>
-                <p id="successModalMessage"></p>
-                <div class="account-summary" id="successModalSummary"></div>
+        <div class="modal-body text-center">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="closeSuccessModal()">
-                <i class="fas fa-times"></i> Close
-            </button>
+            <h3 id="successMessage">Action completed successfully!</h3>
         </div>
     </div>
 </div>
 
-<script>
-let currentUserId = '';
-let currentUserEmail = '';
-let currentUserName = '';
-let currentToggleAction = '';
+@endsection
 
-function openToggleModal(userId, userEmail, toggleLabel, action) {
-    currentUserId = userId;
-    currentUserEmail = userEmail;
-    currentToggleAction = action;
+@section('scripts')
+<script>
+// Toggle User Functions
+function confirmToggleUser(userId, currentStatus, userName) {
+    const action = currentStatus ? 'disable' : 'enable';
+    const modal = document.getElementById('toggleModal');
+    const title = document.getElementById('toggleModalTitle');
+    const message = document.getElementById('toggleModalMessage');
+    const form = document.getElementById('toggleForm');
+    const confirmBtn = document.getElementById('toggleConfirmBtn');
     
-    // Update modal content
-    document.getElementById('toggleModalTitle').textContent = toggleLabel + ' Account';
-    document.getElementById('toggleModalMessage').textContent = `Are you sure you want to ${action} this account?`;
-    document.getElementById('toggleModalEmail').textContent = userEmail;
-    document.getElementById('toggleModalAction').textContent = toggleLabel;
+    title.textContent = `${action.charAt(0).toUpperCase() + action.slice(1)} User`;
+    message.textContent = `Are you sure you want to ${action} "${userName}"?`;
+    form.action = `/admin/manage/${userId}/toggle`;
+    confirmBtn.textContent = action.charAt(0).toUpperCase() + action.slice(1);
+    confirmBtn.className = `btn ${action === 'disable' ? 'btn-warning' : 'btn-success'}`;
     
-    // Update form action
-    document.getElementById('toggleForm').action = `{{ route('admin.manage.toggle', ':id') }}`.replace(':id', userId);
-    
-    // Show modal
-    document.getElementById('toggleModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    modal.style.display = 'block';
 }
 
 function closeToggleModal() {
     document.getElementById('toggleModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-    currentUserId = '';
-    currentUserEmail = '';
-    currentToggleAction = '';
 }
 
-function openDeleteModal(userId, userEmail) {
-    currentUserId = userId;
-    currentUserEmail = userEmail;
+// Delete User Functions
+function confirmDeleteUser(userId, userName) {
+    const modal = document.getElementById('deleteModal');
+    const message = document.getElementById('deleteModalMessage');
+    const form = document.getElementById('deleteForm');
     
-    // Update modal content
-    document.getElementById('deleteModalEmail').textContent = userEmail;
+    message.textContent = `Are you sure you want to delete "${userName}"? This action cannot be undone.`;
+    form.action = `/admin/manage/${userId}`;
     
-    // Update form action
-    document.getElementById('deleteForm').action = `{{ route('admin.manage.destroy', ':id') }}`.replace(':id', userId);
-    
-    // Show modal
-    document.getElementById('deleteModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    modal.style.display = 'block';
 }
 
 function closeDeleteModal() {
     document.getElementById('deleteModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-    currentUserId = '';
-    currentUserEmail = '';
 }
 
-function showSuccessModal(action, userEmail) {
-    // Update success modal content
-    document.getElementById('successModalTitle').textContent = 'Account ' + action + ' Successfully!';
-    document.getElementById('successModalMessage').textContent = `The account has been ${action} successfully.`;
+// Success Modal Functions
+function showSuccessModal(message) {
+    const modal = document.getElementById('successModal');
+    const messageElement = document.getElementById('successMessage');
     
-    // Update summary
-    const summary = document.getElementById('successModalSummary');
-    summary.innerHTML = `
-        <div class="summary-item">
-            <span class="summary-label">Email:</span>
-            <span class="summary-value">${userEmail}</span>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Action:</span>
-            <span class="summary-value">${action}</span>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Status:</span>
-            <span class="summary-value">Completed</span>
-        </div>
-    `;
+    messageElement.textContent = message;
+    modal.style.display = 'block';
     
-    // Show success modal
-    document.getElementById('successModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeSuccessModal() {
-    document.getElementById('successModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    // Auto close after 3 seconds
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 3000);
 }
 
 // Close modals when clicking outside
@@ -353,52 +244,72 @@ window.onclick = function(event) {
         closeDeleteModal();
     }
     if (event.target === successModal) {
-        closeSuccessModal();
+        successModal.style.display = 'none';
     }
 }
 
-// Add form submission handlers
+// Handle form submissions with success feedback
 document.addEventListener('DOMContentLoaded', function() {
-    // Toggle form submission
+    // Check if there's a success message from the server
+    @if(session('status'))
+    showSuccessModal('{{ session('status') }}');
+    @endif
+    
+    // Handle toggle form submission
     document.getElementById('toggleForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        const form = this;
+        const formData = new FormData(form);
         
-        // Simulate form submission (replace with actual AJAX call if needed)
-        const formData = new FormData(this);
-        const action = currentToggleAction;
-        const userEmail = currentUserEmail;
-        
-        // Close confirmation modal
-        closeToggleModal();
-        
-        // Show success modal after a short delay
-        setTimeout(() => {
-            showSuccessModal(action, userEmail);
-        }, 300);
-        
-        // Here you would normally submit the form via AJAX
-        // For now, we'll just show the success message
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            closeToggleModal();
+            showSuccessModal(data.message || 'User status updated successfully!');
+            // Reload the page to show updated data
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showSuccessModal('Error updating user status. Please try again.');
+        });
     });
     
-    // Delete form submission
+    // Handle delete form submission
     document.getElementById('deleteForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        const form = this;
+        const formData = new FormData(form);
         
-        // Simulate form submission (replace with actual AJAX call if needed)
-        const userEmail = currentUserEmail;
-        
-        // Close confirmation modal
-        closeDeleteModal();
-        
-        // Show success modal after a short delay
-        setTimeout(() => {
-            showSuccessModal('deleted', userEmail);
-        }, 300);
-        
-        // Here you would normally submit the form via AJAX
-        // For now, we'll just show the success message
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            closeDeleteModal();
+            showSuccessModal(data.message || 'User deleted successfully!');
+            // Reload the page to show updated data
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showSuccessModal('Error deleting user. Please try again.');
+        });
     });
 });
 </script>
-
 @endsection

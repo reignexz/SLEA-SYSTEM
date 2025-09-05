@@ -3,8 +3,16 @@
 @section('title', 'Create Assessor Account')
 
 @section('content')
-<div class="assessor-form-container">
-    <h2 class="form-title">Create Assessor’s Account</h2>
+<div class="page-with-back-button">
+    <div class="page-content">
+        <!-- Back Button -->
+        <div class="rubric-header-nav">
+            <a href="{{ route('admin.profile') }}" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <h2 class="manage-title">Create Assessor's Account</h2>
 
     <form action="#" method="GET">
         @csrf
@@ -46,5 +54,6 @@
             <button type="button" class="cancel-btn" onclick="window.history.back()">Cancel</button>
         </div>
     </form>
+    </div>
 </div>
 @endsection
