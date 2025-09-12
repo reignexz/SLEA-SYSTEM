@@ -41,11 +41,11 @@
         </template>
 
         <!-- Navigation Buttons -->
-        <div class="rubric-navigation mt-4">
-            <button class="btn btn-secondary" @click="previousTab()" x-show="!isFirstTab()" type="button">
+        <div class="unified-pagination mt-4">
+            <button class="btn-nav" @click="previousTab()" x-show="!isFirstTab()" type="button">
                 <i class="fas fa-chevron-left"></i> Previous
             </button>
-            <button class="btn btn-primary" @click="nextTab()" x-show="!isLastTab()" type="button">
+            <button class="btn-nav" @click="nextTab()" x-show="!isLastTab()" type="button">
                 Next <i class="fas fa-chevron-right"></i>
             </button>
         </div>

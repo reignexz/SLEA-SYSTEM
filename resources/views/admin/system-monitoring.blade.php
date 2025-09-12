@@ -77,43 +77,18 @@
                 </thead>
                 <tbody>
                     @php
-                        // Sample data for demonstration
+                        // Sample data for demonstration - Limited to 10 entries per page
                         $logs = collect([
-                            (object) [
-                                'timestamp' => '2025-01-15 14:30:25',
-                                'user_role' => 'Admin',
-                                'user_name' => 'John Doe',
-                                'activity_type' => 'Login',
-                                'description' => 'User logged in successfully'
-                            ],
-                            (object) [
-                                'timestamp' => '2025-01-15 14:25:10',
-                                'user_role' => 'Assessor',
-                                'user_name' => 'Jane Smith',
-                                'activity_type' => 'Create',
-                                'description' => 'Created new rubric configuration'
-                            ],
-                            (object) [
-                                'timestamp' => '2025-01-15 14:20:45',
-                                'user_role' => 'Admin',
-                                'user_name' => 'Mike Johnson',
-                                'activity_type' => 'Approve',
-                                'description' => 'Approved student submission #1234'
-                            ],
-                            (object) [
-                                'timestamp' => '2025-01-15 14:15:30',
-                                'user_role' => 'Admin',
-                                'user_name' => 'Sarah Wilson',
-                                'activity_type' => 'Export',
-                                'description' => 'Exported award report for College of Engineering'
-                            ],
-                            (object) [
-                                'timestamp' => '2025-01-15 14:10:15',
-                                'user_role' => 'Assessor',
-                                'user_name' => 'David Brown',
-                                'activity_type' => 'Update',
-                                'description' => 'Updated scoring criteria for leadership assessment'
-                            ]
+                            (object) ['timestamp' => '2025-01-15 14:30:25', 'user_role' => 'Admin', 'user_name' => 'John Doe', 'activity_type' => 'Login', 'description' => 'User logged in successfully'],
+                            (object) ['timestamp' => '2025-01-15 14:25:10', 'user_role' => 'Assessor', 'user_name' => 'Jane Smith', 'activity_type' => 'Create', 'description' => 'Created new rubric configuration'],
+                            (object) ['timestamp' => '2025-01-15 14:20:45', 'user_role' => 'Admin', 'user_name' => 'Mike Johnson', 'activity_type' => 'Approve', 'description' => 'Approved student submission #1234'],
+                            (object) ['timestamp' => '2025-01-15 14:15:30', 'user_role' => 'Admin', 'user_name' => 'Sarah Wilson', 'activity_type' => 'Export', 'description' => 'Exported award report for College of Engineering'],
+                            (object) ['timestamp' => '2025-01-15 14:10:15', 'user_role' => 'Assessor', 'user_name' => 'David Brown', 'activity_type' => 'Update', 'description' => 'Updated scoring criteria for leadership assessment'],
+                            (object) ['timestamp' => '2025-01-15 14:05:42', 'user_role' => 'Admin', 'user_name' => 'Lisa Chen', 'activity_type' => 'Delete', 'description' => 'Deleted user account #5678'],
+                            (object) ['timestamp' => '2025-01-15 14:00:18', 'user_role' => 'Student', 'user_name' => 'Maria Santos', 'activity_type' => 'Submit', 'description' => 'Submitted leadership certificate for review'],
+                            (object) ['timestamp' => '2025-01-15 13:55:33', 'user_role' => 'Admin', 'user_name' => 'Robert Kim', 'activity_type' => 'Login', 'description' => 'User logged in successfully'],
+                            (object) ['timestamp' => '2025-01-15 13:50:07', 'user_role' => 'Assessor', 'user_name' => 'Emily Davis', 'activity_type' => 'Review', 'description' => 'Reviewed student submission #9012'],
+                            (object) ['timestamp' => '2025-01-15 13:45:21', 'user_role' => 'Admin', 'user_name' => 'Carlos Martinez', 'activity_type' => 'Export', 'description' => 'Exported system logs for audit']
                         ]);
                     @endphp
 
@@ -152,21 +127,17 @@
         </div>
 
         {{-- Pagination --}}
-        <div class="table-pagination">
-            <div class="pagination-controls">
-                <button class="btn-pagination" disabled>
-                    <i class="fas fa-chevron-left"></i> Previous
-                </button>
-                <div class="pagination-numbers">
-                    <button class="btn-page active">1</button>
-                    <button class="btn-page">2</button>
-                    <button class="btn-page">3</button>
-                    <button class="btn-page">4</button>
-                </div>
-                <button class="btn-pagination">
-                    Next <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
+        <div class="unified-pagination">
+            <button class="btn-nav" disabled>
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <button class="btn-page active">1</button>
+            <button class="btn-page">2</button>
+            <button class="btn-page">3</button>
+            <button class="btn-page">4</button>
+            <button class="btn-nav">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </div>
 </div>
@@ -193,9 +164,9 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Page changed to:', button.textContent);
         }
         
-        if (e.target.closest('.btn-pagination:not([disabled])')) {
+        if (e.target.closest('.btn-nav:not([disabled])')) {
             e.preventDefault();
-            const button = e.target.closest('.btn-pagination');
+            const button = e.target.closest('.btn-nav');
             const isNext = button.textContent.includes('Next');
             
             console.log('Pagination:', isNext ? 'Next' : 'Previous');

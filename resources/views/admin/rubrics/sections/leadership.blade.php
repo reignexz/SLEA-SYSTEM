@@ -24,8 +24,8 @@
                         <td>5</td>
                         <td>Certificate of Election</td>
                         <td>
-                            <button class="btn btn-disable">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -35,8 +35,8 @@
                         <td>5</td>
                         <td>Oath of Office</td>
                         <td>
-                            <button class="btn btn-disable">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -46,8 +46,8 @@
                         <td>5</td>
                         <td>Appointment Letter</td>
                         <td>
-                            <button class="btn btn-disable">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -57,8 +57,8 @@
                         <td>5</td>
                         <td>Certificate of Election</td>
                         <td>
-                            <button class="btn btn-disable">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -89,8 +89,8 @@
                         <td>5</td>
                         <td>Special Order Document</td>
                         <td>
-                            <button class="btn btn-disable">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -121,8 +121,8 @@
                         <td>5</td>
                         <td>Certificate of Election</td>
                         <td>
-                            <button class="btn btn-disable">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -132,8 +132,8 @@
                         <td>5</td>
                         <td>Appointment Letter</td>
                         <td>
-                            <button class="btn btn-disable">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -164,8 +164,8 @@
                         <td>5</td>
                         <td>Certificate of Participation</td>
                         <td>
-                            <button class="btn btn-disable">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -175,8 +175,8 @@
                         <td>5</td>
                         <td>Certificate of Attendance</td>
                         <td>
-                            <button class="btn btn-disable">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -199,7 +199,7 @@
                 <input type="text" placeholder="Position / Title" class="form-control">
                 <input type="number" placeholder="Points" class="form-control" step="0.1" min="0" max="5">
                 <input type="text" placeholder="Evidence" class="form-control">
-                <button class="btn btn-disable" type="button">Add</button>
+                <button class="btn btn-disable" type="button" title="Add"><i class="fas fa-plus"></i></button>
             </div>
         </form>
     </div>

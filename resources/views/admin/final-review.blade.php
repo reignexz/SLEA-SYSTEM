@@ -109,20 +109,105 @@
                                 <button type="button" class="btn btn-review" onclick="openReviewModal('1')">Review</button>
                             </td>
                         </tr>
-                        {{-- Empty rows for demonstration --}}
-                        @for ($i = 0; $i < 5; $i++)
-                            <tr>
-                                <td>---</td>
-                                <td>---</td>
-                                <td>---</td>
-                                <td>
-                                    <span class="badge badge--red">Reject</span>
-                                </td>
-                                <td class="action-buttons">
-                                    <button type="button" class="btn btn-review" disabled>Review</button>
-                                </td>
-                            </tr>
-                        @endfor
+                        <tr>
+                            <td>Maria Santos</td>
+                            <td>2022-00123</td>
+                            <td>14</td>
+                            <td>
+                                <span class="badge badge--green">Approve</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-review" onclick="openReviewModal('2')">Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>John Dela Cruz</td>
+                            <td>2022-00124</td>
+                            <td>12</td>
+                            <td>
+                                <span class="badge badge--yellow">Pending</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-review" onclick="openReviewModal('3')">Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sarah Johnson</td>
+                            <td>2022-00125</td>
+                            <td>18</td>
+                            <td>
+                                <span class="badge badge--green">Approve</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-review" onclick="openReviewModal('4')">Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Michael Rodriguez</td>
+                            <td>2022-00126</td>
+                            <td>10</td>
+                            <td>
+                                <span class="badge badge--red">Reject</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-review" onclick="openReviewModal('5')">Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Anna Garcia</td>
+                            <td>2022-00127</td>
+                            <td>15</td>
+                            <td>
+                                <span class="badge badge--green">Approve</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-review" onclick="openReviewModal('6')">Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>David Kim</td>
+                            <td>2022-00128</td>
+                            <td>13</td>
+                            <td>
+                                <span class="badge badge--yellow">Pending</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-review" onclick="openReviewModal('7')">Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lisa Chen</td>
+                            <td>2022-00129</td>
+                            <td>17</td>
+                            <td>
+                                <span class="badge badge--green">Approve</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-review" onclick="openReviewModal('8')">Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Robert Wilson</td>
+                            <td>2022-00130</td>
+                            <td>9</td>
+                            <td>
+                                <span class="badge badge--red">Reject</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-review" onclick="openReviewModal('9')">Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jennifer Lee</td>
+                            <td>2022-00131</td>
+                            <td>19</td>
+                            <td>
+                                <span class="badge badge--green">Approve</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button type="button" class="btn btn-review" onclick="openReviewModal('10')">Review</button>
+                            </td>
+                        </tr>
                     @endif
                 </tbody>
             </table>
@@ -130,34 +215,18 @@
         
         {{-- Pagination --}}
         @if (isset($students) && method_exists($students, 'links'))
-            <div class="table-pagination">
+            <div class="unified-pagination">
                 {{ $students->withQueryString()->links() }}
             </div>
         @else
             {{-- Sample pagination for demonstration --}}
-            <div class="table-pagination">
-                <nav>
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <span class="page-link">Previous</span>
-                        </li>
-                        <li class="page-item active">
-                            <span class="page-link">1</span>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+            <div class="unified-pagination">
+                <button class="btn-nav" disabled>Previous</button>
+                <button class="btn-page active">1</button>
+                <button class="btn-page">2</button>
+                <button class="btn-page">3</button>
+                <button class="btn-page">4</button>
+                <button class="btn-nav">Next</button>
             </div>
         @endif
     </div>

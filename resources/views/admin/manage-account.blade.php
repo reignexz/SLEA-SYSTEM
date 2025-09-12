@@ -68,7 +68,8 @@
             <table class="manage-account-table">
                 <thead>
                     <tr>
-                        <th>Email Address</th>
+                        <th>
+                            Email Address</th>
                         <th>Name</th>
                         <th>Date</th>
                         <th>Account Status</th>
@@ -113,11 +114,14 @@
         </div>
 
         {{-- Pagination --}}
-        @if($users->hasPages())
-            <div class="pagination-container">
-                {{ $users->appends(request()->query())->links() }}
-            </div>
-        @endif
+        <div class="unified-pagination">
+            <button class="btn-nav" disabled>Previous</button>
+            <button class="btn-page active">1</button>
+            <button class="btn-page">2</button>
+            <button class="btn-page">3</button>
+            <button class="btn-page">4</button>
+            <button class="btn-nav">Next</button>
+        </div>
     </div>
 </div>
 
@@ -166,11 +170,18 @@
 {{-- Success Modal --}}
 <div id="successModal" class="modal" style="display: none;">
     <div class="modal-content success-modal">
+        <div class="modal-header">
+            <h3>Success</h3>
+            <span class="close" onclick="closeSuccessModal()">&times;</span>
+        </div>
         <div class="modal-body text-center">
             <div class="success-icon">
                 <i class="fas fa-check-circle"></i>
             </div>
             <h3 id="successMessage">Action completed successfully!</h3>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeSuccessModal()">OK</button>
         </div>
     </div>
 </div>
@@ -227,9 +238,31 @@ function showSuccessModal(message) {
     
     // Auto close after 3 seconds
     setTimeout(() => {
-        modal.style.display = 'none';
+        closeSuccessModal();
     }, 3000);
 }
+
+function closeSuccessModal() {
+    const modal = document.getElementById('successModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Emergency function to close all modals
+function closeAllModals() {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        modal.style.display = 'none';
+    });
+}
+
+// Add keyboard listener to close modals with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeAllModals();
+    }
+});
 
 // Close modals when clicking outside
 window.onclick = function(event) {
@@ -244,7 +277,7 @@ window.onclick = function(event) {
         closeDeleteModal();
     }
     if (event.target === successModal) {
-        successModal.style.display = 'none';
+        closeSuccessModal();
     }
 }
 

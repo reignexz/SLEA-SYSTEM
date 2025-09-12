@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AssessorController;
 use App\Http\Controllers\RubricController;
 
 // Static admin profile view
@@ -28,4 +29,19 @@ Route::prefix('admin')->group(function () {
     Route::post('/rubrics', [RubricController::class, 'store'])->name('admin.rubrics.store');
     Route::patch('/rubrics/{id}', [RubricController::class, 'update'])->name('admin.rubrics.update');
     Route::delete('/rubrics/{id}', [RubricController::class, 'destroy'])->name('admin.rubrics.destroy');
+});
+
+// Assessor routes
+Route::prefix('assessor')->group(function () {
+    // Assessor dashboard and profile
+    Route::get('/dashboard', [AssessorController::class, 'dashboard'])->name('assessor.dashboard');
+    Route::get('/profile', [AssessorController::class, 'profile'])->name('assessor.profile');
+    Route::patch('/profile', [AssessorController::class, 'updateProfile'])->name('assessor.profile.update');
+    Route::patch('/password', [AssessorController::class, 'updatePassword'])->name('assessor.password.update');
+    Route::post('/profile-picture', [AssessorController::class, 'updateProfilePicture'])->name('assessor.profile.picture');
+    
+    // Assessor submission management
+    Route::get('/pending-submissions', [AssessorController::class, 'pendingSubmissions'])->name('assessor.pending-submissions');
+    Route::get('/submissions', [AssessorController::class, 'submissions'])->name('assessor.submissions');
+    Route::get('/final-review', [AssessorController::class, 'finalReview'])->name('assessor.final-review');
 });

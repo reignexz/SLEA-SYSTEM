@@ -248,34 +248,6 @@
                                 <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-10')">View</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Club Organization Certificate</td>
-                            <td>Carlos Martinez</td>
-                            <td>I. Leadership</td>
-                            <td>
-                                <span class="badge badge--yellow">Pending</span>
-                            </td>
-                            <td class="text-center">
-                                <i class="fas fa-flag" style="color: #dc3545;"></i>
-                            </td>
-                            <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-11')">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Environmental Project Documentation</td>
-                            <td>Emily Davis</td>
-                            <td>IV. Community</td>
-                            <td>
-                                <span class="badge badge--green">Approved</span>
-                            </td>
-                            <td class="text-center">
-                                <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
-                            </td>
-                            <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-12')">View</button>
-                            </td>
-                        </tr>
                     @endif
                 </tbody>
             </table>
@@ -283,34 +255,18 @@
         
         {{-- Pagination --}}
         @if (isset($submissions) && method_exists($submissions, 'links'))
-            <div class="table-pagination">
+            <div class="unified-pagination">
                 {{ $submissions->withQueryString()->links() }}
             </div>
         @else
             {{-- Sample pagination for demonstration --}}
-            <div class="table-pagination">
-                <nav>
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <span class="page-link">Previous</span>
-                        </li>
-                        <li class="page-item active">
-                            <span class="page-link">1</span>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+            <div class="unified-pagination">
+                <button class="btn-nav" disabled>Previous</button>
+                <button class="btn-page active">1</button>
+                <button class="btn-page">2</button>
+                <button class="btn-page">3</button>
+                <button class="btn-page">4</button>
+                <button class="btn-nav">Next</button>
             </div>
         @endif
 

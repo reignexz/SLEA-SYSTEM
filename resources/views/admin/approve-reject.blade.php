@@ -56,25 +56,167 @@
             </tr>
         </thead>
         <tbody>
-            @for ($i = 0; $i < 6; $i++)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>2022-00123</td>
+                <td>Maria Santos</td>
+                <td>Student Council</td>
+                <td>President</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
                 <td class="action-buttons">
-                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('{{ $i + 1 }}')" title="Reject Account">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('1')" title="Reject Account">
                         <i class="fas fa-times"></i>
                     </button>
-                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('{{ $i + 1 }}')" title="Approve Account">
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('1')" title="Approve Account">
                         <i class="fas fa-user-check"></i>
                     </button>
                 </td>
             </tr>
-            @endfor
+            <tr>
+                <td>2022-00124</td>
+                <td>John Dela Cruz</td>
+                <td>Debate Society</td>
+                <td>Vice President</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td class="action-buttons">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('2')" title="Reject Account">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('2')" title="Approve Account">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2022-00125</td>
+                <td>Sarah Johnson</td>
+                <td>Science Club</td>
+                <td>Secretary</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td class="action-buttons">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('3')" title="Reject Account">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('3')" title="Approve Account">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2022-00126</td>
+                <td>Michael Rodriguez</td>
+                <td>Basketball Team</td>
+                <td>Captain</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td class="action-buttons">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('4')" title="Reject Account">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('4')" title="Approve Account">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2022-00127</td>
+                <td>Anna Garcia</td>
+                <td>Art Society</td>
+                <td>Treasurer</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td class="action-buttons">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('5')" title="Reject Account">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('5')" title="Approve Account">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2022-00128</td>
+                <td>David Kim</td>
+                <td>Computer Science Club</td>
+                <td>President</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td class="action-buttons">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('6')" title="Reject Account">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('6')" title="Approve Account">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2022-00129</td>
+                <td>Lisa Chen</td>
+                <td>Music Society</td>
+                <td>Vice President</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td class="action-buttons">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('7')" title="Reject Account">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('7')" title="Approve Account">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2022-00130</td>
+                <td>Robert Wilson</td>
+                <td>Environmental Club</td>
+                <td>Secretary</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td class="action-buttons">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('8')" title="Reject Account">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('8')" title="Approve Account">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2022-00131</td>
+                <td>Jennifer Lee</td>
+                <td>Drama Club</td>
+                <td>Director</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td class="action-buttons">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('9')" title="Reject Account">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('9')" title="Approve Account">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2022-00132</td>
+                <td>Carlos Martinez</td>
+                <td>Photography Club</td>
+                <td>President</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td class="action-buttons">
+                    <button type="button" class="btn-action btn-reject" onclick="rejectAccount('10')" title="Reject Account">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn-action btn-approve" onclick="approveAccount('10')" title="Approve Account">
+                        <i class="fas fa-user-check"></i>
+                    </button>
+                </td>
+            </tr>
         </tbody>
     </table>
+    
+    {{-- Pagination --}}
+    <div class="unified-pagination">
+        <button class="btn-nav" disabled>Previous</button>
+        <button class="btn-page active">1</button>
+        <button class="btn-page">2</button>
+        <button class="btn-page">3</button>
+        <button class="btn-nav">Next</button>
+    </div>
 </div>
 
 <!-- Confirmation Modal -->

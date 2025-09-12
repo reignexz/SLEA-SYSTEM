@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Dashboard')
+@section('title', 'Assessor Dashboard')
 
 @section('content')
 <div class="container">
-    @include('partials.sidebar')
+    @include('partials.assessor_sidebar')
 
     <main class="main-content">
         <div class="avatar-container">
@@ -23,26 +23,26 @@
                 <div id="displayMode" class="info-display">
                     <div class="info-item">
                         <div class="info-label">Name</div>
-                        <div class="info-value" id="display-name">MANOCAY, Edryan S.</div>
+                        <div class="info-value" id="display-name">ASSESSOR, Sample A.</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Contact Number</div>
-                        <div class="info-value" id="display-phone">09917952790</div>
+                        <div class="info-value" id="display-phone">09991234567</div>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Admin ID</div>
-                        <div class="info-value" id="display-admin-id">2022-00216</div>
+                        <div class="info-label">Assessor ID</div>
+                        <div class="info-value" id="display-assessor-id">2024-00123</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Email Address</div>
-                        <div class="info-value" id="display-email">esmanocay00216@usep.edu.ph</div>
+                        <div class="info-value" id="display-email">assessor@usep.edu.ph</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Position</div>
-                        <div class="info-value" id="display-position">Stage Manager President</div>
+                        <div class="info-value" id="display-position">Student Affairs Assessor</div>
                     </div>
                     <div class="info-actions">
-                        <button type="button" class="btn btn-primary" onclick="toggleEditMode()">Edit Information</button>
+                        <button type="button" class="btn btn-primary" onclick="toggleEditMode()">Update Information</button>
                     </div>
                 </div>
 
@@ -52,21 +52,21 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="updateName">Name</label>
-                                <input type="text" id="updateName" name="name" value="MANOCAY, Edryan S.">
+                                <input type="text" id="updateName" name="name" value="ASSESSOR, Sample A.">
                             </div>
                             <div class="form-group">
                                 <label for="updatePhone">Contact Number</label>
-                                <input type="tel" id="updatePhone" name="phone" value="09917952790">
+                                <input type="tel" id="updatePhone" name="phone" value="09991234567">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="updateEmail">Email Address</label>
-                                <input type="email" id="updateEmail" name="email" value="esmanocay00216@usep.edu.ph">
+                                <input type="email" id="updateEmail" name="email" value="assessor@usep.edu.ph">
                             </div>
                             <div class="form-group">
                                 <label for="updatePosition">Position</label>
-                                <input type="text" id="updatePosition" name="position" value="Stage Manager President">
+                                <input type="text" id="updatePosition" name="position" value="Student Affairs Assessor">
                             </div>
                         </div>
                         <div class="form-actions">
@@ -250,7 +250,7 @@ function updateProfile() {
     const formData = new FormData(form);
     
     // Here you would send the data to the server
-    console.log('Updating profile:', Object.fromEntries(formData));
+    console.log('Updating assessor profile:', Object.fromEntries(formData));
     
     // Update the display values
     document.getElementById('display-name').textContent = document.getElementById('updateName').value;
