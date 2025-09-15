@@ -324,65 +324,7 @@ function updatePassword() {
     showSuccessModal('Password updated successfully!');
 }
 
-// Password Validation
-function validatePassword() {
-    const password = document.getElementById('newPassword').value;
-    console.log('Validating password:', password); // Debug log
-    
-    const requirements = {
-        length: password.length >= 8,
-        uppercase: /[A-Z]/.test(password),
-        lowercase: /[a-z]/.test(password),
-        number: /\d/.test(password),
-        special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
-    };
-    
-    console.log('Requirements:', requirements); // Debug log
-    
-    let allRequirementsMet = true;
-    
-    Object.keys(requirements).forEach(req => {
-        const element = document.getElementById(req);
-        console.log('Processing requirement:', req, 'Element:', element); // Debug log
-        
-        if (element) {
-            if (requirements[req]) {
-                element.classList.remove('invalid');
-                element.classList.add('valid');
-                console.log('Set', req, 'to valid'); // Debug log
-            } else {
-                element.classList.remove('valid');
-                element.classList.add('invalid');
-                console.log('Set', req, 'to invalid'); // Debug log
-                allRequirementsMet = false;
-            }
-        } else {
-            console.error('Element not found for requirement:', req); // Debug log
-        }
-    });
-    
-    console.log('All requirements met:', allRequirementsMet); // Debug log
-    
-    // Enable/disable the Change Password button based on requirements
-    const changePasswordBtn = document.querySelector('#passwordEditMode .btn-save');
-    console.log('Change password button:', changePasswordBtn); // Debug log
-    
-    if (changePasswordBtn) {
-        if (allRequirementsMet && password.length > 0) {
-            changePasswordBtn.disabled = false;
-            changePasswordBtn.style.opacity = '1';
-            changePasswordBtn.style.cursor = 'pointer';
-            console.log('Button enabled'); // Debug log
-        } else {
-            changePasswordBtn.disabled = true;
-            changePasswordBtn.style.opacity = '0.5';
-            changePasswordBtn.style.cursor = 'not-allowed';
-            console.log('Button disabled'); // Debug log
-        }
-    } else {
-        console.error('Change password button not found'); // Debug log
-    }
-}
+// Password validation is now handled by the external admin_profile.js file
 
 // Toggle Password Visibility
 function togglePassword() {

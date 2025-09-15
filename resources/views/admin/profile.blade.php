@@ -151,7 +151,6 @@
                                 <div class="info-field">
                                     <label class="field-label">New Password</label>
                                     <input type="password" class="field-input" id="newPassword" name="new_password" placeholder="Enter new password" onkeyup="validatePassword()" oninput="validatePassword()" onchange="validatePassword()">
-                                    <button type="button" onclick="validatePassword()" style="margin-top: 5px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Test Validation</button>
                                 </div>
                                 <div class="info-field">
                                     <label class="field-label">Confirm Password</label>
@@ -325,84 +324,6 @@ function updatePassword() {
     showSuccessModal('Password updated successfully!');
 }
 
-// Password Validation
-function validatePassword() {
-    console.log('validatePassword function called!'); // Debug log
-    
-    // Get password value
-    const passwordField = document.getElementById('newPassword');
-    if (!passwordField) {
-        console.error('Password field not found!');
-        return;
-    }
-    
-    const password = passwordField.value;
-    console.log('Validating password:', password); // Debug log
-    
-    // Check requirements
-    const requirements = {
-        length: password.length >= 8,
-        uppercase: /[A-Z]/.test(password),
-        lowercase: /[a-z]/.test(password),
-        number: /\d/.test(password),
-        special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
-    };
-    
-    console.log('Requirements:', requirements); // Debug log
-    
-    let allRequirementsMet = true;
-    
-    // Update each requirement visually
-    Object.keys(requirements).forEach(req => {
-        const element = document.getElementById(req);
-        console.log('Processing requirement:', req, 'Element:', element); // Debug log
-        
-        if (element) {
-            // Remove all classes first
-            element.classList.remove('valid', 'invalid');
-            
-            if (requirements[req]) {
-                element.classList.add('valid');
-                element.style.color = '#28a745'; // Force green color
-                element.querySelector('i').style.color = '#28a745'; // Force icon green
-                console.log('Set', req, 'to valid'); // Debug log
-            } else {
-                element.classList.add('invalid');
-                element.style.color = '#dc3545'; // Force red color
-                element.querySelector('i').style.color = '#dc3545'; // Force icon red
-                console.log('Set', req, 'to invalid'); // Debug log
-                allRequirementsMet = false;
-            }
-        } else {
-            console.error('Element not found for requirement:', req); // Debug log
-        }
-    });
-    
-    console.log('All requirements met:', allRequirementsMet); // Debug log
-    
-    // Enable/disable the Change Password button based on requirements
-    const changePasswordBtn = document.querySelector('#passwordEditMode .btn-save');
-    console.log('Change password button:', changePasswordBtn); // Debug log
-    
-    if (changePasswordBtn) {
-        if (allRequirementsMet && password.length > 0) {
-            changePasswordBtn.disabled = false;
-            changePasswordBtn.style.opacity = '1';
-            changePasswordBtn.style.cursor = 'pointer';
-            changePasswordBtn.style.backgroundColor = '#7b0000';
-            console.log('Button enabled'); // Debug log
-        } else {
-            changePasswordBtn.disabled = true;
-            changePasswordBtn.style.opacity = '0.5';
-            changePasswordBtn.style.cursor = 'not-allowed';
-            changePasswordBtn.style.backgroundColor = '#ccc';
-            console.log('Button disabled'); // Debug log
-        }
-    } else {
-        console.error('Change password button not found'); // Debug log
-    }
-}
-
 // Toggle Password Visibility
 function togglePassword() {
     const inputs = document.querySelectorAll('#passwordEditMode input[type="password"]');
@@ -489,12 +410,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('profilePicture').src = savedImage;
         updateSidebarProfile(savedImage);
     }
-    
-    // Test password validation on page load
-    setTimeout(() => {
-        console.log('Testing password validation...');
-        validatePassword();
-    }, 1000);
 });
 </script>
 @endsection

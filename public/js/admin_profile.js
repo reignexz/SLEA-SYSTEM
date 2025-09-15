@@ -25,12 +25,84 @@ function togglePassword() {
 
 // Password validation
 function validatePassword() {
-    const p = document.getElementById('newPassword').value;
-    document.getElementById('length').className    = p.length >= 8 ? 'valid' : 'invalid';
-    document.getElementById('uppercase').className = /[A-Z]/.test(p) ? 'valid' : 'invalid';
-    document.getElementById('lowercase').className = /[a-z]/.test(p) ? 'valid' : 'invalid';
-    document.getElementById('number').className    = /\d/.test(p) ? 'valid' : 'invalid';
-    document.getElementById('special').className   = /[^A-Za-z0-9]/.test(p) ? 'valid' : 'invalid';
+    console.log('validatePassword function called!'); // Debug log
+    
+    // Get password value
+    const passwordField = document.getElementById('newPassword');
+    if (!passwordField) {
+        console.error('Password field not found!');
+        return;
+    }
+    
+    const password = passwordField.value;
+    console.log('Validating password:', password); // Debug log
+    
+    // Check requirements
+    const requirements = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    };
+    
+    console.log('Requirements:', requirements); // Debug log
+    
+    let allRequirementsMet = true;
+    
+    // Update each requirement visually
+    Object.keys(requirements).forEach(req => {
+        const element = document.getElementById(req);
+        console.log('Processing requirement:', req, 'Element:', element); // Debug log
+        
+        if (element) {
+            // Remove all classes first
+            element.classList.remove('valid', 'invalid');
+            
+            if (requirements[req]) {
+                element.classList.add('valid');
+                element.style.color = '#28a745'; // Force green color
+                if (element.querySelector('i')) {
+                    element.querySelector('i').style.color = '#28a745'; // Force icon green
+                }
+                console.log('Set', req, 'to valid'); // Debug log
+            } else {
+                element.classList.add('invalid');
+                element.style.color = '#dc3545'; // Force red color
+                if (element.querySelector('i')) {
+                    element.querySelector('i').style.color = '#dc3545'; // Force icon red
+                }
+                console.log('Set', req, 'to invalid'); // Debug log
+                allRequirementsMet = false;
+            }
+        } else {
+            console.error('Element not found for requirement:', req); // Debug log
+        }
+    });
+    
+    console.log('All requirements met:', allRequirementsMet); // Debug log
+    
+    // Enable/disable the Change Password button based on requirements
+    const changePasswordBtn = document.querySelector('#passwordEditMode .btn-save');
+    console.log('Change password button:', changePasswordBtn); // Debug log
+    
+    if (changePasswordBtn) {
+        if (allRequirementsMet && password.length > 0) {
+            changePasswordBtn.disabled = false;
+            changePasswordBtn.style.opacity = '1';
+            changePasswordBtn.style.cursor = 'pointer';
+            changePasswordBtn.style.backgroundColor = '#7b0000';
+            console.log('Button enabled'); // Debug log
+        } else {
+            changePasswordBtn.disabled = true;
+            changePasswordBtn.style.opacity = '0.5';
+            changePasswordBtn.style.cursor = 'not-allowed';
+            changePasswordBtn.style.backgroundColor = '#ccc';
+            console.log('Button disabled'); // Debug log
+        }
+    } else {
+        console.error('Change password button not found'); // Debug log
+    }
 }
 
 // Expose functions globally (needed for inline onClick handlers in Blade)
