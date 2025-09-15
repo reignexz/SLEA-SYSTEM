@@ -30,20 +30,5 @@
                 <i class="fas fa-clipboard-check"></i><span>Final Review</span>
             </a>
         </li>
-        
-        <li>
-            <a href="#" onclick="logout()" style="display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;">
-                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-            </a>
-        </li>
     </ul>
 </aside>
-
-<script>
-function logout() {
-    if (confirm('Are you sure you want to log out?')) {
-        // Add logout functionality here
-        window.location.href = '/logout';
-    }
-}
-</script>

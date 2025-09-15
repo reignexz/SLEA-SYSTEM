@@ -785,8 +785,8 @@ body.dark-mode .submissions-table tbody tr:hover {
 body.dark-mode .submissions-table-container .submissions-table thead th {
     background-color: #8B0000 !important;
     color: white !important;
-    border-bottom: 1px solid white !important;
-    border-right: 1px solid white !important;
+    border-bottom: 1px solid #555 !important;
+    border-right: 1px solid #555 !important;
     text-align: center !important;
     white-space: nowrap !important;
 }

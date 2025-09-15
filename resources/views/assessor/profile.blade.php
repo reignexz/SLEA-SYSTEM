@@ -7,97 +7,180 @@
     @include('partials.assessor_sidebar')
 
     <main class="main-content">
-        <div class="avatar-container">
-            <img src="https://via.placeholder.com/120" class="avatar" id="avatarPreview">
-            <button class="edit-icon" onclick="document.getElementById('avatarUpload').click()">
-                <i class="fas fa-pencil-alt"></i>
+        <!-- Profile Header Banner -->
+        <div class="profile-banner">
+            <div class="profile-avatar">
+                <img src="{{ asset('images/avatars/default-avatar.svg') }}" alt="Profile Picture" id="profilePicture">
+                <button class="upload-photo-btn" onclick="document.getElementById('avatarUpload').click()">
+                    <i class="fas fa-camera"></i>
             </button>
             <input type="file" id="avatarUpload" accept="image/*" style="display:none;" onchange="previewAvatar(event)">
+            </div>
+            <h1 class="profile-name">Sample Assessor</h1>
         </div>
 
-        <section class="profile-section">
-            <div class="profile-info">
-                <h3>Personal Information</h3>
-                
+        <!-- Profile Content -->
+        <div class="profile-content">
+            <!-- Personal Information Card -->
+            <div class="profile-card">
+                <div class="card-header">
+                    <h2 class="card-title">Personal Information</h2>
+                </div>
+                <div class="card-content">
                 <!-- Display Mode -->
-                <div id="displayMode" class="info-display">
-                    <div class="info-item">
-                        <div class="info-label">Name</div>
-                        <div class="info-value" id="display-name">ASSESSOR, Sample A.</div>
+                    <div id="displayMode" class="info-grid">
+                        <div class="info-field">
+                            <label class="field-label">Assessor ID</label>
+                            <input type="text" class="field-input" value="2024-00123" readonly>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Contact Number</div>
-                        <div class="info-value" id="display-phone">09991234567</div>
+                        <div class="info-field">
+                            <label class="field-label">First Name</label>
+                            <input type="text" class="field-input" value="Sample" readonly>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Assessor ID</div>
-                        <div class="info-value" id="display-assessor-id">2024-00123</div>
+                        <div class="info-field">
+                            <label class="field-label">Position</label>
+                            <input type="text" class="field-input" value="Student Affairs Assessor" readonly>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Email Address</div>
-                        <div class="info-value" id="display-email">assessor@usep.edu.ph</div>
+                        <div class="info-field">
+                            <label class="field-label">Email Address</label>
+                            <input type="text" class="field-input" value="assessor@usep.edu.ph" readonly>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Position</div>
-                        <div class="info-value" id="display-position">Student Affairs Assessor</div>
+                        <div class="info-field">
+                            <label class="field-label">Last Name</label>
+                            <input type="text" class="field-input" value="Assessor" readonly>
                     </div>
-                    <div class="info-actions">
-                        <button type="button" class="btn btn-primary" onclick="toggleEditMode()">Update Information</button>
+                        <div class="info-field">
+                            <label class="field-label">Contact Number</label>
+                            <input type="text" class="field-input" value="09991234567" readonly>
                     </div>
                 </div>
 
                 <!-- Edit Mode -->
-                <div id="editMode" class="info-edit" style="display: none;">
+                    <div id="editMode" class="edit-form" style="display: none;">
                     <form id="updateForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="updateName">Name</label>
-                                <input type="text" id="updateName" name="name" value="ASSESSOR, Sample A.">
+                            <div class="info-grid">
+                                <div class="info-field">
+                                    <label class="field-label">Assessor ID</label>
+                                    <input type="text" class="field-input" id="updateAssessorId" name="assessor_id" value="2024-00123" readonly>
+                                </div>
+                                <div class="info-field">
+                                    <label class="field-label">First Name</label>
+                                    <input type="text" class="field-input" id="updateFirstname" name="firstname" value="Sample">
+                                </div>
+                                <div class="info-field">
+                                    <label class="field-label">Position</label>
+                                    <input type="text" class="field-input" id="updatePosition" name="position" value="Student Affairs Assessor">
+                                </div>
+                                <div class="info-field">
+                                    <label class="field-label">Email Address</label>
+                                    <input type="email" class="field-input" id="updateEmail" name="email" value="assessor@usep.edu.ph">
+                                </div>
+                                <div class="info-field">
+                                    <label class="field-label">Last Name</label>
+                                    <input type="text" class="field-input" id="updateLastname" name="lastname" value="Assessor">
+                                </div>
+                                <div class="info-field">
+                                    <label class="field-label">Contact Number</label>
+                                    <input type="tel" class="field-input" id="updatePhone" name="phone" value="09991234567">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="updatePhone">Contact Number</label>
-                                <input type="tel" id="updatePhone" name="phone" value="09991234567">
+                            <div class="form-actions">
+                                <button type="button" class="btn-save" onclick="updateProfile()">Save Changes</button>
+                                <button type="button" class="btn-cancel" onclick="cancelEdit()">Cancel</button>
                             </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="edit-btn" onclick="toggleEditMode()" id="editPersonalBtn">
+                        <i class="fas fa-edit"></i>
+                        Edit
+                    </button>
+                </div>
+            </div>
+
+            <!-- Change Password Card -->
+            <div class="profile-card">
+                <div class="card-header">
+                    <h2 class="card-title">Change Password</h2>
+                </div>
+                <div class="card-content">
+                    <!-- Display Mode -->
+                    <div id="passwordDisplayMode" class="password-display">
+                        <div class="password-info">
+                            <i class="fas fa-lock"></i>
+                            <span>Password was last changed 15 days ago</span>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="updateEmail">Email Address</label>
-                                <input type="email" id="updateEmail" name="email" value="assessor@usep.edu.ph">
+                    </div>
+
+                    <!-- Edit Mode -->
+                    <div id="passwordEditMode" class="password-edit" style="display: none;">
+                        <form id="passwordForm">
+                            <div class="password-fields">
+                                <div class="info-field">
+                                    <label class="field-label">Current Password</label>
+                                    <input type="password" class="field-input" id="currentPassword" name="current_password" placeholder="Enter current password">
+                                </div>
+                                
+                                <div class="password-requirements">
+                                    <p class="requirements-title">Password Requirements:</p>
+                                    <ul class="requirements-list" id="passwordChecklist">
+                                        <li id="length" class="requirement-item invalid">
+                                            <i class="fas fa-circle"></i>
+                                            Minimum of 8 characters
+                                        </li>
+                                        <li id="uppercase" class="requirement-item invalid">
+                                            <i class="fas fa-circle"></i>
+                                            An uppercase character
+                                        </li>
+                                        <li id="lowercase" class="requirement-item invalid">
+                                            <i class="fas fa-circle"></i>
+                                            A lowercase character
+                                        </li>
+                                        <li id="number" class="requirement-item invalid">
+                                            <i class="fas fa-circle"></i>
+                                            A number
+                                        </li>
+                                        <li id="special" class="requirement-item invalid">
+                                            <i class="fas fa-circle"></i>
+                                            A special character
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="info-field">
+                                    <label class="field-label">New Password</label>
+                                    <input type="password" class="field-input" id="newPassword" name="new_password" placeholder="Enter new password" onkeyup="validatePassword()" oninput="validatePassword()">
+                                </div>
+                                <div class="info-field">
+                                    <label class="field-label">Confirm Password</label>
+                                    <input type="password" class="field-input" id="confirmPassword" name="confirm_password" placeholder="Confirm new password">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="updatePosition">Position</label>
-                                <input type="text" id="updatePosition" name="position" value="Student Affairs Assessor">
+                            
+                            <div class="checkbox-field">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" onclick="togglePassword()">
+                                    <span class="checkmark"></span>
+                                    Show Password
+                                </label>
                             </div>
-                        </div>
+                            
                         <div class="form-actions">
-                            <button type="button" class="btn btn-primary" onclick="updateProfile()">Save Changes</button>
-                            <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                                <button type="button" class="btn-save" onclick="updatePassword()">Change Password</button>
+                                <button type="button" class="btn-cancel" onclick="cancelPasswordEdit()">Cancel</button>
                         </div>
                     </form>
                 </div>
             </div>
-
-            <div class="change-password">
-                <h3>Change Password</h3>
-                <input type="password" placeholder="Present Password" />
-                <div class="requirements">
-                    <p>A new password must contain the following:</p>
-                    <ul id="passwordChecklist">
-                        <li id="length" class="invalid">Minimum of 8 characters</li>
-                        <li id="uppercase" class="invalid">An uppercase character</li>
-                        <li id="lowercase" class="invalid">A lowercase character</li>
-                        <li id="number" class="invalid">A number</li>
-                        <li id="special" class="invalid">A special character</li>
-                    </ul>
+                <div class="card-footer">
+                    <button class="edit-btn" onclick="togglePasswordEdit()" id="editPasswordBtn">
+                        <i class="fas fa-edit"></i>
+                        Edit
+                    </button>
                 </div>
-                <input type="password" placeholder="New Password" id="newPassword" onkeyup="validatePassword()">
-                <input type="password" placeholder="Confirm Password" id="confirmPassword">
-                <label>
-                    <input type="checkbox" onclick="togglePassword()"> Show Password
-                </label>
-                <button class="change-btn">Change Password</button>
             </div>
-        </section>
+        </div>
     </main>
 </div>
 
@@ -121,7 +204,215 @@
 </div>
 
 <script>
-// Profile Picture Upload
+// Toggle Edit Mode
+function toggleEditMode() {
+    document.getElementById('displayMode').style.display = 'none';
+    document.getElementById('editMode').style.display = 'block';
+    document.getElementById('editPersonalBtn').style.display = 'none';
+}
+
+// Cancel Edit
+function cancelEdit() {
+    document.getElementById('displayMode').style.display = 'block';
+    document.getElementById('editMode').style.display = 'none';
+    document.getElementById('editPersonalBtn').style.display = 'flex';
+    
+    // Reset form to original values
+    document.getElementById('updateFirstname').value = 'Sample';
+    document.getElementById('updateLastname').value = 'Assessor';
+    document.getElementById('updatePhone').value = '09991234567';
+    document.getElementById('updateEmail').value = 'assessor@usep.edu.ph';
+    document.getElementById('updatePosition').value = 'Student Affairs Assessor';
+}
+
+// Update Profile
+function updateProfile() {
+    const form = document.getElementById('updateForm');
+    const formData = new FormData(form);
+    
+    // Here you would send the data to the server
+    console.log('Updating profile:', Object.fromEntries(formData));
+    
+    // Update the display values
+    document.querySelector('#displayMode .info-field:nth-child(1) .field-input').value = document.getElementById('updateAssessorId').value;
+    document.querySelector('#displayMode .info-field:nth-child(2) .field-input').value = document.getElementById('updateFirstname').value;
+    document.querySelector('#displayMode .info-field:nth-child(3) .field-input').value = document.getElementById('updatePosition').value;
+    document.querySelector('#displayMode .info-field:nth-child(4) .field-input').value = document.getElementById('updateEmail').value;
+    document.querySelector('#displayMode .info-field:nth-child(5) .field-input').value = document.getElementById('updateLastname').value;
+    document.querySelector('#displayMode .info-field:nth-child(6) .field-input').value = document.getElementById('updatePhone').value;
+    
+    // Switch back to display mode
+    document.getElementById('displayMode').style.display = 'block';
+    document.getElementById('editMode').style.display = 'none';
+    document.getElementById('editPersonalBtn').style.display = 'flex';
+            
+            // Show success message
+    showSuccessModal('Personal information updated successfully!');
+}
+
+// Toggle Password Edit Mode
+function togglePasswordEdit() {
+    document.getElementById('passwordDisplayMode').style.display = 'none';
+    document.getElementById('passwordEditMode').style.display = 'block';
+    document.getElementById('editPasswordBtn').style.display = 'none';
+    
+    // Initialize button state as disabled
+    const changePasswordBtn = document.querySelector('#passwordEditMode .btn-save');
+    if (changePasswordBtn) {
+        changePasswordBtn.disabled = true;
+        changePasswordBtn.style.opacity = '0.5';
+        changePasswordBtn.style.cursor = 'not-allowed';
+    }
+    
+    // Reset all requirements to invalid state
+    document.querySelectorAll('.requirement-item').forEach(item => {
+        item.classList.remove('valid');
+        item.classList.add('invalid');
+    });
+}
+
+// Cancel Password Edit
+function cancelPasswordEdit() {
+    document.getElementById('passwordDisplayMode').style.display = 'block';
+    document.getElementById('passwordEditMode').style.display = 'none';
+    document.getElementById('editPasswordBtn').style.display = 'flex';
+    
+    // Clear form
+    document.getElementById('passwordForm').reset();
+    
+    // Reset password requirements
+    document.querySelectorAll('.requirement-item').forEach(item => {
+        item.classList.remove('valid');
+        item.classList.add('invalid');
+    });
+    
+    // Reset button state
+    const changePasswordBtn = document.querySelector('#passwordEditMode .btn-save');
+    if (changePasswordBtn) {
+        changePasswordBtn.disabled = false;
+        changePasswordBtn.style.opacity = '1';
+        changePasswordBtn.style.cursor = 'pointer';
+    }
+}
+
+// Update Password
+function updatePassword() {
+    const form = document.getElementById('passwordForm');
+    const formData = new FormData(form);
+    
+    // Validate passwords match
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    
+    if (newPassword !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+    }
+    
+    // Here you would send the data to the server
+    console.log('Updating password:', Object.fromEntries(formData));
+    
+    // Switch back to display mode
+    document.getElementById('passwordDisplayMode').style.display = 'block';
+    document.getElementById('passwordEditMode').style.display = 'none';
+    document.getElementById('editPasswordBtn').style.display = 'flex';
+    
+    // Clear form
+    form.reset();
+    
+    // Show success message
+    showSuccessModal('Password updated successfully!');
+}
+
+// Password Validation
+function validatePassword() {
+    const password = document.getElementById('newPassword').value;
+    console.log('Validating password:', password); // Debug log
+    
+    const requirements = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    };
+    
+    console.log('Requirements:', requirements); // Debug log
+    
+    let allRequirementsMet = true;
+    
+    Object.keys(requirements).forEach(req => {
+        const element = document.getElementById(req);
+        console.log('Processing requirement:', req, 'Element:', element); // Debug log
+        
+        if (element) {
+            if (requirements[req]) {
+                element.classList.remove('invalid');
+                element.classList.add('valid');
+                console.log('Set', req, 'to valid'); // Debug log
+            } else {
+                element.classList.remove('valid');
+                element.classList.add('invalid');
+                console.log('Set', req, 'to invalid'); // Debug log
+                allRequirementsMet = false;
+            }
+        } else {
+            console.error('Element not found for requirement:', req); // Debug log
+        }
+    });
+    
+    console.log('All requirements met:', allRequirementsMet); // Debug log
+    
+    // Enable/disable the Change Password button based on requirements
+    const changePasswordBtn = document.querySelector('#passwordEditMode .btn-save');
+    console.log('Change password button:', changePasswordBtn); // Debug log
+    
+    if (changePasswordBtn) {
+        if (allRequirementsMet && password.length > 0) {
+            changePasswordBtn.disabled = false;
+            changePasswordBtn.style.opacity = '1';
+            changePasswordBtn.style.cursor = 'pointer';
+            console.log('Button enabled'); // Debug log
+        } else {
+            changePasswordBtn.disabled = true;
+            changePasswordBtn.style.opacity = '0.5';
+            changePasswordBtn.style.cursor = 'not-allowed';
+            console.log('Button disabled'); // Debug log
+        }
+    } else {
+        console.error('Change password button not found'); // Debug log
+    }
+}
+
+// Toggle Password Visibility
+function togglePassword() {
+    const inputs = document.querySelectorAll('#passwordEditMode input[type="password"]');
+    inputs.forEach(input => {
+        input.type = input.type === 'password' ? 'text' : 'password';
+    });
+}
+
+// Success Modal
+function showSuccessModal(message) {
+    document.getElementById('successMessage').textContent = message;
+    document.getElementById('successModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSuccessModal() {
+    document.getElementById('successModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+window.addEventListener('click', function(e) {
+    const modal = document.getElementById('successModal');
+    if (e.target === modal) {
+        closeSuccessModal();
+    }
+});
+
+// Avatar preview function
 function previewAvatar(event) {
     const file = event.target.files[0];
     if (file) {
@@ -139,8 +430,12 @@ function previewAvatar(event) {
         
         const reader = new FileReader();
         reader.onload = function(e) {
-            // Update main profile picture
-            document.getElementById('avatarPreview').src = e.target.result;
+            // Update profile picture
+            const profileImg = document.getElementById('profilePicture');
+            if (profileImg) {
+                profileImg.src = e.target.result;
+                console.log('Profile picture updated successfully');
+            }
             
             // Update sidebar profile icon
             updateSidebarProfile(e.target.result);
@@ -165,16 +460,6 @@ function updateSidebarProfile(imageSrc) {
         
         // Store in localStorage for persistence
         localStorage.setItem('profileImage', imageSrc);
-        
-        // Also update any other profile icons on the page
-        const allProfileIcons = document.querySelectorAll('.profile-icon');
-        allProfileIcons.forEach(icon => {
-            if (icon.id !== 'sidebarProfileIcon') {
-                icon.style.backgroundImage = `url('${imageSrc}')`;
-                icon.style.backgroundSize = 'cover';
-                icon.style.backgroundPosition = 'center';
-            }
-        });
     }
 }
 
@@ -182,107 +467,8 @@ function updateSidebarProfile(imageSrc) {
 document.addEventListener('DOMContentLoaded', function() {
     const savedImage = localStorage.getItem('profileImage');
     if (savedImage) {
-        document.getElementById('avatarPreview').src = savedImage;
+        document.getElementById('profilePicture').src = savedImage;
         updateSidebarProfile(savedImage);
-    }
-    
-    // Ensure sidebar profile icon is updated on page load
-    setTimeout(function() {
-        const mainAvatar = document.getElementById('avatarPreview');
-        if (mainAvatar && mainAvatar.src && !mainAvatar.src.includes('placeholder')) {
-            updateSidebarProfile(mainAvatar.src);
-        }
-    }, 100);
-});
-
-// Password Validation
-function validatePassword() {
-    const password = document.getElementById('newPassword').value;
-    const requirements = {
-        length: password.length >= 8,
-        uppercase: /[A-Z]/.test(password),
-        lowercase: /[a-z]/.test(password),
-        number: /\d/.test(password),
-        special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
-    };
-    
-    Object.keys(requirements).forEach(req => {
-        const element = document.getElementById(req);
-        if (requirements[req]) {
-            element.classList.remove('invalid');
-            element.classList.add('valid');
-        } else {
-            element.classList.remove('valid');
-            element.classList.add('invalid');
-        }
-    });
-}
-
-// Toggle Password Visibility
-function togglePassword() {
-    const inputs = document.querySelectorAll('.change-password input[type="password"]');
-    inputs.forEach(input => {
-        input.type = input.type === 'password' ? 'text' : 'password';
-    });
-}
-
-// Toggle Edit Mode
-function toggleEditMode() {
-    document.getElementById('displayMode').style.display = 'none';
-    document.getElementById('editMode').style.display = 'block';
-}
-
-// Cancel Edit
-function cancelEdit() {
-    document.getElementById('displayMode').style.display = 'block';
-    document.getElementById('editMode').style.display = 'none';
-    
-    // Reset form to original values
-    document.getElementById('updateName').value = document.getElementById('display-name').textContent;
-    document.getElementById('updatePhone').value = document.getElementById('display-phone').textContent;
-    document.getElementById('updateEmail').value = document.getElementById('display-email').textContent;
-    document.getElementById('updatePosition').value = document.getElementById('display-position').textContent;
-}
-
-// Update Profile
-function updateProfile() {
-    const form = document.getElementById('updateForm');
-    const formData = new FormData(form);
-    
-    // Here you would send the data to the server
-    console.log('Updating assessor profile:', Object.fromEntries(formData));
-    
-    // Update the display values
-    document.getElementById('display-name').textContent = document.getElementById('updateName').value;
-    document.getElementById('display-phone').textContent = document.getElementById('updatePhone').value;
-    document.getElementById('display-email').textContent = document.getElementById('updateEmail').value;
-    document.getElementById('display-position').textContent = document.getElementById('updatePosition').value;
-    
-    // Switch back to display mode
-    document.getElementById('displayMode').style.display = 'block';
-    document.getElementById('editMode').style.display = 'none';
-    
-    // Show success message
-    showSuccessModal('Personal information updated successfully!');
-}
-
-// Success Modal
-function showSuccessModal(message) {
-    document.getElementById('successMessage').textContent = message;
-    document.getElementById('successModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeSuccessModal() {
-    document.getElementById('successModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Close modal when clicking outside
-window.addEventListener('click', function(e) {
-    const modal = document.getElementById('successModal');
-    if (e.target === modal) {
-        closeSuccessModal();
     }
 });
 </script>

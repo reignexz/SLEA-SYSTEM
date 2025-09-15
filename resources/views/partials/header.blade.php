@@ -21,6 +21,11 @@
             <button id="darkModeToggle" class="dark-toggle-btn" title="Toggle Dark Mode">
                 <i class="fas fa-moon"></i>
             </button>
+            <button id="logoutBtn" class="logout-btn" title="Log Out" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Log Out</span>
+            </button>
         </div>
     </div>
 </div>
+
