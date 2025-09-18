@@ -56,61 +56,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse($pendingSubmissions as $submission)
                     <tr>
-                        <td>2021-12345</td>
-                        <td>DELA CRUZ, Juan M.</td>
-                        <td>Leadership Portfolio</td>
-                        <td>2024-01-15</td>
+                        <td>{{ $submission->student->student_id }}</td>
+                        <td>{{ $submission->student->name }}</td>
+                        <td>{{ $submission->document_title }}</td>
+                        <td>{{ $submission->submitted_at->format('Y-m-d') }}</td>
                         <td>
-                            <button class="btn btn-view" onclick="openSubmissionModal(1)" title="View Submission">
+                            <button class="btn btn-view" onclick="openSubmissionModal({{ $submission->id }})" title="View Submission">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
+                    @empty
                     <tr>
-                        <td>2021-67890</td>
-                        <td>SANTOS, Maria A.</td>
-                        <td>Community Service Report</td>
-                        <td>2024-01-14</td>
-                        <td>
-                            <button class="btn btn-view" onclick="openSubmissionModal(2)" title="View Submission">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </td>
+                        <td colspan="5" class="text-center">No pending submissions found.</td>
                     </tr>
-                    <tr>
-                        <td>2021-54321</td>
-                        <td>GARCIA, Pedro L.</td>
-                        <td>Academic Excellence Portfolio</td>
-                        <td>2024-01-13</td>
-                        <td>
-                            <button class="btn btn-view" onclick="openSubmissionModal(3)" title="View Submission">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2021-98765</td>
-                        <td>RODRIGUEZ, Ana S.</td>
-                        <td>Leadership Development Plan</td>
-                        <td>2024-01-12</td>
-                        <td>
-                            <button class="btn btn-view" onclick="openSubmissionModal(4)" title="View Submission">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2021-11111</td>
-                        <td>MARTINEZ, Carlos R.</td>
-                        <td>Innovation Project Proposal</td>
-                        <td>2024-01-11</td>
-                        <td>
-                            <button class="btn btn-view" onclick="openSubmissionModal(5)" title="View Submission">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -134,29 +96,37 @@
     </main>
 </div>
 
-<!-- View Submission Modal -->
+<!-- Review Submission Modal -->
 <div class="modal fade" id="submissionModal" tabindex="-1" aria-labelledby="submissionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="submissionModalLabel">View Submission</h5>
+                <h5 class="modal-title" id="submissionModalLabel">Review Submission</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="submission-content">
-                    <!-- Student Information Card -->
+                    <!-- Student Details Panel -->
                     <div class="info-card">
                         <div class="card-header">
-                            <h6 class="card-title">Student Information</h6>
+                            <h6 class="card-title">Student Details</h6>
                         </div>
                         <div class="card-body">
                             <div class="detail-row">
-                                <span class="label">Name:</span>
-                                <span class="value" id="modalStudentName">DELA CRUZ, Juan M.</span>
+                                <span class="label">Student ID:</span>
+                                <span class="value" id="modalStudentId">-</span>
                             </div>
                             <div class="detail-row">
-                                <span class="label">Student ID:</span>
-                                <span class="value" id="modalStudentId">2021-12345</span>
+                                <span class="label">Student Name:</span>
+                                <span class="value" id="modalStudentName">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">Document Title:</span>
+                                <span class="value" id="modalDocumentTitle">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">Date Submitted:</span>
+                                <span class="value" id="modalDateSubmitted">-</span>
                             </div>
                         </div>
                     </div>
@@ -168,53 +138,66 @@
                         </div>
                         <div class="card-body">
                             <div class="detail-row">
-                                <span class="label">Title:</span>
-                                <span class="value" id="modalDocumentTitle">Leadership Portfolio</span>
+                                <span class="label">SLEA Section:</span>
+                                <span class="value" id="modalSleaSection">-</span>
                             </div>
-                            <div class="detail-row">
-                                <span class="label">Category:</span>
-                                <span class="value" id="modalSleaSections">Leadership Excellence</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="label">Submission Status:</span>
-                                <span class="status-badge status-pending">PENDING</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Document Content Card -->
-                    <div class="info-card">
-                        <div class="card-header">
-                            <h6 class="card-title">Document Content</h6>
-                        </div>
-                        <div class="card-body">
                             <div class="detail-row">
                                 <span class="label">Subsection:</span>
-                                <span class="value" id="modalSubsection">Student Leadership</span>
+                                <span class="value" id="modalSubsection">-</span>
                             </div>
                             <div class="detail-row">
                                 <span class="label">Role in Activity:</span>
-                                <span class="value" id="modalRole">President</span>
+                                <span class="value" id="modalRole">-</span>
                             </div>
                             <div class="detail-row">
-                                <span class="label">Date of Activity:</span>
-                                <span class="value" id="modalActivityDate">2024-01-10</span>
+                                <span class="label">Activity Date:</span>
+                                <span class="value" id="modalActivityDate">-</span>
                             </div>
                             <div class="detail-row">
                                 <span class="label">Organizing Body:</span>
-                                <span class="value" id="modalOrganizingBody">Student Council</span>
+                                <span class="value" id="modalOrganizingBody">-</span>
                             </div>
                             <div class="detail-row">
-                                <span class="label">Score:</span>
-                                <span class="value" id="modalScore">85/100</span>
+                                <span class="label">Description:</span>
+                                <span class="value" id="modalDescription">-</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Assessor Remarks Card -->
+                    <!-- Uploaded Document Preview -->
                     <div class="info-card">
                         <div class="card-header">
-                            <h6 class="card-title">Assessor Remarks</h6>
+                            <h6 class="card-title">Uploaded Document</h6>
+                        </div>
+                        <div class="card-body">
+                            <div id="documentPreview" class="document-preview">
+                                <!-- Document preview/download buttons will be loaded here -->
+                            </div>
+                            </div>
+                            </div>
+
+                    <!-- System Auto-Generated Score -->
+                    <div class="info-card">
+                        <div class="card-header">
+                            <h6 class="card-title">System Auto-Generated Score</h6>
+                            </div>
+                        <div class="card-body">
+                            <div class="score-display">
+                                <div class="score-main">
+                                    <span class="score-label">Auto Score:</span>
+                                    <span class="score-value" id="modalAutoScore">-</span>
+                                </div>
+                                <div class="score-note">
+                                    <small>This score is calculated automatically based on submission criteria.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Assessor Remarks -->
+                    <div class="info-card">
+                        <div class="card-header">
+                            <h6 class="card-title">Assessor Remarks (Optional)</h6>
                         </div>
                         <div class="card-body">
                             <textarea id="assessorRemarks" class="form-control remarks-textarea" rows="4" placeholder="Enter your remarks and feedback..."></textarea>
@@ -225,16 +208,16 @@
                 
                 <!-- Action Buttons -->
                 <div class="action-buttons-container">
-                    <button type="button" class="btn btn-approve" onclick="handleSubmission('approve')" title="Approve">
+                    <button type="button" class="btn btn-approve" onclick="handleSubmission('approve')" title="✅ Approve">
                         <i class="fas fa-check"></i>
                     </button>
-                    <button type="button" class="btn btn-reject" onclick="handleSubmission('reject')" title="Reject">
+                    <button type="button" class="btn btn-reject" onclick="handleSubmission('reject')" title="❌ Reject">
                         <i class="fas fa-times"></i>
                     </button>
-                    <button type="button" class="btn btn-return" onclick="handleSubmission('return')" title="Return">
+                    <button type="button" class="btn btn-return" onclick="handleSubmission('return')" title="↩ Return to Student">
                         <i class="fas fa-undo"></i>
                     </button>
-                    <button type="button" class="btn btn-flag" onclick="handleSubmission('flag')" title="Flag">
+                    <button type="button" class="btn btn-flag" onclick="handleSubmission('flag')" title="🚩 Flag for Admin">
                         <i class="fas fa-flag"></i>
                     </button>
                 </div>
@@ -975,6 +958,161 @@ body.dark-mode .status-reject {
     flex-shrink: 0;
 }
 
+/* Document Preview Styles */
+.document-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.document-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+
+.document-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.document-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.document-icon.pdf {
+    background: #dc3545;
+}
+
+.document-icon.image {
+    background: #28a745;
+}
+
+.document-icon.other {
+    background: #6c757d;
+}
+
+.document-details h6 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.document-details small {
+    color: #666;
+}
+
+.document-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-download {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.btn-download:hover {
+    background: #0056b3;
+}
+
+.btn-preview {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.btn-preview:hover {
+    background: #1e7e34;
+}
+
+/* Score Display Styles */
+.score-display {
+    text-align: center;
+    padding: 1rem;
+}
+
+.score-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.score-label {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.score-value {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #28a745;
+    background: #d4edda;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 2px solid #28a745;
+}
+
+.score-note {
+    color: #666;
+    font-style: italic;
+}
+
+/* Dark mode document preview */
+body.dark-mode .document-item {
+    background: #363636 !important;
+    border-color: #555 !important;
+}
+
+body.dark-mode .document-details h6 {
+    color: #f0f0f0 !important;
+}
+
+body.dark-mode .document-details small {
+    color: #ccc !important;
+}
+
+body.dark-mode .score-label {
+    color: #f0f0f0 !important;
+}
+
+body.dark-mode .score-value {
+    background: #1e4d2b !important;
+    color: #68d391 !important;
+    border-color: #68d391 !important;
+}
+
+body.dark-mode .score-note {
+    color: #ccc !important;
+}
+
 .btn-approve {
     background-color: #28a745 !important;
     color: white !important;
@@ -1208,102 +1346,116 @@ body.dark-mode .btn-flag:hover {
 </style>
 
 <script>
-// Sample data for different submissions
-const submissionData = {
-    1: {
-        studentName: "DELA CRUZ, Juan M.",
-        studentId: "2021-12345",
-        documentTitle: "Leadership Portfolio",
-        sleaSections: "Leadership Excellence",
-        subsection: "Student Leadership",
-        role: "President",
-        activityDate: "2024-01-10",
-        organizingBody: "Student Council",
-        score: "85/100",
-        status: "pending"
-    },
-    2: {
-        studentName: "SANTOS, Maria A.",
-        studentId: "2021-67890",
-        documentTitle: "Community Service Report",
-        sleaSections: "Community Engagement",
-        subsection: "Volunteer Work",
-        role: "Coordinator",
-        activityDate: "2024-01-09",
-        organizingBody: "Community Outreach",
-        score: "92/100",
-        status: "approve"
-    },
-    3: {
-        studentName: "GARCIA, Pedro L.",
-        studentId: "2021-54321",
-        documentTitle: "Academic Excellence Portfolio",
-        sleaSections: "Academic Excellence",
-        subsection: "Research",
-        role: "Lead Researcher",
-        activityDate: "2024-01-08",
-        organizingBody: "Research Department",
-        score: "88/100",
-        status: "reject"
-    },
-    4: {
-        studentName: "RODRIGUEZ, Ana S.",
-        studentId: "2021-98765",
-        documentTitle: "Leadership Development Plan",
-        sleaSections: "Leadership Excellence",
-        subsection: "Leadership Training",
-        role: "Facilitator",
-        activityDate: "2024-01-07",
-        organizingBody: "Leadership Institute",
-        score: "90/100",
-        status: "pending"
-    },
-    5: {
-        studentName: "MARTINEZ, Carlos R.",
-        studentId: "2021-11111",
-        documentTitle: "Innovation Project Proposal",
-        sleaSections: "Innovation & Creativity",
-        subsection: "Project Development",
-        role: "Project Lead",
-        activityDate: "2024-01-06",
-        organizingBody: "Innovation Lab",
-        score: "87/100",
-        status: "approve"
-    }
-};
+let currentSubmissionId = null;
 
-function openSubmissionModal(submissionId) {
-    const data = submissionData[submissionId];
-    if (data) {
-        document.getElementById('modalStudentName').textContent = data.studentName;
-        document.getElementById('modalStudentId').textContent = data.studentId;
-        document.getElementById('modalDocumentTitle').textContent = data.documentTitle;
-        document.getElementById('modalSleaSections').textContent = data.sleaSections;
-        document.getElementById('modalSubsection').textContent = data.subsection;
-        document.getElementById('modalRole').textContent = data.role;
-        document.getElementById('modalActivityDate').textContent = data.activityDate;
-        document.getElementById('modalOrganizingBody').textContent = data.organizingBody;
-        document.getElementById('modalScore').textContent = data.score;
+async function openSubmissionModal(submissionId) {
+    try {
+        // Show loading state
+        showModalLoading();
         
-        // Update status badge
-        const statusBadge = document.querySelector('.status-badge');
-        statusBadge.className = `status-badge status-${data.status}`;
-        statusBadge.textContent = data.status.toUpperCase();
+        // Fetch submission details from API
+        const response = await fetch(`/assessor/submissions/${submissionId}/details`);
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to fetch submission details');
+        }
+        
+        const submission = data.submission;
+        
+        // Populate student details
+        document.getElementById('modalStudentId').textContent = submission.student.id;
+        document.getElementById('modalStudentName').textContent = submission.student.name;
+        document.getElementById('modalDocumentTitle').textContent = submission.document_title;
+        document.getElementById('modalDateSubmitted').textContent = new Date(submission.submitted_at).toLocaleDateString();
+        
+        // Populate document information
+        document.getElementById('modalSleaSection').textContent = submission.slea_section || '-';
+        document.getElementById('modalSubsection').textContent = submission.subsection || '-';
+        document.getElementById('modalRole').textContent = submission.role_in_activity || '-';
+        document.getElementById('modalActivityDate').textContent = submission.activity_date || '-';
+        document.getElementById('modalOrganizingBody').textContent = submission.organizing_body || '-';
+        
+        // Show description if available
+        const descriptionElement = document.getElementById('modalDescription');
+        if (descriptionElement) {
+            descriptionElement.textContent = submission.description || '-';
+        }
+        
+        // Display auto-generated score
+        document.getElementById('modalAutoScore').textContent = submission.auto_generated_score ? 
+            `${submission.auto_generated_score}/100` : 'Not calculated';
+        
+        // Populate document preview
+        populateDocumentPreview(submission.documents);
         
         // Clear previous remarks
         document.getElementById('assessorRemarks').value = '';
         
         // Store current submission ID for action handling
-        document.getElementById('submissionModal').setAttribute('data-submission-id', submissionId);
+        currentSubmissionId = submissionId;
         
         // Show modal
         const modal = new bootstrap.Modal(document.getElementById('submissionModal'));
         modal.show();
+        
+    } catch (error) {
+        console.error('Error fetching submission details:', error);
+        showErrorModal('Failed to load submission details: ' + error.message);
     }
 }
 
-function handleSubmission(action) {
-    const submissionId = document.getElementById('submissionModal').getAttribute('data-submission-id');
+function showModalLoading() {
+    // Show loading state in modal
+    document.getElementById('modalStudentId').textContent = 'Loading...';
+    document.getElementById('modalStudentName').textContent = 'Loading...';
+    document.getElementById('modalDocumentTitle').textContent = 'Loading...';
+    document.getElementById('modalDateSubmitted').textContent = 'Loading...';
+    document.getElementById('modalAutoScore').textContent = 'Loading...';
+}
+
+function populateDocumentPreview(documents) {
+    const previewContainer = document.getElementById('documentPreview');
+    previewContainer.innerHTML = '';
+    
+    if (!documents || documents.length === 0) {
+        previewContainer.innerHTML = '<p class="text-muted">No documents uploaded.</p>';
+        return;
+    }
+    
+    documents.forEach(doc => {
+        const documentItem = document.createElement('div');
+        documentItem.className = 'document-item';
+        
+        const iconClass = doc.is_pdf ? 'pdf' : doc.is_image ? 'image' : 'other';
+        const iconSymbol = doc.is_pdf ? '📄' : doc.is_image ? '🖼️' : '📎';
+        
+        documentItem.innerHTML = `
+            <div class="document-info">
+                <div class="document-icon ${iconClass}">
+                    ${iconSymbol}
+                </div>
+                <div class="document-details">
+                    <h6>${doc.original_filename}</h6>
+                    <small>${doc.file_type.toUpperCase()} • ${doc.file_size}</small>
+                </div>
+            </div>
+            <div class="document-actions">
+                ${doc.is_image ? `<button class="btn-preview" onclick="previewDocument(${doc.id})">Preview</button>` : ''}
+                <button class="btn-download" onclick="downloadDocument(${doc.id})">Download</button>
+            </div>
+        `;
+        
+        previewContainer.appendChild(documentItem);
+    });
+}
+
+async function handleSubmission(action) {
+    if (!currentSubmissionId) {
+        showErrorModal('No submission selected');
+        return;
+    }
+    
     const remarks = document.getElementById('assessorRemarks').value.trim();
     
     // Validate remarks for reject, return, and flag actions
@@ -1312,17 +1464,105 @@ function handleSubmission(action) {
         return;
     }
     
-    // Here you would typically send the data to your backend
-    console.log(`Action: ${action}, Submission ID: ${submissionId}, Remarks: ${remarks}`);
-    
-    // Close the submission modal first
+    try {
+        // Show loading state
+        const actionButton = event.target.closest('.btn');
+        const originalText = actionButton.innerHTML;
+        actionButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        actionButton.disabled = true;
+        
+        // Send action to backend
+        const response = await fetch(`/assessor/submissions/${currentSubmissionId}/action`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                action: action,
+                remarks: remarks
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to process action');
+        }
+        
+        // Close the submission modal
     const modal = bootstrap.Modal.getInstance(document.getElementById('submissionModal'));
     modal.hide();
     
-    // Show appropriate success message based on action
+        // Show success message
     showSuccessMessage(action);
     
-    // Here you would typically refresh the table or remove the row
+        // Remove the row from the table or refresh the page
+        removeSubmissionFromTable(currentSubmissionId);
+        
+    } catch (error) {
+        console.error('Error processing submission action:', error);
+        showErrorModal('Failed to process action: ' + error.message);
+        
+        // Restore button state
+        const actionButton = event.target.closest('.btn');
+        actionButton.innerHTML = originalText;
+        actionButton.disabled = false;
+    }
+}
+
+function downloadDocument(documentId) {
+    window.open(`/assessor/documents/${documentId}/download`, '_blank');
+}
+
+function previewDocument(documentId) {
+    // For now, just download the document
+    // In a real implementation, you might want to show a preview modal
+    downloadDocument(documentId);
+}
+
+function removeSubmissionFromTable(submissionId) {
+    // Find and remove the row from the table
+    const tableRows = document.querySelectorAll('.submissions-table tbody tr');
+    tableRows.forEach(row => {
+        const viewButton = row.querySelector('.btn-view');
+        if (viewButton && viewButton.onclick.toString().includes(submissionId)) {
+            row.remove();
+        }
+    });
+    
+    // Update pagination info
+    updatePaginationInfo();
+}
+
+function showErrorModal(message) {
+    const errorModal = document.createElement('div');
+    errorModal.className = 'modal fade';
+    errorModal.id = 'errorModal';
+    errorModal.innerHTML = `
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content validation-modal-content">
+                <div class="modal-body text-center p-4">
+                    <div class="validation-icon mb-3">
+                        <i class="fas fa-exclamation-triangle" style="color: #dc3545; font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="validation-title mb-3">Error</h5>
+                    <p class="validation-message mb-4">${message}</p>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(errorModal);
+    const modal = new bootstrap.Modal(errorModal);
+    modal.show();
+    
+    errorModal.addEventListener('hidden.bs.modal', function() {
+        document.body.removeChild(errorModal);
+    });
 }
 
 function showValidationError(message) {
@@ -1565,3 +1805,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 @endsection
+

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssessorController;
 use App\Http\Controllers\RubricController;
-use App\Http\Controllers\LoginController;
 
 // Login and registration routes will be implemented by your teammate
 
@@ -55,4 +54,9 @@ Route::prefix('assessor')->group(function () {
     Route::get('/pending-submissions', [AssessorController::class, 'pendingSubmissions'])->name('assessor.pending-submissions');
     Route::get('/submissions', [AssessorController::class, 'submissions'])->name('assessor.submissions');
     Route::get('/final-review', [AssessorController::class, 'finalReview'])->name('assessor.final-review');
+    
+    // API routes for submission review
+    Route::get('/submissions/{id}/details', [AssessorController::class, 'getSubmissionDetails'])->name('assessor.submission.details');
+    Route::post('/submissions/{id}/action', [AssessorController::class, 'handleSubmissionAction'])->name('assessor.submission.action');
+    Route::get('/documents/{id}/download', [AssessorController::class, 'downloadDocument'])->name('assessor.document.download');
 });
