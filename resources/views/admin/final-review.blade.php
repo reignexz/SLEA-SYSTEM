@@ -92,7 +92,9 @@
                                     </span>
                                 </td>
                                 <td class="action-buttons">
-                                    <button type="button" class="btn btn-review" onclick="openReviewModal('{{ $student->id ?? 1 }}')">Review</button>
+                                    <button type="button" class="btn-action btn-review" onclick="openReviewModal('{{ $student->id ?? 1 }}')" title="Review Submission">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -106,7 +108,9 @@
                                 <span class="badge badge--green">Approve</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('1')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('1')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -117,7 +121,9 @@
                                 <span class="badge badge--green">Approve</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('2')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('2')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -128,7 +134,9 @@
                                 <span class="badge badge--yellow">Pending</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('3')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('3')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -139,7 +147,9 @@
                                 <span class="badge badge--green">Approve</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('4')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('4')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -150,7 +160,9 @@
                                 <span class="badge badge--red">Reject</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('5')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('5')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -161,7 +173,9 @@
                                 <span class="badge badge--green">Approve</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('6')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('6')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -172,7 +186,9 @@
                                 <span class="badge badge--yellow">Pending</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('7')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('7')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -183,7 +199,9 @@
                                 <span class="badge badge--green">Approve</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('8')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('8')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -194,7 +212,9 @@
                                 <span class="badge badge--red">Reject</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('9')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('9')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -205,7 +225,9 @@
                                 <span class="badge badge--green">Approve</span>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-review" onclick="openReviewModal('10')">Review</button>
+                                <button type="button" class="btn-action btn-review" onclick="openReviewModal('10')" title="Review Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                     @endif
@@ -344,6 +366,24 @@
     </div>
 </div>
 
+<!-- Success Modal -->
+<div id="successModal" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content success-modal-content">
+            <div class="modal-body text-center p-4">
+                <div class="success-icon mb-3">
+                    <i class="fas fa-check-circle" style="color: #28a745; font-size: 3rem;"></i>
+                </div>
+                <h5 class="success-title mb-3">Success!</h5>
+                <p class="success-message mb-4" id="successMessage">Operation completed successfully!</p>
+                <button type="button" class="btn btn-success" onclick="closeSuccessModal()">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 let currentStudentId = '';
 
@@ -386,11 +426,11 @@ function approveQualification() {
     console.log('Approving qualification for student:', currentStudentId);
     console.log('Remarks:', remarks);
     
-    // Show success message
-    alert('Qualification approved successfully!');
-    
-    // Close modal
+    // Close review modal first
     closeReviewModal();
+    
+    // Show custom success modal
+    showSuccessModal('Qualification approved successfully!');
 }
 
 function rejectQualification() {
@@ -400,18 +440,40 @@ function rejectQualification() {
     console.log('Rejecting qualification for student:', currentStudentId);
     console.log('Remarks:', remarks);
     
-    // Show success message
-    alert('Qualification rejected successfully!');
-    
-    // Close modal
+    // Close review modal first
     closeReviewModal();
+    
+    // Show custom success modal
+    showSuccessModal('Qualification rejected successfully!');
+}
+
+// Success Modal Functions
+function showSuccessModal(message) {
+    document.getElementById('successMessage').textContent = message;
+    const modal = document.getElementById('successModal');
+    modal.style.display = 'block';
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+}
+
+function closeSuccessModal() {
+    const modal = document.getElementById('successModal');
+    modal.style.display = 'none';
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
 }
 
 // Close modal when clicking outside of it
 window.onclick = function(event) {
-    const modal = document.getElementById('reviewModal');
-    if (event.target === modal) {
+    const reviewModal = document.getElementById('reviewModal');
+    const successModal = document.getElementById('successModal');
+    
+    if (event.target === reviewModal) {
         closeReviewModal();
+    }
+    
+    if (event.target === successModal) {
+        closeSuccessModal();
     }
 }
 </script>

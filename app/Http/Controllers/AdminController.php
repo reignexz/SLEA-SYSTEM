@@ -7,6 +7,11 @@ use App\Models\User; // Make sure this is added
 
 class AdminController extends Controller
 {
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
+
     public function createAssessor()
     {
         // Generate the next password based on the latest user

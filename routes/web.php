@@ -4,6 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssessorController;
 use App\Http\Controllers\RubricController;
+use App\Http\Controllers\LoginController;
+
+// Login and registration routes will be implemented by your teammate
+
+// Dashboard route (placeholder)
+Route::get('/dashboard', function () {
+    return redirect()->route('admin.dashboard');
+})->name('dashboard');
 
 // Static admin profile view
 Route::get('/admin/profile', function () {
@@ -11,6 +19,9 @@ Route::get('/admin/profile', function () {
 })->name('admin.profile');
 
 Route::prefix('admin')->group(function () {
+    // Admin dashboard
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    
     // Admin pages
     Route::get('/create_assessor', [AdminController::class, 'createAssessor'])->name('admin.create_assessor');
     Route::get('/approve-reject', [AdminController::class, 'approveReject'])->name('admin.approve-reject');

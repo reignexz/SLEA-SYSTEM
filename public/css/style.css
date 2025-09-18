@@ -1043,13 +1043,14 @@ body.dark-mode .btn-page.active {
 /* Action buttons container */
 .manage-table .action-buttons {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
   position: relative;
   z-index: 15;
   pointer-events: none;
+  width: 100%;
 }
 
 .manage-table .action-buttons .action-btn {
@@ -1098,11 +1099,11 @@ body.dark-mode .btn-page.active {
 
 /* Base action button styles - NEW CLASS NAMES */
 .action-btn {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   margin: 0;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
   border: 1px solid transparent;
@@ -1719,6 +1720,64 @@ body.dark-mode .review-table tbody tr:hover td {
   width: 95%;
 }
 
+/* Final Review Action Buttons - Icon Style */
+.review-table .action-buttons {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: relative;
+  z-index: 15;
+  pointer-events: none;
+  width: 100%;
+}
+
+.review-table .btn-action {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer !important;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  position: relative;
+  text-decoration: none;
+  outline: none;
+  user-select: none;
+  pointer-events: auto !important;
+  z-index: 100 !important;
+}
+
+.review-table .btn-review {
+  background: #7b0000 !important;
+  color: white !important;
+  border: 1px solid #7b0000 !important;
+}
+
+.review-table .btn-review:hover {
+  background: #5c0000 !important;
+  border-color: #5c0000 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(123, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .review-table .btn-action {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
 .review-container {
   display: flex;
   flex-direction: column;
@@ -1880,8 +1939,8 @@ body.dark-mode .remarks-textarea:focus {
 /* Review Action Buttons */
 .review-actions {
   display: flex;
-  gap: 15px;
-  justify-content: flex-end;
+  gap: 10px;
+  justify-content: center;
   padding-top: 20px;
   border-top: 1px solid #dee2e6;
 }
@@ -1894,14 +1953,18 @@ body.dark-mode .review-actions {
   background: #28a745;
   color: #fff;
   border: 1px solid #28a745;
-  padding: 12px 24px;
-  border-radius: 25px;
+  padding: 8px 16px;
+  border-radius: 6px;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.3s ease;
-  font-size: 14px;
+  font-size: 12px;
+  min-width: 120px;
+  height: 36px;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .btn-approve-qualification:hover {
@@ -1917,14 +1980,18 @@ body.dark-mode .review-actions {
   background: #dc3545;
   color: #fff;
   border: 1px solid #dc3545;
-  padding: 12px 24px;
-  border-radius: 25px;
+  padding: 8px 16px;
+  border-radius: 6px;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.3s ease;
-  font-size: 14px;
+  font-size: 12px;
+  min-width: 80px;
+  height: 36px;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .btn-reject-qualification:hover {
@@ -1959,35 +2026,262 @@ body.dark-mode .review-actions {
   
   .review-actions {
     flex-direction: column;
+    gap: 8px;
   }
   
   .btn-approve-qualification,
   .btn-reject-qualification {
     width: 100%;
+    min-width: auto;
+    height: 32px;
+    font-size: 11px;
     justify-content: center;
   }
 }
 
+/* ===== Modal Action Buttons - Standardized Sizing ===== */
+.modal .btn,
+.modal .btn-action {
+  min-width: 80px;
+  height: 36px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.modal .btn-primary,
+.modal .btn-approve,
+.modal .btn-approve-qualification {
+  background: #28a745;
+  color: white;
+  border: 1px solid #28a745;
+}
+
+.modal .btn-primary:hover,
+.modal .btn-approve:hover,
+.modal .btn-approve-qualification:hover {
+  background: #218838;
+  border-color: #1e7e34;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.modal .btn-danger,
+.modal .btn-reject,
+.modal .btn-reject-qualification {
+  background: #dc3545;
+  color: white;
+  border: 1px solid #dc3545;
+}
+
+.modal .btn-danger:hover,
+.modal .btn-reject:hover,
+.modal .btn-reject-qualification:hover {
+  background: #c82333;
+  border-color: #bd2130;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.modal .btn-secondary,
+.modal .btn-cancel {
+  background: #6c757d;
+  color: white;
+  border: 1px solid #6c757d;
+}
+
+.modal .btn-secondary:hover,
+.modal .btn-cancel:hover {
+  background: #5a6268;
+  border-color: #545b62;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Modal footer button consistency */
+.modal-footer .btn {
+  min-width: 100px;
+  width: 100px;
+  height: 36px;
+  margin: 0 5px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+}
+
+@media (max-width: 768px) {
+  .modal .btn,
+  .modal .btn-action {
+    height: 32px;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  
+  .modal-footer .btn {
+    min-width: 80px;
+    width: 80px;
+    height: 32px;
+  }
+}
+
+/* ===== Success Modal Styles (Matching Assessor Dashboard) ===== */
+.success-modal-content {
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.success-icon {
+  animation: successPulse 0.6s ease-in-out;
+}
+
+.success-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.success-modal-content .btn-success {
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+  padding: 0.75rem 2rem !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  color: white !important;
+}
+
+.success-modal-content .btn-success:hover {
+  background-color: #218838 !important;
+  border-color: #218838 !important;
+  transform: translateY(-1px) !important;
+  color: white !important;
+}
+
+/* Dark mode success modal */
+body.dark-mode .success-modal-content {
+  background-color: #2a2a2a !important;
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .success-title {
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .success-message {
+  color: #ccc !important;
+}
+
+/* Success pulse animation */
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Account summary styling for success modal */
+.account-summary {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+  text-align: left;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  font-weight: 600;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.summary-value {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* Dark mode for account summary */
+body.dark-mode .account-summary {
+  background: #3a3a3a;
+}
+
+body.dark-mode .summary-item {
+  border-bottom-color: #555;
+}
+
+body.dark-mode .summary-label {
+  color: #ccc;
+}
+
+body.dark-mode .summary-value {
+  color: #f0f0f0;
+}
+
 /* ===== Modal Styles ===== */
 .modal {
-  display: none !important;
-  position: fixed !important;
-  z-index: 9999 !important;
-  left: 0 !important;
-  top: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal[style*="flex"] {
+  display: flex !important;
 }
 
 .modal[style*="block"] {
-  display: block !important;
+  display: flex !important;
 }
 
 .modal-content {
   background-color: #fff;
-  margin: 5% auto;
+  margin: 0;
   padding: 0;
   border-radius: 15px;
   width: 90%;
@@ -2150,6 +2444,8 @@ body.dark-mode .modal-footer {
   gap: 8px;
   transition: all 0.3s ease;
   font-size: 14px;
+  min-width: 100px;
+  justify-content: center;
 }
 
 /* Responsive Modal */
@@ -2188,24 +2484,52 @@ body.dark-mode .modal-footer {
 /* Export section */
 .export-section {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid #dee2e6;
+}
+
+.export-section .btn-export {
+  background: #7b0000 !important;
+  color: #fff !important;
+  border: 1px solid #7b0000 !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  transition: all 0.3s ease !important;
+  font-size: 12px !important;
+  min-width: auto !important;
+  width: auto !important;
+  max-width: 150px !important;
+}
+
+.export-section .btn-export:hover {
+  background: #5c0000 !important;
+  border-color: #5c0000 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 4px rgba(123, 0, 0, 0.2) !important;
 }
 
 .btn-export {
   background: #7b0000;
   color: #fff;
   border: 1px solid #7b0000;
-  padding: 10px 20px;
-  border-radius: 25px;
+  padding: 6px 12px;
+  border-radius: 6px;
   font-weight: 500;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.3s ease;
-  font-size: 14px;
+  font-size: 12px;
+  min-width: auto;
+  width: auto;
 }
 
 .btn-export:hover {
@@ -2213,6 +2537,8 @@ body.dark-mode .modal-footer {
   border-color: #5c0000;
   color: #fff;
   text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(123, 0, 0, 0.2);
 }
 
 /* Pagination styling */
@@ -3637,6 +3963,37 @@ body.dark-mode .password-info {
   overflow: hidden;
 }
 
+/* Award table view buttons - minimized size */
+.award-table .btn-view {
+  background: #7b0000 !important;
+  color: white !important;
+  border: 1px solid #7b0000 !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  transition: all 0.3s ease !important;
+  font-size: 11px !important;
+  min-width: auto !important;
+  width: auto !important;
+  height: 28px !important;
+}
+
+.award-table .btn-view:hover {
+  background: #5c0000 !important;
+  border-color: #5c0000 !important;
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 4px rgba(123, 0, 0, 0.2) !important;
+}
+
+.award-table .btn-view i {
+  font-size: 10px !important;
+}
+
 /* Column widths for award report */
 .col-name { width: 20%; }
 .col-id { width: 15%; }
@@ -3812,15 +4169,17 @@ body.dark-mode .action-section {
   background: #7b0000;
   color: #fff;
   border: 1px solid #7b0000;
-  padding: 12px 24px;
-  border-radius: 25px;
+  padding: 6px 12px;
+  border-radius: 6px;
   font-weight: 500;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.3s ease;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
+  min-width: auto;
+  width: auto;
 }
 
 .btn-export-pdf:hover,
@@ -4161,7 +4520,7 @@ body.dark-mode .award-table tbody tr:hover td {
 
 .search-btn {
   padding: 10px 15px;
-  background: #dc3545;
+  background: #7b0000;
   color: white;
   border: none;
   cursor: pointer;
@@ -4255,6 +4614,7 @@ body.dark-mode .award-table tbody tr:hover td {
   justify-content: center !important;
   transition: all 0.3s ease !important;
   font-size: 0.9rem !important;
+  flex-shrink: 0 !important;
 }
 
 .disable-btn {
@@ -4289,6 +4649,87 @@ body.dark-mode .award-table tbody tr:hover td {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Rubric Modal Styles */
+#editRubricModal,
+#deleteRubricModal,
+#rubricSuccessModal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+}
+
+#editRubricModal[style*="flex"],
+#deleteRubricModal[style*="flex"],
+#rubricSuccessModal[style*="flex"] {
+  display: flex !important;
+}
+
+/* Rubric Modal Button Consistency */
+#editRubricModal .modal-footer .btn,
+#deleteRubricModal .modal-footer .btn,
+#rubricSuccessModal .modal-footer .btn {
+  min-width: 100px;
+  width: 100px;
+  padding: 10px 20px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin: 0 5px;
+}
+
+/* Ensure rubric modal footer buttons are in same row */
+#editRubricModal .modal-footer,
+#deleteRubricModal .modal-footer,
+#rubricSuccessModal .modal-footer {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Manage Account Modal Button Consistency */
+#toggleModal .modal-footer .btn,
+#deleteModal .modal-footer .btn {
+  min-width: 100px;
+  width: 100px;
+  padding: 10px 20px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin: 0 5px;
+}
+
+/* Ensure modal footer buttons are in same row */
+#toggleModal .modal-footer,
+#deleteModal .modal-footer {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Override any conflicting button styles */
+#toggleModal .modal-footer .btn,
+#deleteModal .modal-footer .btn {
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .modal[style*="block"] {
@@ -4344,6 +4785,11 @@ body.dark-mode .award-table tbody tr:hover td {
   display: flex;
   gap: 10px;
   justify-content: flex-end;
+}
+
+.modal-footer .btn {
+  min-width: 100px;
+  justify-content: center;
 }
 
 /* Success Modal */
@@ -4564,17 +5010,29 @@ body.dark-mode .award-table tbody tr:hover td {
   list-style: none;
 }
 
+/* Pagination info display */
+.pagination-info {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+body.dark-mode .pagination-info {
+  color: #ccc;
+}
+
 /* Pagination buttons - Back/Next (rectangular) */
 .unified-pagination .btn-nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
-  border: 1px solid #6b7280;
-  background: #4a5568;
-  color: #e2e8f0;
+  border: 1px solid #ddd;
+  background: white;
+  color: #666;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
   min-width: 80px;
@@ -4584,15 +5042,15 @@ body.dark-mode .award-table tbody tr:hover td {
 }
 
 .unified-pagination .btn-nav:hover:not(:disabled) {
-  background: #5a6578;
-  border-color: #718096;
-  color: #f7fafc;
+  background: #8B0000;
+  border-color: #8B0000;
+  color: white;
 }
 
 .unified-pagination .btn-nav:disabled {
-  background: #4a5568;
-  color: #a0aec0;
-  border-color: #6b7280;
+  background: #f9f9f9;
+  color: #ccc;
+  border-color: #ddd;
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -4604,11 +5062,11 @@ body.dark-mode .award-table tbody tr:hover td {
   justify-content: center;
   width: 36px;
   height: 36px;
-  border: 1px solid #6b7280;
-  background: #4a5568;
-  color: #e2e8f0;
+  border: 1px solid #ddd;
+  background: white;
+  color: #666;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -4616,21 +5074,21 @@ body.dark-mode .award-table tbody tr:hover td {
 }
 
 .unified-pagination .btn-page:hover:not(.active) {
-  background: #5a6578;
-  border-color: #718096;
-  color: #f7fafc;
+  background: #8B0000;
+  border-color: #8B0000;
+  color: white;
 }
 
 /* Active page button */
 .unified-pagination .btn-page.active {
-  background: #dc2626;
+  background: #8B0000;
   color: white;
-  border-color: #dc2626;
+  border-color: #8B0000;
 }
 
 .unified-pagination .btn-page.active:hover {
-  background: #b91c1c;
-  border-color: #b91c1c;
+  background: #5c0000;
+  border-color: #5c0000;
 }
 
 /* Disabled page button */
@@ -4642,42 +5100,42 @@ body.dark-mode .award-table tbody tr:hover td {
   opacity: 0.6;
 }
 
-/* Dark mode support - same as light mode for consistency */
+/* Dark mode support - matching assessor dashboard */
 body.dark-mode .unified-pagination .btn-nav {
-  background: #4a5568;
-  color: #e2e8f0;
-  border-color: #6b7280;
+  background: #2a2a2a;
+  color: #f0f0f0;
+  border-color: #555;
 }
 
 body.dark-mode .unified-pagination .btn-nav:hover:not(:disabled) {
-  background: #5a6578;
-  border-color: #718096;
-  color: #f7fafc;
+  background: #8B0000;
+  border-color: #8B0000;
+  color: white;
 }
 
 body.dark-mode .unified-pagination .btn-nav:disabled {
-  background: #4a5568;
+  background: #2a2a2a;
   color: #a0aec0;
-  border-color: #6b7280;
+  border-color: #555;
   opacity: 0.6;
 }
 
 body.dark-mode .unified-pagination .btn-page {
-  background: #4a5568;
-  color: #e2e8f0;
-  border-color: #6b7280;
+  background: #2a2a2a;
+  color: #f0f0f0;
+  border-color: #555;
 }
 
 body.dark-mode .unified-pagination .btn-page:hover:not(.active) {
-  background: #5a6578;
-  border-color: #718096;
-  color: #f7fafc;
+  background: #8B0000;
+  border-color: #8B0000;
+  color: white;
 }
 
 body.dark-mode .unified-pagination .btn-page.active {
-  background: #dc2626;
+  background: #8B0000;
   color: white;
-  border-color: #dc2626;
+  border-color: #8B0000;
 }
 
 body.dark-mode .unified-pagination .btn-page:disabled {
@@ -4815,8 +5273,8 @@ body.dark-mode .unified-pagination .pagination .page-item.disabled .page-link {
   }
   
   .manage-account .action-btn {
-    width: 28px !important;
-    height: 28px !important;
+    width: 30px !important;
+    height: 30px !important;
     font-size: 0.8rem !important;
   }
   
@@ -4886,8 +5344,8 @@ body.dark-mode .unified-pagination .pagination .page-item.disabled .page-link {
   }
   
   .action-btn {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     font-size: 0.8rem;
   }
   
@@ -6010,73 +6468,210 @@ body.dark-mode .page-with-back-button.manage-account .pagination-container .pagi
 }
 
 /* Success Modal for Create Assessor */
-.success-modal {
-  max-width: 500px !important;
-  width: 90% !important;
+/* Rubric Success Modal - Direct Modal Body Design */
+#rubricSuccessModal .modal-body {
+  max-width: 400px;
+  width: 90%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 
-.success-modal .modal-header {
-  background: #28a745 !important;
-  color: white !important;
-  border-bottom: none !important;
-  border-radius: 8px 8px 0 0 !important;
+#rubricSuccessModal .modal-header {
+  background: #28a745;
+  color: white;
+  border-bottom: none;
+  padding: 20px;
+  position: relative;
+  margin: 0;
 }
 
-.success-modal .modal-header h3 {
-  margin: 0 !important;
-  font-size: 1.2rem !important;
+#rubricSuccessModal .modal-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
 }
 
-.success-modal .modal-body {
-  padding: 30px 20px !important;
+#rubricSuccessModal .modal-header .close {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
 }
 
-.success-modal .success-icon {
-  font-size: 3rem !important;
-  color: #28a745 !important;
-  margin-bottom: 15px !important;
+#rubricSuccessModal .modal-header .close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-.success-modal .modal-body h3 {
-  color: #28a745 !important;
-  margin-bottom: 10px !important;
-  font-size: 1.3rem !important;
+#rubricSuccessModal .success-icon {
+  font-size: 4rem;
+  color: #28a745;
+  margin: 30px 0 20px 0;
 }
 
-.success-modal .modal-body p {
-  color: #666 !important;
-  margin: 0 !important;
-  font-size: 0.95rem !important;
+#rubricSuccessModal .modal-body h3 {
+  color: #28a745;
+  margin-bottom: 30px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 0 20px;
 }
 
-.success-modal .modal-footer {
-  border-top: 1px solid #dee2e6 !important;
-  padding: 15px 20px !important;
-  text-align: center !important;
+#rubricSuccessModal .modal-footer {
+  border-top: 1px solid #e9ecef;
+  padding: 20px;
+  text-align: center;
+  background: white;
+  margin: 0;
 }
 
-/* Dark mode for success modal */
-body.dark-mode .success-modal .modal-header {
-  background: #28a745 !important;
-  color: white !important;
+/* Dark mode for rubric success modal */
+body.dark-mode #rubricSuccessModal .modal-body {
+  background: #2a2a2a;
 }
 
-body.dark-mode .success-modal .modal-body h3 {
-  color: #28a745 !important;
+body.dark-mode #rubricSuccessModal .modal-header {
+  background: #28a745;
+  color: white;
 }
 
-body.dark-mode .success-modal .modal-body p {
-  color: #ccc !important;
+body.dark-mode #rubricSuccessModal .modal-header .close {
+  color: white;
 }
 
-body.dark-mode .success-modal .modal-footer {
-  border-top-color: #555 !important;
-  background: #3a3a3a !important;
+body.dark-mode #rubricSuccessModal .modal-header .close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode #rubricSuccessModal .modal-body h3 {
+  color: #28a745;
+}
+
+body.dark-mode #rubricSuccessModal .modal-footer {
+  background: #2a2a2a;
+  border-top-color: #555;
 }
 
 /* ========================================
    APPROVE/REJECT PAGE STYLES
    ======================================== */
+
+/* Ensure modals are hidden by default */
+.modal {
+    display: none !important;
+}
+
+.modal[style*="block"] {
+    display: flex !important;
+}
+
+.modal[style*="flex"] {
+    display: flex !important;
+}
+
+/* Approval Modal Button Consistency */
+#confirmationModal .modal-footer .btn,
+#successModal .modal-footer .btn {
+    min-width: 100px;
+    width: 100px;
+    padding: 10px 20px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin: 0 5px;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Ensure approval modal footer buttons are in same row */
+#confirmationModal .modal-footer,
+#successModal .modal-footer {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Submission Oversight Action Buttons */
+.submission-table .action-buttons {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    position: relative;
+    z-index: 15;
+    pointer-events: none;
+    width: 100%;
+}
+
+.submission-table .btn-action {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    position: relative;
+    text-decoration: none;
+    outline: none;
+    user-select: none;
+    pointer-events: auto !important;
+    z-index: 100 !important;
+}
+
+.submission-table .btn-view {
+    background: #7b0000 !important;
+    color: white !important;
+    border: 1px solid #7b0000 !important;
+}
+
+.submission-table .btn-view:hover {
+    background: #5c0000 !important;
+    border-color: #5c0000 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(123, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .submission-table .btn-action {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 0.8rem !important;
+    }
+}
 
 /* Status Badges for Approve/Reject */
 .status-badge {

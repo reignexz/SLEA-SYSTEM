@@ -113,6 +113,10 @@
             </table>
         </div>
 
+        <div class="pagination-info">
+            Showing <span id="showingStart">1</span>-<span id="showingEnd">10</span> of <span id="totalEntries">0</span> entries
+        </div>
+
         {{-- Pagination --}}
         <div class="unified-pagination">
             <button class="btn-nav" disabled>Previous</button>
@@ -137,10 +141,10 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-secondary" onclick="closeToggleModal()">Cancel</button>
-            <form id="toggleForm" method="POST" style="display: inline;">
+            <button type="button" class="btn btn-primary" id="toggleConfirmBtn" onclick="submitToggleForm()">Confirm</button>
+            <form id="toggleForm" method="POST" style="display: none;">
                 @csrf
                 @method('PATCH')
-                <button type="submit" class="btn btn-primary" id="toggleConfirmBtn">Confirm</button>
             </form>
         </div>
     </div>
@@ -158,10 +162,10 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
-            <form id="deleteForm" method="POST" style="display: inline;">
+            <button type="button" class="btn btn-danger" onclick="submitDeleteForm()">Delete</button>
+            <form id="deleteForm" method="POST" style="display: none;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </div>
     </div>
@@ -281,6 +285,16 @@ window.onclick = function(event) {
     }
 }
 
+// Function to submit toggle form
+function submitToggleForm() {
+    document.getElementById('toggleForm').submit();
+}
+
+// Function to submit delete form
+function submitDeleteForm() {
+    document.getElementById('deleteForm').submit();
+}
+
 // Handle form submissions with success feedback
 document.addEventListener('DOMContentLoaded', function() {
     // Check if there's a success message from the server
@@ -345,4 +359,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+{{-- Include Admin Pagination Script --}}
+<script src="{{ asset('js/admin_pagination.js') }}"></script>
+
 @endsection

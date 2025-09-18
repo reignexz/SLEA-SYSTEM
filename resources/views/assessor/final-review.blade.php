@@ -97,8 +97,8 @@
                         <td>85/100</td>
                         <td>Qualified</td>
                         <td>
-                            <button class="btn btn-view" onclick="viewSummary(1)" title="View Summary">
-                                View
+                            <button class="btn btn-view btn-action" onclick="viewSummary(1)" title="View Summary">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -110,8 +110,8 @@
                         <td>92/100</td>
                         <td>Qualified</td>
                         <td>
-                            <button class="btn btn-view" onclick="viewSummary(2)" title="View Summary">
-                                View
+                            <button class="btn btn-view btn-action" onclick="viewSummary(2)" title="View Summary">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -123,8 +123,8 @@
                         <td>78/100</td>
                         <td>Under Review</td>
                         <td>
-                            <button class="btn btn-view" onclick="viewSummary(3)" title="View Summary">
-                                View
+                            <button class="btn btn-view btn-action" onclick="viewSummary(3)" title="View Summary">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -136,8 +136,8 @@
                         <td>88/100</td>
                         <td>Qualified</td>
                         <td>
-                            <button class="btn btn-view" onclick="viewSummary(4)" title="View Summary">
-                                View
+                            <button class="btn btn-view btn-action" onclick="viewSummary(4)" title="View Summary">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -149,8 +149,8 @@
                         <td>90/100</td>
                         <td>Qualified</td>
                         <td>
-                            <button class="btn btn-view" onclick="viewSummary(5)" title="View Summary">
-                                View
+                            <button class="btn btn-view btn-action" onclick="viewSummary(5)" title="View Summary">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -269,6 +269,23 @@ body.dark-mode .page-header h1 {
     color: #f9bd3d !important;
 }
 
+/* Dark mode statistics cards */
+body.dark-mode .stat-card {
+    background: #E8A840;
+}
+
+body.dark-mode .stat-icon {
+    background: #5C0000;
+}
+
+body.dark-mode .stat-content h3 {
+    color: #5C0000;
+}
+
+body.dark-mode .stat-content p {
+    color: #5C0000;
+}
+
 .review-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -277,7 +294,7 @@ body.dark-mode .page-header h1 {
 }
 
 .stat-card {
-    background: white;
+    background: #F9BD3D;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -289,7 +306,7 @@ body.dark-mode .page-header h1 {
 .stat-icon {
     width: 50px;
     height: 50px;
-    background: #dc3545;
+    background: #7B0000;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -301,12 +318,12 @@ body.dark-mode .page-header h1 {
 .stat-content h3 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #333;
+    color: #7B0000;
     margin: 0;
 }
 
 .stat-content p {
-    color: #666;
+    color: #7B0000;
     margin: 0.25rem 0 0 0;
     font-size: 0.9rem;
 }
@@ -811,6 +828,17 @@ body.dark-mode .submissions-table-container .submissions-table thead th:last-chi
     min-width: 60px;
 }
 
+.btn-view.btn-action {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    padding: 0;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .btn-view:hover {
     background-color: #A52A2A;
     transform: translateY(-1px);
@@ -818,6 +846,10 @@ body.dark-mode .submissions-table-container .submissions-table thead th:last-chi
 
 .btn-view i {
     font-size: 0.9rem;
+}
+
+.btn-view.btn-action i {
+    font-size: 0.8rem;
 }
 
 /* Dark mode button styling */

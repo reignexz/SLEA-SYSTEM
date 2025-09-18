@@ -91,6 +91,9 @@
         {{-- Program Sections --}}
         <div class="program-section">
             <h3 class="program-title">BTVTED Program</h3>
+            <div class="pagination-info">
+                Showing <span id="showingStart">1</span>-<span id="showingEnd">10</span> of <span id="totalEntries">0</span> entries
+            </div>
             <div class="table-wrap">
                 <table class="award-table">
                     <thead>
@@ -473,5 +476,8 @@ window.onclick = function(event) {
     }
 }
 </script>
+
+{{-- Include Admin Pagination Script --}}
+<script src="{{ asset('js/admin_pagination.js') }}"></script>
 
 @endsection

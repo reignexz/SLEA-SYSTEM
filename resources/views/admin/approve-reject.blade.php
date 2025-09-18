@@ -209,6 +209,10 @@
         </tbody>
     </table>
     
+    <div class="pagination-info">
+        Showing <span id="showingStart">1</span>-<span id="showingEnd">10</span> of <span id="totalEntries">0</span> entries
+    </div>
+    
     {{-- Pagination --}}
     <div class="unified-pagination">
         <button class="btn-nav" disabled>Previous</button>
@@ -220,7 +224,7 @@
 </div>
 
 <!-- Confirmation Modal -->
-<div id="confirmationModal" class="modal">
+<div id="confirmationModal" class="modal" style="display: none;">
     <div class="modal-content confirmation-modal">
         <div class="modal-header">
             <h3 id="modalTitle">Confirm Action</h3>
@@ -240,25 +244,22 @@
 </div>
 
 <!-- Success Modal -->
-<div id="successModal" class="modal">
-    <div class="modal-content success-modal">
-        <div class="modal-header success-header">
-            <h3 id="successTitle">Action Completed</h3>
-            <span class="close" onclick="closeSuccessModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            <div class="success-content">
-                <div class="success-icon" id="successIcon">
-                    <!-- Icon will be set dynamically -->
+<div id="successModal" class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content success-modal-content">
+            <div class="modal-body text-center p-4">
+                <div class="success-icon mb-3">
+                    <i class="fas fa-check-circle" style="color: #28a745; font-size: 3rem;"></i>
                 </div>
-                <p id="successMessage">The action has been completed successfully.</p>
-                <div class="account-summary" id="accountSummary">
+                <h5 class="success-title mb-3">Success!</h5>
+                <p class="success-message mb-4" id="successMessage">The action has been completed successfully.</p>
+                <div class="account-summary mb-4" id="accountSummary">
                     <!-- Account summary will be populated here -->
                 </div>
+                <button type="button" class="btn btn-success" onclick="closeSuccessModal()">
+                    OK
+                </button>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="closeSuccessModal()">OK</button>
         </div>
     </div>
 </div>
@@ -266,6 +267,41 @@
 <script>
 let currentAction = '';
 let currentAccountId = '';
+
+// Ensure modals are hidden on page load
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Approval page loaded - ensuring modals are hidden');
+    
+    // Force hide all modals on page load
+    const confirmationModal = document.getElementById('confirmationModal');
+    const successModal = document.getElementById('successModal');
+    
+    if (confirmationModal) {
+        confirmationModal.style.display = 'none';
+        console.log('Confirmation modal hidden');
+    }
+    
+    if (successModal) {
+        successModal.style.display = 'none';
+        console.log('Success modal hidden');
+    }
+    
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
+    
+    // Check for any session messages that might trigger modals
+    @if(session('status'))
+        console.log('Session status found:', '{{ session('status') }}');
+        // Don't automatically show modals for session messages
+    @endif
+    
+    @if(session('error'))
+        console.log('Session error found:', '{{ session('error') }}');
+        // Don't automatically show modals for session errors
+    @endif
+    
+    console.log('All modals properly hidden on page load');
+});
 
 function approveAccount(accountId) {
     currentAction = 'approve';
@@ -324,7 +360,8 @@ function rejectAccount(accountId) {
 }
 
 function openConfirmationModal() {
-    document.getElementById('confirmationModal').style.display = 'block';
+    console.log('openConfirmationModal called');
+    document.getElementById('confirmationModal').style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
@@ -346,24 +383,12 @@ function confirmAction() {
 }
 
 function showSuccessModal() {
+    console.log('showSuccessModal called with action:', currentAction, 'accountId:', currentAccountId);
     const actionText = currentAction === 'approve' ? 'approved' : 'rejected';
     const actionTextPast = currentAction === 'approve' ? 'approved' : 'rejected';
     
     // Set modal content based on action
-    document.getElementById('successTitle').textContent = 'Action Completed Successfully';
     document.getElementById('successMessage').textContent = `You have successfully ${actionTextPast} this account.`;
-    
-    // Set icon and styling based on action
-    const successIcon = document.getElementById('successIcon');
-    if (currentAction === 'approve') {
-        successIcon.innerHTML = '<i class="fas fa-check-circle" style="color: #28a745; font-size: 48px;"></i>';
-        document.querySelector('.success-header').style.background = '#d4edda';
-        document.querySelector('.success-header h3').style.color = '#155724';
-    } else {
-        successIcon.innerHTML = '<i class="fas fa-times-circle" style="color: #dc3545; font-size: 48px;"></i>';
-        document.querySelector('.success-header').style.background = '#f8d7da';
-        document.querySelector('.success-header h3').style.color = '#721c24';
-    }
     
     // Populate account summary
     document.getElementById('accountSummary').innerHTML = `
@@ -382,13 +407,17 @@ function showSuccessModal() {
     `;
     
     // Show the success modal
-    document.getElementById('successModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    const modal = document.getElementById('successModal');
+    modal.style.display = 'block';
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
 }
 
 function closeSuccessModal() {
-    document.getElementById('successModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    const modal = document.getElementById('successModal');
+    modal.style.display = 'none';
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
     currentAction = '';
     currentAccountId = '';
 }
@@ -407,5 +436,8 @@ window.onclick = function(event) {
     }
 }
 </script>
+
+{{-- Include Admin Pagination Script --}}
+<script src="{{ asset('js/admin_pagination.js') }}"></script>
 
 @endsection

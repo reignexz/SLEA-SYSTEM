@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'SLEA')</title>
     <link rel="icon" href="{{ asset('images/osas-logo-removebg.png') }}?v={{ filemtime(public_path('images/osas-logo-removebg.png')) }}" type="image/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,7 +43,7 @@
     {{-- Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('js/admin_profile.js') }}"></script>
+    <script src="{{ asset('js/admin_profile.js') }}?v={{ time() }}"></script>
     @yield('scripts')
 </body>
 </html>

@@ -102,7 +102,9 @@
                                     @endif
                                 </td>
                                 <td class="action-buttons">
-                                    <button type="button" class="btn btn-view" onclick="openSubmissionModal('{{ $submission->id ?? '1'}}')">View</button>
+                                    <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('{{ $submission->id ?? '1'}}')" title="View Submission">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -119,7 +121,9 @@
                                 <i class="fas fa-flag" style="color: #dc3545;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-1')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-1')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -133,7 +137,9 @@
                                 <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-2')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-2')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -147,7 +153,9 @@
                                 <i class="fas fa-flag" style="color: #dc3545;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-3')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-3')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -161,7 +169,9 @@
                                 <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-4')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-4')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -175,7 +185,9 @@
                                 <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-5')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-5')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -189,7 +201,9 @@
                                 <i class="fas fa-flag" style="color: #dc3545;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-6')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-6')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -203,7 +217,9 @@
                                 <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-7')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-7')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -217,7 +233,9 @@
                                 <i class="fas fa-flag" style="color: #dc3545;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-8')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-8')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -231,7 +249,9 @@
                                 <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-9')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-9')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -245,7 +265,9 @@
                                 <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn btn-view" onclick="openSubmissionModal('sample-10')">View</button>
+                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-10')" title="View Submission">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                         </tr>
                     @endif

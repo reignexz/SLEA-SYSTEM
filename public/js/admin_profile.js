@@ -234,7 +234,36 @@ function showLogoutConfirmation() {
         
         // Auto logout after showing success message
         setTimeout(() => {
-            window.location.href = '/logout';
+            console.log('Starting logout process...');
+            
+            // Get CSRF token
+            const csrfToken = document.querySelector('meta[name="csrf-token"]');
+            console.log('CSRF Token found:', csrfToken);
+            
+            if (csrfToken) {
+                const token = csrfToken.getAttribute('content');
+                console.log('CSRF token value:', token);
+                
+                // Create a form to submit POST request to logout
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/logout';
+                form.style.display = 'none';
+                
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = '_token';
+                csrfInput.value = token;
+                form.appendChild(csrfInput);
+                
+                document.body.appendChild(form);
+                console.log('Form created and submitted');
+                form.submit();
+            } else {
+                console.error('CSRF token not found!');
+                // Fallback without CSRF token
+                window.location.href = '/';
+            }
         }, 2000);
     });
     

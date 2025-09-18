@@ -24,8 +24,8 @@
                         <td>5</td>
                         <td>Certificate of Election</td>
                         <td>
-                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-disable" title="Edit" onclick="openEditRubricModal(1, 'Student Government', 'President', '5.0', '5', 'Certificate of Election')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete" onclick="openDeleteRubricModal(1, 'Student Government', 'President')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -35,8 +35,8 @@
                         <td>5</td>
                         <td>Oath of Office</td>
                         <td>
-                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-disable" title="Edit" onclick="openEditRubricModal(2, 'Campus Student Council', 'Vice President', '4.0', '5', 'Oath of Office')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete" onclick="openDeleteRubricModal(2, 'Campus Student Council', 'Vice President')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -46,8 +46,8 @@
                         <td>5</td>
                         <td>Appointment Letter</td>
                         <td>
-                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-disable" title="Edit" onclick="openEditRubricModal(3, 'Local Councils', 'Secretary', '3.0', '5', 'Appointment Letter')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete" onclick="openDeleteRubricModal(3, 'Local Councils', 'Secretary')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -57,8 +57,8 @@
                         <td>5</td>
                         <td>Certificate of Election</td>
                         <td>
-                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-disable" title="Edit" onclick="openEditRubricModal(4, 'Student Clubs and Organizations', 'President', '3.0', '5', 'Certificate of Election')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete" onclick="openDeleteRubricModal(4, 'Student Clubs and Organizations', 'President')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -89,8 +89,8 @@
                         <td>5</td>
                         <td>Special Order Document</td>
                         <td>
-                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-disable" title="Edit" onclick="openEditRubricModal(3, 'Local Councils', 'Secretary', '3.0', '5', 'Appointment Letter')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete" onclick="openDeleteRubricModal(3, 'Local Councils', 'Secretary')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -121,8 +121,8 @@
                         <td>5</td>
                         <td>Certificate of Election</td>
                         <td>
-                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-disable" title="Edit" onclick="openEditRubricModal(3, 'Local Councils', 'Secretary', '3.0', '5', 'Appointment Letter')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete" onclick="openDeleteRubricModal(3, 'Local Councils', 'Secretary')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -132,8 +132,8 @@
                         <td>5</td>
                         <td>Appointment Letter</td>
                         <td>
-                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-disable" title="Edit" onclick="openEditRubricModal(3, 'Local Councils', 'Secretary', '3.0', '5', 'Appointment Letter')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete" onclick="openDeleteRubricModal(3, 'Local Councils', 'Secretary')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -164,8 +164,8 @@
                         <td>5</td>
                         <td>Certificate of Participation</td>
                         <td>
-                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-disable" title="Edit" onclick="openEditRubricModal(3, 'Local Councils', 'Secretary', '3.0', '5', 'Appointment Letter')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete" onclick="openDeleteRubricModal(3, 'Local Councils', 'Secretary')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -175,8 +175,8 @@
                         <td>5</td>
                         <td>Certificate of Attendance</td>
                         <td>
-                            <button class="btn btn-disable" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-disable" title="Edit" onclick="openEditRubricModal(3, 'Local Councils', 'Secretary', '3.0', '5', 'Appointment Letter')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-delete" title="Delete" onclick="openDeleteRubricModal(3, 'Local Councils', 'Secretary')"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
