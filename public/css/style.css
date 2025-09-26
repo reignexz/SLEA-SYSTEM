@@ -1247,7 +1247,7 @@ body.dark-mode .action-btn.btn-delete {
   font-size: 14px;
 }
 
-.submission-table thead th:last-child { }
+.submission-table thead th:last-child { border-right: 1px solid #dee2e6; }
 
 .submission-table tbody td {
   padding: 12px; 
@@ -1257,9 +1257,9 @@ body.dark-mode .action-btn.btn-delete {
   background: #fff;
 }
 
-.submission-table tbody td:last-child { }
+.submission-table tbody td:last-child { border-right: 1px solid #dee2e6; }
 
-.submission-table tbody tr:last-child td { }
+.submission-table tbody tr:last-child td { border-bottom: 1px solid #dee2e6; }
 
 /* Remove outer table borders so wrapper supplies the outside stroke */
 /* Ensure borders are continuous and sized consistently */
@@ -1317,7 +1317,83 @@ body.dark-mode .submission-table tbody tr:hover td {
   border: 1px solid #FDE68A;
 }
 
-/* View button style */
+/* Enhanced Export Button */
+.btn-export-enhanced {
+  background: linear-gradient(135deg, #7b0000 0%, #9a0000 100%);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(123, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-export-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-export-enhanced:hover {
+  background: linear-gradient(135deg, #9a0000 0%, #b30000 100%);
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(123, 0, 0, 0.4);
+}
+
+.btn-export-enhanced:hover::before {
+  left: 100%;
+}
+
+.btn-export-enhanced:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(123, 0, 0, 0.3);
+}
+
+/* Icon-only View Button */
+.btn-view-icon {
+  background: #7b0000;
+  color: #fff;
+  border: 1px solid #7b0000;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 2px 4px rgba(123, 0, 0, 0.2);
+}
+
+.btn-view-icon:hover {
+  background: #5c0000;
+  border-color: #5c0000;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(123, 0, 0, 0.3);
+}
+
+/* Legacy View button style (for backward compatibility) */
 .btn-view {
   background: #7b0000;
   color: #fff;

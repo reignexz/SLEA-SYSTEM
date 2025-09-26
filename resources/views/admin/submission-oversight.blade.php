@@ -106,7 +106,7 @@
                                 <td class="action-buttons">
                                     <button 
                                         type="button" 
-                                        class="btn-action btn-view js-open-submission"
+                                        class="btn-action btn-view-icon js-open-submission"
                                         title="View Submission"
                                         data-submission-id="{{ $submission->id ?? '' }}"
                                         data-title="{{ $submission->document_title ?? '' }}"
@@ -134,7 +134,7 @@
                                 <i class="fas fa-flag" style="color: #dc3545;"></i>
                             </td>
                             <td class="action-buttons">
-                                <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('sample-1')" title="View Submission">
+                                <button type="button" class="btn-action btn-view-icon" onclick="openSubmissionModal('sample-1')" title="View Submission">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </td>
@@ -375,7 +375,7 @@
                 </div>
                 <div class="modal-footer" style="display:flex; gap:8px; justify-content:flex-end;">
                     <button type="button" class="btn" id="cancelExportBtn" style="background:#e5e7eb; color:#111827; border:1px solid #d1d5db;">Close</button>
-                    <a id="exportPdfForm" href="{{ route('admin.submission-oversight.export', request()->query()) }}" class="btn btn-export">
+                    <a id="exportPdfForm" href="{{ route('admin.submission-oversight.export', request()->query()) }}" class="btn btn-export-enhanced">
                         <i class="fas fa-file-pdf"></i> Proceed Export
                     </a>
                 </div>

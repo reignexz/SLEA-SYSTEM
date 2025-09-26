@@ -149,8 +149,8 @@
                                     </span>
                                 </td>
                                 <td class="action-buttons">
-                                    <button type="button" class="btn btn-view" onclick="openDocumentModal('{{ $student['id'] }}')">
-                                        <i class="fas fa-eye"></i> View
+                                    <button type="button" class="btn btn-view-icon js-open-document" data-student-id="{{ $student['id'] }}" title="View Details">
+                                        <i class="fas fa-eye"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -226,8 +226,8 @@
                                     </span>
                                 </td>
                                 <td class="action-buttons">
-                                    <button type="button" class="btn btn-view" onclick="openDocumentModal('{{ $student['id'] }}')">
-                                        <i class="fas fa-eye"></i> View
+                                    <button type="button" class="btn btn-view-icon js-open-document" data-student-id="{{ $student['id'] }}" title="View Details">
+                                        <i class="fas fa-eye"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -248,12 +248,77 @@
 
         {{-- Action Section --}}
         <div class="action-section">
-            <button type="button" class="btn-export-pdf" onclick="exportReport()">
+            <button type="button" class="btn-export-pdf" id="btnExportAwardPdf">
                 <i class="fas fa-file-pdf"></i> Export as PDF
             </button>
             <button type="button" class="btn-generate-preview" onclick="generatePreview()" title="Generate a preview of the award report before final export">
                 <i class="fas fa-eye"></i> Generate Preview
             </button>
+        </div>
+
+        <!-- Award Export Modal: Shows list of students/details before PDF generation -->
+        <div id="awardExportModal" class="modal" style="display:none;">
+            <div class="modal-content" style="max-width: 1000px; width: 95%;">
+                <div class="modal-header">
+                    <h3>Export Award Report to PDF</h3>
+                    <span class="close" id="closeAwardExportModal" style="cursor:pointer">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-3">Review the award report data below. You can proceed to export all shown items.</p>
+
+                    <div class="table-wrap" style="max-height: 60vh; overflow:auto;">
+                        <table class="award-table">
+                            <thead>
+                                <tr>
+                                    <th class="col-name">Student Name</th>
+                                    <th class="col-id">Student ID</th>
+                                    <th class="col-program">Program</th>
+                                    <th class="col-points">Total Points</th>
+                                    <th class="col-status">Leadership Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $allStudents = array_merge($btvtedStudents, $bpedStudents);
+                                @endphp
+                                @foreach ($allStudents as $student)
+                                    <tr>
+                                        <td>{{ $student['name'] }}</td>
+                                        <td>{{ $student['student_id'] }}</td>
+                                        <td>{{ $student['program'] }}</td>
+                                        <td>{{ $student['points'] }}/100</td>
+                                        <td>
+                                            @php
+                                                $statusClass = '';
+                                                switch($student['status']) {
+                                                    case 'Tracking':
+                                                        $statusClass = 'badge--blue';
+                                                        break;
+                                                    case 'For Final Review':
+                                                        $statusClass = 'badge--yellow';
+                                                        break;
+                                                    case 'SLEA Qualified':
+                                                        $statusClass = 'badge--green';
+                                                        break;
+                                                }
+                                            @endphp
+                                            <span class="badge {{ $statusClass }}">
+                                                {{ $student['status'] }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" style="display:flex; gap:8px; justify-content:flex-end;">
+                    <button type="button" class="btn" id="cancelAwardExportBtn" style="background:#e5e7eb; color:#111827; border:1px solid #d1d5db;">Close</button>
+                    <a id="exportAwardPdfForm" href="{{ route('admin.award-report.export') }}" class="btn btn-export-enhanced">
+                        <i class="fas fa-file-pdf"></i> Proceed Export
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -409,28 +474,140 @@ function openDocumentModal(studentId) {
             score: '78/100'
         },
         4: {
-            name: 'Emily Davis',
+            name: 'Lisa Garcia',
             studentId: '2021-004',
+            program: 'BTVTED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '89/100'
+        },
+        5: {
+            name: 'David Lee',
+            studentId: '2021-005',
+            program: 'BTVTED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '76/100'
+        },
+        6: {
+            name: 'Maria Rodriguez',
+            studentId: '2021-006',
+            program: 'BTVTED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '94/100'
+        },
+        7: {
+            name: 'James Wilson',
+            studentId: '2021-007',
+            program: 'BTVTED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '82/100'
+        },
+        8: {
+            name: 'Anna Martinez',
+            studentId: '2021-008',
+            program: 'BTVTED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '87/100'
+        },
+        9: {
+            name: 'Robert Kim',
+            studentId: '2021-009',
+            program: 'BTVTED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '91/100'
+        },
+        10: {
+            name: 'Jennifer Chen',
+            studentId: '2021-010',
+            program: 'BTVTED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '83/100'
+        },
+        11: {
+            name: 'Emily Davis',
+            studentId: '2021-011',
             program: 'BPED',
             college: 'College of Education',
             batch: '2021',
             score: '88/100'
         },
-        5: {
+        12: {
             name: 'David Miller',
-            studentId: '2021-005',
+            studentId: '2021-012',
             program: 'BPED',
             college: 'College of Education',
             batch: '2021',
             score: '95/100'
         },
-        6: {
+        13: {
             name: 'Lisa Anderson',
-            studentId: '2021-006',
+            studentId: '2021-013',
             program: 'BPED',
             college: 'College of Education',
             batch: '2021',
             score: '82/100'
+        },
+        14: {
+            name: 'Mark Thompson',
+            studentId: '2021-014',
+            program: 'BPED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '90/100'
+        },
+        15: {
+            name: 'Rachel Green',
+            studentId: '2021-015',
+            program: 'BPED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '79/100'
+        },
+        16: {
+            name: 'Kevin White',
+            studentId: '2021-016',
+            program: 'BPED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '86/100'
+        },
+        17: {
+            name: 'Amanda Taylor',
+            studentId: '2021-017',
+            program: 'BPED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '93/100'
+        },
+        18: {
+            name: 'Chris Johnson',
+            studentId: '2021-018',
+            program: 'BPED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '81/100'
+        },
+        19: {
+            name: 'Nicole Brown',
+            studentId: '2021-019',
+            program: 'BPED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '89/100'
+        },
+        20: {
+            name: 'Ryan Davis',
+            studentId: '2021-020',
+            program: 'BPED',
+            college: 'College of Education',
+            batch: '2021',
+            score: '84/100'
         }
     };
 
@@ -453,10 +630,7 @@ function closeDocumentModal() {
     document.body.style.overflow = 'auto';
 }
 
-function exportReport() {
-    // Sample export functionality - replace with actual export logic
-    alert('Export functionality will be implemented here. This would typically generate a PDF file.');
-}
+// Removed old exportReport function - now handled by modal
 
 function generatePreview() {
     // Sample preview functionality - replace with actual preview logic
@@ -466,6 +640,42 @@ function generatePreview() {
 // Initialize programs on page load
 document.addEventListener('DOMContentLoaded', function() {
     updatePrograms();
+    
+    // Add event delegation for document modal buttons
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.js-open-document');
+        if (btn) {
+            const studentId = btn.getAttribute('data-student-id');
+            openDocumentModal(studentId);
+        }
+    });
+
+    // Award Export Modal handlers
+    const awardExportBtn = document.getElementById('btnExportAwardPdf');
+    const awardExportModal = document.getElementById('awardExportModal');
+    const closeAwardExport = document.getElementById('closeAwardExportModal');
+    const cancelAwardExport = document.getElementById('cancelAwardExportBtn');
+
+    function openAwardExportModal() {
+        awardExportModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeAwardExportModal() {
+        awardExportModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    if (awardExportBtn) awardExportBtn.addEventListener('click', openAwardExportModal);
+    if (closeAwardExport) closeAwardExport.addEventListener('click', closeAwardExportModal);
+    if (cancelAwardExport) cancelAwardExport.addEventListener('click', closeAwardExportModal);
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(e) {
+        if (e.target === awardExportModal) {
+            closeAwardExportModal();
+        }
+    });
 });
 
 // Close modal when clicking outside

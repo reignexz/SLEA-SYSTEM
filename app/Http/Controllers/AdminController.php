@@ -165,6 +165,59 @@ class AdminController extends Controller
         return view('admin.award-report');
     }
 
+    /**
+     * Export award report as PDF
+     */
+    public function exportAwardReport()
+    {
+        // Sample data matching the view
+        $btvtedStudents = [
+            ['id' => 1, 'name' => 'John Smith', 'student_id' => '2021-001', 'program' => 'BTVTED', 'points' => 85, 'status' => 'Tracking'],
+            ['id' => 2, 'name' => 'Sarah Wilson', 'student_id' => '2021-002', 'program' => 'BTVTED', 'points' => 92, 'status' => 'For Final Review'],
+            ['id' => 3, 'name' => 'Michael Brown', 'student_id' => '2021-003', 'program' => 'BTVTED', 'points' => 78, 'status' => 'SLEA Qualified'],
+            ['id' => 4, 'name' => 'Lisa Garcia', 'student_id' => '2021-004', 'program' => 'BTVTED', 'points' => 89, 'status' => 'Tracking'],
+            ['id' => 5, 'name' => 'David Lee', 'student_id' => '2021-005', 'program' => 'BTVTED', 'points' => 76, 'status' => 'For Final Review'],
+            ['id' => 6, 'name' => 'Maria Rodriguez', 'student_id' => '2021-006', 'program' => 'BTVTED', 'points' => 94, 'status' => 'SLEA Qualified'],
+            ['id' => 7, 'name' => 'James Wilson', 'student_id' => '2021-007', 'program' => 'BTVTED', 'points' => 82, 'status' => 'Tracking'],
+            ['id' => 8, 'name' => 'Anna Martinez', 'student_id' => '2021-008', 'program' => 'BTVTED', 'points' => 87, 'status' => 'For Final Review'],
+            ['id' => 9, 'name' => 'Robert Kim', 'student_id' => '2021-009', 'program' => 'BTVTED', 'points' => 91, 'status' => 'SLEA Qualified'],
+            ['id' => 10, 'name' => 'Jennifer Chen', 'student_id' => '2021-010', 'program' => 'BTVTED', 'points' => 83, 'status' => 'Tracking']
+        ];
+
+        $bpedStudents = [
+            ['id' => 11, 'name' => 'Emily Davis', 'student_id' => '2021-011', 'program' => 'BPED', 'points' => 88, 'status' => 'Tracking'],
+            ['id' => 12, 'name' => 'David Miller', 'student_id' => '2021-012', 'program' => 'BPED', 'points' => 95, 'status' => 'SLEA Qualified'],
+            ['id' => 13, 'name' => 'Lisa Anderson', 'student_id' => '2021-013', 'program' => 'BPED', 'points' => 82, 'status' => 'For Final Review'],
+            ['id' => 14, 'name' => 'Mark Thompson', 'student_id' => '2021-014', 'program' => 'BPED', 'points' => 90, 'status' => 'SLEA Qualified'],
+            ['id' => 15, 'name' => 'Rachel Green', 'student_id' => '2021-015', 'program' => 'BPED', 'points' => 79, 'status' => 'Tracking'],
+            ['id' => 16, 'name' => 'Kevin White', 'student_id' => '2021-016', 'program' => 'BPED', 'points' => 86, 'status' => 'For Final Review'],
+            ['id' => 17, 'name' => 'Amanda Taylor', 'student_id' => '2021-017', 'program' => 'BPED', 'points' => 93, 'status' => 'SLEA Qualified'],
+            ['id' => 18, 'name' => 'Chris Johnson', 'student_id' => '2021-018', 'program' => 'BPED', 'points' => 81, 'status' => 'Tracking'],
+            ['id' => 19, 'name' => 'Nicole Brown', 'student_id' => '2021-019', 'program' => 'BPED', 'points' => 89, 'status' => 'For Final Review'],
+            ['id' => 20, 'name' => 'Ryan Davis', 'student_id' => '2021-020', 'program' => 'BPED', 'points' => 84, 'status' => 'Tracking']
+        ];
+
+        $allStudents = array_merge($btvtedStudents, $bpedStudents);
+
+        // Render with Dompdf from a Blade view
+        $html = view('admin.pdf.award-report', [
+            'allStudents' => $allStudents,
+        ])->render();
+
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $options->set('defaultFont', 'Helvetica');
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="award-report-export.pdf"',
+        ]);
+    }
+
     public function systemMonitoring()
     {
         // Placeholder view for system monitoring and logs
