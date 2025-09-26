@@ -91,14 +91,14 @@
                             <td>{{ $user->last_login_at ? $user->last_login_at->format('M d, Y H:i') : 'Never' }}</td>
                             <td class="action-column">
                                 <div class="action-buttons">
-                                    <button class="action-btn disable-btn" 
-                                            onclick="confirmToggleUser({{ $user->id }}, {{ $user->is_disabled ? 'false' : 'true' }}, '{{ $user->name }}')"
-                                            title="{{ $user->is_disabled ? 'Enable' : 'Disable' }} User">
+                    <button class="action-btn disable-btn" 
+                        onclick="confirmToggleUser({{ $user->id }}, {{ $user->is_disabled ? 'false' : 'true' }}, '{{ addslashes($user->name) }}')"
+                        title="{{ $user->is_disabled ? 'Enable' : 'Disable' }} User">
                                         <i class="fas {{ $user->is_disabled ? 'fa-user-check' : 'fa-user-slash' }}"></i>
                                     </button>
-                                    <button class="action-btn delete-btn" 
-                                            onclick="confirmDeleteUser({{ $user->id }}, '{{ $user->name }}')"
-                                            title="Delete User">
+                    <button class="action-btn delete-btn" 
+                        onclick="confirmDeleteUser({{ $user->id }}, '{{ addslashes($user->name) }}')"
+                        title="Delete User">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -297,11 +297,7 @@ function submitDeleteForm() {
 
 // Handle form submissions with success feedback
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if there's a success message from the server
-    @if(session('status'))
-    showSuccessModal('{{ session('status') }}');
-    @endif
-    
+
     // Handle toggle form submission
     document.getElementById('toggleForm').addEventListener('submit', function(e) {
         e.preventDefault();
@@ -359,6 +355,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+{{-- Blade: Output success modal script if session status exists --}}
+@if(session('status'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showSuccessModal("{{ addslashes(session('status')) }}");
+        });
+    </script>
+@endif
 
 {{-- Include Admin Pagination Script --}}
 <script src="{{ asset('js/admin_pagination.js') }}"></script>

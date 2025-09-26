@@ -1233,8 +1233,7 @@ body.dark-mode .action-btn.btn-delete {
 /* ===== SUBMISSION OVERSIGHT TABLE STYLES ===== */
 .submission-table { 
   width: 100%; 
-  border-collapse: separate; 
-  border-spacing: 0;
+  border-collapse: collapse; 
   table-layout: fixed;
 }
 
@@ -1244,31 +1243,28 @@ body.dark-mode .action-btn.btn-delete {
   font-weight: 600;
   padding: 15px 12px; 
   text-align: center;
-  border-right: 1px solid #fff;
-  border-bottom: 2px solid #fff;
+  border: 1px solid #dee2e6;
   font-size: 14px;
 }
 
-.submission-table thead th:last-child {
-  border-right: none;
-}
+.submission-table thead th:last-child { }
 
 .submission-table tbody td {
   padding: 12px; 
-  border-right: 1px solid #dee2e6;
-  border-bottom: 1px solid #dee2e6;
+  border: 1px solid #dee2e6;
   text-align: center;
   vertical-align: middle;
   background: #fff;
 }
 
-.submission-table tbody td:last-child {
-  border-right: none;
-}
+.submission-table tbody td:last-child { }
 
-.submission-table tbody tr:last-child td {
-  border-bottom: none;
-}
+.submission-table tbody tr:last-child td { }
+
+/* Remove outer table borders so wrapper supplies the outside stroke */
+/* Ensure borders are continuous and sized consistently */
+.submission-table th,
+.submission-table td { box-sizing: border-box; }
 
 .submission-table tbody tr:nth-child(even) td {
   background: #f8f9fa;
@@ -1280,7 +1276,7 @@ body.dark-mode .action-btn.btn-delete {
 
 /* Submission table action cell */
 .submission-table tbody td.action-buttons {
-  padding: 8px 12px;
+  padding: 12px; /* match other cells */
   text-align: center;
   vertical-align: middle;
   overflow: hidden;

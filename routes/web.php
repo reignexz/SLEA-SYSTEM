@@ -25,6 +25,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/create_assessor', [AdminController::class, 'createAssessor'])->name('admin.create_assessor');
     Route::get('/approve-reject', [AdminController::class, 'approveReject'])->name('admin.approve-reject');
     Route::get('/submission-oversight', [AdminController::class, 'submissionOversight'])->name('admin.submission-oversight');
+    Route::get('/submission-oversight/export', [AdminController::class, 'exportSamplePdf'])->name('admin.submission-oversight.export');
     Route::get('/final-review', [AdminController::class, 'finalReview'])->name('admin.final-review');
     Route::get('/award-report', [AdminController::class, 'awardReport'])->name('admin.award-report');
     Route::get('/system-monitoring', [AdminController::class, 'systemMonitoring'])->name('admin.system-monitoring');

@@ -67,15 +67,15 @@
 
         {{-- Table --}}
         <div class="table-wrap">
-            <table class="submission-table">
+            <table class="submission-table" style="table-layout: fixed; width: 100%;">
                 <thead>
                     <tr>
-                        <th class="col-title">Document Title</th>
-                        <th class="col-student">Student Name</th>
-                        <th class="col-category">Category</th>
-                        <th class="col-status">Submission Status</th>
-                        <th class="col-flag">Flag</th>
-                        <th class="col-action text-center">Actions</th>
+                        <th class="col-title" style="width:25%">Document Title</th>
+                        <th class="col-student" style="width:20%">Student Name</th>
+                        <th class="col-category" style="width:20%">Category</th>
+                        <th class="col-status" style="width:15%">Submission Status</th>
+                        <th class="col-flag" style="width:10%">Flag</th>
+                        <th class="col-action text-center" style="width:10%">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,23 +86,36 @@
                     @if ($hasRows)
                         @foreach ($submissions ?? [] as $submission)
                             <tr>
-                                <td>{{ $submission->document_title ?? 'Leadership Certificate' }}</td>
-                                <td>{{ $submission->student_name ?? 'Edryan Manocay' }}</td>
-                                <td>{{ $submission->category ?? 'I. Leadership' }}</td>
+                                <td>{{ $submission->document_title ?? '—' }}</td>
+                                <td>{{ optional($submission->student)->name ?? '—' }}</td>
+                                <td>{{ $submission->slea_section ?? '—' }}</td>
                                 <td>
-                                    <span class="badge {{ $submission->status === 'pending' ? 'badge--yellow' : ($submission->status === 'approved' ? 'badge--green' : 'badge--red') }}">
-                                        {{ ucfirst($submission->status ?? 'pending') }}
+                                    @php $st = strtolower($submission->status ?? 'pending'); @endphp
+                                    <span class="badge {{ $st === 'pending' ? 'badge--yellow' : ($st === 'approved' ? 'badge--green' : 'badge--red') }}">
+                                        {{ ucfirst($st) }}
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    @if($submission->is_flagged ?? false)
+                                    @php $flagged = filled($submission->flag_reason ?? null); @endphp
+                                    @if($flagged)
                                         <i class="fas fa-flag" style="color: #dc3545;"></i>
                                     @else
                                         <i class="fas fa-flag" style="color: #6c757d; opacity: 0.3;"></i>
                                     @endif
                                 </td>
                                 <td class="action-buttons">
-                                    <button type="button" class="btn-action btn-view" onclick="openSubmissionModal('{{ $submission->id ?? '1'}}')" title="View Submission">
+                                    <button 
+                                        type="button" 
+                                        class="btn-action btn-view js-open-submission"
+                                        title="View Submission"
+                                        data-submission-id="{{ $submission->id ?? '' }}"
+                                        data-title="{{ $submission->document_title ?? '' }}"
+                                        data-category="{{ $submission->slea_section ?? '' }}"
+                                        data-status="{{ $submission->status ?? '' }}"
+                                        data-student="{{ optional($submission->student)->name ?? '' }}"
+                                        data-student-id="{{ optional($submission->student)->student_id ?? '' }}"
+                                        data-date="{{ optional($submission->submitted_at)->format('Y-m-d') ?? '' }}"
+                                    >
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </td>
@@ -294,9 +307,79 @@
 
         {{-- Export Button --}}
         <div class="export-section">
-            <button type="button" class="btn btn-export">
+            <button type="button" class="btn btn-export" id="btnExportPdf">
                 <i class="fas fa-file-pdf"></i> Export as PDF
             </button>
+        </div>
+
+        <!-- Export Modal: Shows list of students/details before PDF generation -->
+        <div id="exportModal" class="modal" style="display:none;">
+            <div class="modal-content" style="max-width: 900px; width: 95%;">
+                <div class="modal-header">
+                    <h3>Export Submissions to PDF</h3>
+                    <span class="close" id="closeExportModal" style="cursor:pointer">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-3">Review the list below. You can proceed to export all shown items.</p>
+
+                    <div class="table-wrap" style="max-height: 60vh; overflow:auto;">
+                        <table class="submission-table">
+                            <thead>
+                                <tr>
+                                    <th class="col-student">Student Name</th>
+                                    <th class="col-title">Document Title</th>
+                                    <th class="col-category">Category</th>
+                                    <th class="col-date">Date</th>
+                                    <th class="col-status">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $hasRows = isset($submissions) && (($submissions instanceof \Illuminate\Contracts\Pagination\Paginator && $submissions->count() > 0) || collect($submissions)->count() > 0);
+                                @endphp
+
+                                @if ($hasRows)
+                                    @foreach ($submissions ?? [] as $submission)
+                                        <tr>
+                                            <td>{{ $submission->student->name ?? ($submission->student_name ?? '—') }}</td>
+                                            <td>{{ $submission->document_title ?? '—' }}</td>
+                                            <td>{{ $submission->slea_section ?? ($submission->category ?? '—') }}</td>
+                                            <td>{{ optional($submission->submitted_at)->format('Y-m-d') ?? '—' }}</td>
+                                            <td>
+                                                <span class="badge {{ ($submission->status ?? 'pending') === 'pending' ? 'badge--yellow' : (($submission->status ?? '') === 'approved' ? 'badge--green' : 'badge--red') }}">
+                                                    {{ ucfirst($submission->status ?? 'pending') }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    {{-- Sample rows when there's no data from backend yet --}}
+                                    <tr>
+                                        <td>Edryan Manocay</td>
+                                        <td>Leadership Certificate</td>
+                                        <td>I. Leadership</td>
+                                        <td>2025-09-01</td>
+                                        <td><span class="badge badge--yellow">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maria Santos</td>
+                                        <td>Academic Excellence Award</td>
+                                        <td>II. Academic</td>
+                                        <td>2025-09-02</td>
+                                        <td><span class="badge badge--green">Approved</span></td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" style="display:flex; gap:8px; justify-content:flex-end;">
+                    <button type="button" class="btn" id="cancelExportBtn" style="background:#e5e7eb; color:#111827; border:1px solid #d1d5db;">Close</button>
+                    <a id="exportPdfForm" href="{{ route('admin.submission-oversight.export', request()->query()) }}" class="btn btn-export">
+                        <i class="fas fa-file-pdf"></i> Proceed Export
+                    </a>
+                </div>
+            </div>
         </div>
         <!-- Submission Details Modal -->
         <div id="submissionModal" class="modal" style="display:none;">
@@ -340,21 +423,58 @@
         </div>
 
         <script>
-        function openSubmissionModal(submissionId) {
-            // Example placeholder: populate fields. Replace with AJAX if needed
-            document.getElementById('md-title').textContent = 'Leadership Certificate';
-            document.getElementById('md-category').textContent = 'I. Leadership';
-            document.getElementById('md-status').textContent = 'Pending';
-            document.getElementById('md-student').textContent = 'Edryan Manocay';
-            document.getElementById('md-student-id').textContent = '2022-00216';
-            document.getElementById('md-reviewer').textContent = '—';
-            document.getElementById('md-remarks').textContent = '—';
+        // Export Modal open/close handlers
+        (function() {
+            // Delegate open of submission modal, populate from data attributes
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.js-open-submission');
+                if (!btn) return;
+                const title = btn.getAttribute('data-title') || '—';
+                const category = btn.getAttribute('data-category') || '—';
+                const status = btn.getAttribute('data-status') || '—';
+                const student = btn.getAttribute('data-student') || '—';
+                const studentId = btn.getAttribute('data-student-id') || '—';
 
-            const modal = document.getElementById('submissionModal');
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // prevent background scroll
-        }
+                document.getElementById('md-title').textContent = title;
+                document.getElementById('md-category').textContent = category;
+                document.getElementById('md-status').textContent = status ? (status.charAt(0).toUpperCase()+status.slice(1)) : '—';
+                document.getElementById('md-student').textContent = student;
+                document.getElementById('md-student-id').textContent = studentId;
+                document.getElementById('md-reviewer').textContent = '—';
+                document.getElementById('md-remarks').textContent = '—';
 
+                const modal = document.getElementById('submissionModal');
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            const exportBtn = document.getElementById('btnExportPdf');
+            const exportModal = document.getElementById('exportModal');
+            const closeExport = document.getElementById('closeExportModal');
+            const cancelExport = document.getElementById('cancelExportBtn');
+
+            function openExportModal() {
+                exportModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeExportModal() {
+                exportModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            if (exportBtn) exportBtn.addEventListener('click', openExportModal);
+            if (closeExport) closeExport.addEventListener('click', closeExportModal);
+            if (cancelExport) cancelExport.addEventListener('click', closeExportModal);
+
+            window.addEventListener('click', function(e) {
+                if (e.target === exportModal) {
+                    closeExportModal();
+                }
+            });
+        })();
+
+        // removed legacy openSubmissionModal; now populated via delegated click above
+        
         function closeSubmissionModal() {
             const modal = document.getElementById('submissionModal');
             modal.style.display = 'none';
